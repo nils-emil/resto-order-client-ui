@@ -1,43 +1,21 @@
 import React from 'react';
 import './App.css';
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from '@material-ui/core/styles';
+import ClientCodeEntry from "./components/ClientCodeEntry/ClientCodeEntry";
 
 function App() {
-    const useStyles = makeStyles(theme => ({
-        container: {
-            display: 'flex',
-            flexWrap: 'wrap',
-        },
-        textField: {
-            marginLeft: theme.spacing(1),
-            marginRight: theme.spacing(1),
-        },
-        dense: {
-            marginTop: theme.spacing(2),
-        },
-        menu: {
-            width: 200,
-        },
-    }));
-    const classes = useStyles();
+    const submitHandler = (code) => {
+        // TODO handle code submitHandler.
+        console.log(code)
+    };
 
-  return (
-    <div className="App">
-      <header className="App-header">
-          <TextField
-              id="outlined-name"
-              label="Code: XXXX"
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-          />
-        <p>
-          Enter code and order food/service instantly!
-        </p>
-      </header>
-    </div>
-  );
-}
+    return (
+        <div className="App">
+            <header className="App-header">
+                <ClientCodeEntry
+                    submit={submitHandler}/>
+            </header>
+        </div>
+    );
+};
 
 export default App;
