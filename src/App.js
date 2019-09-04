@@ -1,23 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from '@material-ui/core/styles';
 
 function App() {
+    const useStyles = makeStyles(theme => ({
+        container: {
+            display: 'flex',
+            flexWrap: 'wrap',
+        },
+        textField: {
+            marginLeft: theme.spacing(1),
+            marginRight: theme.spacing(1),
+        },
+        dense: {
+            marginTop: theme.spacing(2),
+        },
+        menu: {
+            width: 200,
+        },
+    }));
+    const classes = useStyles();
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+          <TextField
+              id="outlined-name"
+              label="Code: XXXX"
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+          />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Enter code and order food/service instantly!
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
