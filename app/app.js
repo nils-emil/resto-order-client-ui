@@ -2,31 +2,42 @@ const express = require('express');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const http = require('http');
+const mongoose = require("mongoose");
+var bodyParser = require('body-parser');
 
-const server = http.createServer((req, res) => {
-    const url = req.url;
-    const method = req.method;
-    if (url === '/') {
-        res.write('<html>');
-        res.write('<head><title>Enter Message</title><head>');
-        res.write('<body><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form></body>');
-        res.write('</html>');
-        return res.end();
-    }
-    if (url === '/message' && method === 'POST') {
-        fs.writeFileSync('message.txt', 'DUMMY');
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        return res.end();
-    }
-    res.setHeader('Content-Type', 'text/html');
-    res.write('<html>');
-    res.write('<head><title>My First Page</title><head>');
-    res.write('<body><h1>Hello from my Node.js Server!</h1></body>');
-    res.write('</html>');
-    res.end();
-});
 
-server.listen(3000);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+mongoose.Promise = global.Promise;mongoose.connect("mongodb://mongo:27017/app");
+
+var nameSchema = new mongoose.Schema({
+    firstName: String,
+    lastName: String
+   });
+var User = mongoose.model("User", nameSchema);  
+
+app.get('/persons', function(req, res) {
+    User.find({}, function(err, users) {
+      res.send(JSON.stringify(users));  
+    });
+  });
+
+app.use("/add", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+   });
+
+app.post("/addname", (req, res) => {
+    myData.save()
+    .then(item => {
+        console.log(item)
+    res.send("item saved to database");
+    })
+    .catch(err => {
+    res.status(400).send("unable to save to database");
+    });
+   });
+
+app.listen(3000);
 
 
