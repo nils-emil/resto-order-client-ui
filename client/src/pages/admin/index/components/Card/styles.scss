@@ -1,0 +1,18 @@
+.card {
+  overflow: hidden;
+  width: 45%;
+  margin: 1rem;
+  height: 24rem;
+  position: relative;
+
+  img {
+    height: inherit;
+  }
+
+  .title {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+  }
+}
