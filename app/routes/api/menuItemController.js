@@ -1,7 +1,6 @@
 const express = require('express');
-const router = express.Router({mergeParams: true});
-
 const MenuItem = require('./../../models/menu').MenuItem;
+const router = express.Router({mergeParams: true});
 
 router.route('/add').post(function (req, res) {
     const menuItem = new MenuItem(req.body);
@@ -24,7 +23,12 @@ router.route('/').get(function (req, res) {
     });
 });
 
-// Defined edit route
+router.route('/:organization').get(function (req, res) {
+    MenuItem.find({"organization": req.params.organization})
+        .exec()
+        .then(menuItems => res.json(menuItems));
+});
+
 router.route('/edit/:id').get(function (req, res) {
     let id = req.params.id;
     MenuItem.findById(id, function (err, MenuItem) {
@@ -32,7 +36,6 @@ router.route('/edit/:id').get(function (req, res) {
     });
 });
 
-//  Defined update route
 router.route('/update/:id').post(function (req, res) {
     MenuItem.findById(req.params.id, function (err, MenuItem) {
         if (!MenuItem)

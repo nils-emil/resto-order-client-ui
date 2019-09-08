@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
 
-const OrderController = require('./../../models/order').Order;
+const Order = require('./../../models/order').Order;
 
 router.route('/add').post(function (req, res) {
-    let order = new OrderController(req.body);
+    let order = new Order(req.body);
     order.save()
         .then(e => {
             res.status(200).json(e);
@@ -12,7 +12,7 @@ router.route('/add').post(function (req, res) {
 });
 
 router.route('/').get(function (req, res) {
-    OrderController.find((err, Orders) => {
+    Order.find((err, Orders) => {
         if (err) {
             console.log(err);
         } else {
@@ -22,7 +22,7 @@ router.route('/').get(function (req, res) {
 });
 
 router.route('/:barTabId/total-sum').get(function (req, res) {
-    OrderController.find({"barTabId": req.params.barTabId})
+    Order.find({"barTabId": req.params.barTabId})
         .populate('menuItem', "price")
         .exec()
         .then(orders => {
@@ -34,13 +34,13 @@ router.route('/:barTabId/total-sum').get(function (req, res) {
 
 router.route('/edit/:id').get(function (req, res) {
     let id = req.params.id;
-    OrderController.findById(id, (err, orders) => {
+    Order.findById(id, (err, orders) => {
         res.json(orders);
     });
 });
 
 router.route('/update/:id').post(function (req, res) {
-    OrderController.findById(req.params.id, (err, order) => {
+    Order.findById(req.params.id, (err, order) => {
         if (!order)
             res.status(404).send("data is not found");
         else {

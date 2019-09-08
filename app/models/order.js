@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
     barTabId: {
-        type: String
+        type: Schema.Types.ObjectId, ref: 'Tab', required: true
     },
     tableCode: {
         type: String
