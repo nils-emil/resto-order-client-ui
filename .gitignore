@@ -85,8 +85,12 @@ yarn-debug.log*
 yarn-error.log*
 
 
-
+# IDEA
 client/.idea
-app/data
 app/.idea
+/.idea
+
+# volumes
+app/data
+/data
 
