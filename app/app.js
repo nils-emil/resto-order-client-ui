@@ -1,43 +1,26 @@
 const express = require('express');
 const app = express();
-const MongoClient = require('mongodb').MongoClient;
-const http = require('http');
-const mongoose = require("mongoose");
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const PORT = 4000;
+const cors = require('cors');
+const mongoose = require('mongoose');
+const config = require('./../app/models/db');
+const menuItemRoutes = require('./../app/routes/api/menuItem');
+const orderRoutes = require('./../app/routes/api/order');
 
+mongoose.Promise = global.Promise;
+mongoose.connect(config.DB, { useNewUrlParser: true }).then(
+    () => {console.log('Database is connected') },
+    err => { console.log('Can not connect to the database'+ err)}
+);
 
-
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-mongoose.Promise = global.Promise;mongoose.connect("mongodb://mongo:27017/app");
 
-var nameSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String
-   });
-var User = mongoose.model("User", nameSchema);  
+app.use('/api/menu', menuItemRoutes);
+app.use('/api/menu/order', orderRoutes);
 
-app.get('/persons', function(req, res) {
-    User.find({}, function(err, users) {
-      res.send(JSON.stringify(users));  
-    });
-  });
-
-app.use("/add", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
-   });
-
-app.post("/addname", (req, res) => {
-    myData.save()
-    .then(item => {
-        console.log(item)
-    res.send("item saved to database");
-    })
-    .catch(err => {
-    res.status(400).send("unable to save to database");
-    });
-   });
-
-app.listen(3000);
-
-
+app.listen(PORT, function(){
+    console.log('Server is running on Port:',PORT);
+});
