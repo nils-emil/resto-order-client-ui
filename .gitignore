@@ -87,4 +87,6 @@ yarn-error.log*
 
 
 client/.idea
+app/data
+app/.idea
 
