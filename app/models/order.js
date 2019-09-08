@@ -1,21 +1,22 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var OrderSchema = new Schema({
+const OrderSchema = new Schema({
     barTabId: {
         type: String
     },
     tableCode: {
         type: String
     },
-    menuItemId: {
+    menuItem: {
         type: Schema.Types.ObjectId, ref: 'MenuItem', required: true
     },
-    paid : {
+    paid: {
         type: Boolean
     },
-    cancelled : {
+    cancelled: {
         type: Boolean
     }
 });
-module.exports = mongoose.model('Order', OrderSchema);
+
+module.exports.Order = mongoose.model('Order', OrderSchema);

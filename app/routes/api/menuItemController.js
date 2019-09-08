@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
 
-let MenuItem = require('./../../models/menu');
+const MenuItem = require('./../../models/menu').MenuItem;
 
 router.route('/add').post(function (req, res) {
-    let menuItem = new MenuItem(req.body);
+    const menuItem = new MenuItem(req.body);
     menuItem.save()
         .then(e => {
             res.status(200).json(e);

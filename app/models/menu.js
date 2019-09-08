@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var MenuItemSchema = new Schema({
+const MenuItemSchema = new Schema({
     title: {
         type: String
     },
@@ -18,4 +18,5 @@ var MenuItemSchema = new Schema({
         type: String
     },
 });
-module.exports = mongoose.model('MenuItem', MenuItemSchema, 'menuItems');
+
+module.exports.MenuItem = mongoose.model('MenuItem', MenuItemSchema);
