@@ -8,11 +8,14 @@ import '../main.scss'
 import MenuList from '../pages/admin/MenuList/MenuList';
 import {CssBaseline} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
+import ItemEdit from '../pages/admin/ItemEdit/ItemEdit';
+
+require('dotenv').config();
 
 
 class App extends Component {
 
-  styles = makeStyles(theme => ({
+  styles = makeStyles({
     toolbar: {
       display: 'flex',
       alignItems: 'center',
@@ -20,23 +23,20 @@ class App extends Component {
       padding: '0 8px',
       minHeight: '64px'
     }
-  }));
+  });
 
   render() {
     return (
-      <div>
+      <div className="page">
         <CssBaseline/>
-        <Header
-          appName={this.props.appName}
-          currentUser={this.props.currentUser}/>
-        <div className="page">
-          <Router>
-            <Route exact path="/food" component={FoodPicker}/>
-            <Route exact path="/admin" component={Admin}/>
-            <Route exact path="/admin/menu-list" component={MenuList}/>
-            <Route exact path="/" component={ClientCodeEntry}/>
-          </Router>
-        </div>
+        <Router>
+          <Header/>
+          <Route exact path="/food" component={FoodPicker}/>
+          <Route exact path="/admin" component={Admin}/>
+          <Route exact path="/admin/menu-list" component={MenuList}/>
+          <Route exact path="/admin/item-edit" component={ItemEdit}/>
+          <Route exact path="/" component={ClientCodeEntry}/>
+        </Router>
       </div>
     );
   }

@@ -1,34 +1,41 @@
 import React from 'react';
 
 import './styles.scss'
-import Card from './components/Card/Card';
+import {GridList} from '@material-ui/core';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import GridListTile from '@material-ui/core/GridListTile';
+import {Link} from 'react-router-dom';
 
 function Admin(props) {
 
+  const links = [
+    {text: 'Welcome to the Vapiano admin panel!', linkTo: '/admin'},
+    {
+      text: 'Menu',
+      img: 'https://www.weightwatchers.com/us/sites/default/files/styles/wwvs_default_image/public/article_masthead/allaboutzeropointfoods_yk_ww_080218_0spvfoods_190_1250x600.jpg?itok=Fo_ThSVk',
+      linkTo: "admin/menu-list"
+    },
+    {text: 'Settings', linkTo: '/admin'},
+    {
+      text: 'Statistics',
+      img: 'https://static.vecteezy.com/system/resources/thumbnails/000/152/182/small/free-linear-web-statistics.jpg',
+      linkTo: '/admin'
+    }
+  ];
+
   return (
-    <div className="admin">
-
-
-      <Card
-        text="Welcome to the Vapiano admin panel!"
-      />
-
-      <Card
-        linkTo="admin/menu-list"
-        imageUrl="https://www.weightwatchers.com/us/sites/default/files/styles/wwvs_default_image/public/article_masthead/allaboutzeropointfoods_yk_ww_080218_0spvfoods_190_1250x600.jpg?itok=Fo_ThSVk"
-        text="Menu"
-      />
-
-      <Card
-        text="Settings"
-      />
-
-
-      <Card
-        text="Statistics"
-        imageUrl="https://static.vecteezy.com/system/resources/thumbnails/000/152/182/small/free-linear-web-statistics.jpg"
-      />
-    </div>
+    <GridList cellHeight={260} className="grid-list">
+      {links.map(tile => (
+        <GridListTile key={tile.text} className="grid-tile">
+          <Link to={tile.linkTo}>
+            <img src={tile.img} alt={tile.text}/>
+            <GridListTileBar
+              title={tile.text}
+            />
+          </Link>
+        </GridListTile>
+      ))}
+    </GridList>
   );
 }
 
