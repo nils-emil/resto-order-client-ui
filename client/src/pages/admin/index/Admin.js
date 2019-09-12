@@ -9,7 +9,9 @@ import {Link} from 'react-router-dom';
 function Admin(props) {
 
   const links = [
-    {text: 'Welcome to the Vapiano admin panel!', linkTo: '/admin'},
+    {text: 'Tables that required service!',
+      img: 'https://image.shutterstock.com/image-vector/people-waiting-long-queue-counter-600w-1065200126.jpg',
+      linkTo: '/serviceCalls'},
     {
       text: 'Menu',
       img: 'https://www.weightwatchers.com/us/sites/default/files/styles/wwvs_default_image/public/article_masthead/allaboutzeropointfoods_yk_ww_080218_0spvfoods_190_1250x600.jpg?itok=Fo_ThSVk',

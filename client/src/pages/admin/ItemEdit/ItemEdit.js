@@ -24,6 +24,7 @@ class ItemEdit extends Component {
   }
 
   save() {
+    console.table(this.state.item)
     addMenuItem(this.state.item);
     this.props.history.push('/admin/menu-list');
   }

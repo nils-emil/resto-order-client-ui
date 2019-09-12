@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import {Link} from 'react-router-dom';
+import CallServiceClientButton from "../../admin/index/CallServiceClientButton";
 
 const ClientCodeEntry = props => {
   const [setCode] = useState({code: ""});
@@ -24,6 +25,7 @@ const ClientCodeEntry = props => {
       <p>
         Enter code and order food/service instantly!
       </p>
+        <CallServiceClientButton tableCode="586TGJ"/>
     </div>
   );
 };
