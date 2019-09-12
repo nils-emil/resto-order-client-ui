@@ -1,69 +1,58 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './styles.scss'
 import {Container} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ImageAdd from './components/ImageAdd/ImageAdd';
 import ItemInfo from './components/ItemInfo/ItemInfo';
-import {withRouter} from 'react-router-dom';
 import {addMenuItem} from '../../../services/adminService';
 
-class ItemEdit extends Component {
+function ItemEdit(props) {
+  const [item, setItem] = useState(
+    props.location.state || {
+      image: '',
+      title: '',
+      category: '',
+      price: 0,
+      description: '',
+    }
+  );
 
-  constructor(props) {
-    super(props);
+  const save = () => {
+    addMenuItem(item);
+    props.history.push('/admin/menu-list');
+  };
 
-    this.state = {
-      isFetching: true,
-      item: {
-        title: 'Burger',
-        category: 'Main course',
-        price: 12,
-        description: ''
-      }
-    };
-  }
+  const cancel = () => {
+    props.history.push('/admin/menu-list');
+  };
 
-  save() {
-    console.table(this.state.item)
-    addMenuItem(this.state.item);
-    this.props.history.push('/admin/menu-list');
-  }
+  const updateField = event => {
+    let modifiedItem = {...item};
+    modifiedItem[event.target.id] = event.target.value;
+    setItem(modifiedItem);
+  };
 
-  cancel() {
-    this.props.history.push('/admin/menu-list');
-  }
-
-  updateField(event) {
-    this.setState(state => {
-      let item = state.item;
-      item[event.id] = event.value;
-
-      return {
-        item,
-        ...state
-      }
-    });
-  }
-
-  render() {
-    return (
-      <Container className="container">
-        <Grid container spacing={3} className="half-height">
-          <Grid item xs={6} className="full-height">
-            <ImageAdd/>
-          </Grid>
-          <Grid item xs={6}>
-            <ItemInfo
-              item={this.state.item}
-              onChange={(event) => this.updateField(event)}
-              save={() => this.save()}
-              cancel={() => this.cancel()}
-            />
-          </Grid>
+  return (
+    <Container className="container">
+      <Grid container spacing={3} className="half-height">
+        <Grid item xs={6} className="full-height">
+          <ImageAdd
+            url={item.image}
+            onChange={(event) => updateField(event)}
+          />
         </Grid>
-      </Container>
-    )
-  }
+        <Grid item xs={6}>
+          <ItemInfo
+            item={item}
+            onChange={(event) => updateField(event)}
+            save={() => save()}
+            cancel={() => cancel()}
+          />
+        </Grid>
+      </Grid>
+    </Container>
+  )
+
 }
 
-export default withRouter(ItemEdit);
+export default ItemEdit;

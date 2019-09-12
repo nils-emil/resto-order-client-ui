@@ -4,7 +4,6 @@ import Drawer from './components/Drawer';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import response from './response'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {getMenuItems} from '../../../services/adminService';
@@ -16,35 +15,32 @@ export default class MenuList extends Component {
     super(props);
 
     this.state = {
-      isFetching: true,
       menuItems: []
     };
   }
 
 
-  componentDidMount() {
-    const items = getMenuItems();
-    this.setState({...this.state, isFetching: false});
-    this.setState({...this.state, isFetching: items});
+  async componentDidMount() {
+    let items = await getMenuItems();
+    this.setState({...this.state, menuItems: items});
   }
 
   render() {
     return (
       <div className="menu-list">
         <Drawer/>
-
-        <p>{this.state.isFetching ? 'Fetching users...' : ''}</p>
-
         <div className="content">
           <GridList cellHeight={260} className="grid-list">
-            {response.map(tile => (
-              <GridListTile key={tile.img} className="grid-tile">
-                <img src={tile.img} alt={tile.title}/>
-                <GridListTileBar
-                  title={tile.title}
-                  subtitle={<span>Price: {tile.price}€</span>}
-                />
-              </GridListTile>
+            {this.state.menuItems.map(tile => (
+              <Link to={{pathname: "/admin/item-edit", state: tile}}>
+                <GridListTile key={tile.title} className="grid-tile">
+                  <img src={tile.image} alt={tile.title}/>
+                  <GridListTileBar
+                    title={tile.title}
+                    subtitle={<span>Price: {tile.price}€</span>}
+                  />
+                </GridListTile>
+              </Link>
             ))}
           </GridList>
         </div>

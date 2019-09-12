@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 export function getMenuItems() {
-  axios.get(process.env.REACT_APP_BACKEND_URL + '/api/menu').then(res => {
+  return axios.get(process.env.REACT_APP_BACKEND_URL + '/api/menu').then(res => {
     return res.data;
   });
 }

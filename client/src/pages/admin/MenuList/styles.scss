@@ -1,5 +1,6 @@
 .menu-list {
   display: flex;
+  height: 100%;
 }
 
 .content {
@@ -8,6 +9,7 @@
   padding-left: 20rem;
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
   justify-content: space-around;
 }
 

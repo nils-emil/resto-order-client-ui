@@ -7,47 +7,41 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 export default function ItemInfo(props) {
 
-  const onHandleChange = (event) => {
-    props.onChange(event.target);
-  };
-
   return (
     <div className="item-info">
       <InputLabel htmlFor="title">Name</InputLabel>
       <Input
         id="title"
         value={props.item.title}
-        onChange={(event) => {
-          onHandleChange(event)
-        }}
+        onChange={e => props.onChange(e)}
       />
 
-      <InputLabel htmlFor="category">Category</InputLabel>
-      <Input
-        id="category"
-        value={props.item.category}
-        onChange={(event) => {
-          onHandleChange(event)
-        }}
-      />
+      <div className="flex space-between">
+        <div>
+          <InputLabel htmlFor="category">Category</InputLabel>
+          <Input
+            id="category"
+            value={props.item.category}
+            onChange={e => props.onChange(e)}
+          />
+        </div>
 
-      <InputLabel htmlFor="price">Price</InputLabel>
-      <Input
-        id="price"
-        value={props.item.price}
-        onChange={(event) => {
-          onHandleChange(event)
-        }}
-        endAdornment={<InputAdornment position="end">€</InputAdornment>}
-      />
+        <div>
+          <InputLabel htmlFor="price">Price</InputLabel>
+          <Input
+            id="price"
+            value={props.item.price}
+            onChange={e => props.onChange(e)}
+            endAdornment={<InputAdornment position="end">€</InputAdornment>}
+          />
+        </div>
+      </div>
 
       <InputLabel htmlFor="description">Description</InputLabel>
       <Input
         id="description"
         value={props.item.description}
-        onChange={(event) => {
-          onHandleChange(event)
-        }}
+        onChange={e => props.onChange(e)}
         multiline variant="outlined"
       />
 
