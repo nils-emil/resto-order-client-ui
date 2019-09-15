@@ -1,16 +1,11 @@
 .menu-list {
-  display: flex;
-  height: 100%;
 }
 
 .content {
   width: 100%;
   height: 100%;
   padding-left: 20rem;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: hidden;
-  justify-content: space-around;
+  padding-top: .5rem;
 }
 
 .grid-list {
@@ -19,10 +14,15 @@
 
 .grid-tile {
   cursor: pointer;
+  overflow: hidden;
 }
 
 .add-icon {
   position: absolute !important;
   right: 3rem;
   bottom: 2rem;
+}
+
+.height-inherit {
+  height: inherit;
 }

@@ -5,8 +5,7 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-export default function ItemInfo(props) {
-
+function ItemInfo(props) {
   return (
     <div className="item-info">
       <InputLabel htmlFor="title">Name</InputLabel>
@@ -57,3 +56,5 @@ export default function ItemInfo(props) {
     </div>
   );
 }
+
+export default ItemInfo;

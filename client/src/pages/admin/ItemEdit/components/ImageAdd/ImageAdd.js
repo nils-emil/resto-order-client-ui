@@ -14,7 +14,7 @@ function ImageAdd(props) {
   return (
     <div className="image-height">
       <Card onClick={() => setOpen(true)} className="card">
-        <img src={props.url || 'https://static.thenounproject.com/png/187803-200.png'} alt=""/>
+        <img src={props.url || 'https://static.thenounproject.com/png/187803-200.png'} alt="" className="height-inherit"/>
       </Card>
 
       <ImageAddModal

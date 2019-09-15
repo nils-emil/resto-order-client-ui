@@ -1,9 +1,29 @@
-html, body, #root {
+body {
+  height: 100%;
+  overflow: hidden;
   margin: 0;
 }
 
 .page {
   margin-top: 64px;
+  margin-bottom: 64px;
   height: 100%;
   width: 100%;
+}
+
+.main-scroll {
+  overflow: scroll;
+  height: 100vh;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.clickable {
+  cursor: pointer;
 }
