@@ -7,25 +7,23 @@ import {Link} from 'react-router-dom';
 
 export default function ButtonAppBar() {
   return (
-    <header>
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography variant="h6">
-            Vapiano
-          </Typography>
+    <AppBar position="fixed">
+      <Toolbar>
+        <Typography variant="h6">
+          Vapiano
+        </Typography>
 
-          <div className="nav-buttons">
-            <Link to="/admin">
-              <p>Admin</p>
-            </Link>
+        <div className="nav-buttons">
+          <Link to="/admin">
+            <p>Admin</p>
+          </Link>
 
-            <Link to="/">
-              <p>Client</p>
-            </Link>
-          </div>
+          <Link to="/">
+            <p>Client</p>
+          </Link>
+        </div>
 
-        </Toolbar>
-      </AppBar>
-    </header>
+      </Toolbar>
+    </AppBar>
   );
 }

@@ -9,7 +9,7 @@ import {addMenuItem, removeMenuItem, updateMenuItem} from '../../../services/adm
 import DeleteModal from './components/DeleteModal/DeleteModal';
 
 function ItemEdit(props) {
-  const [isModalOpen, setOpen] = useState();
+  const [isModalOpen, setOpen] = useState(false);
   const [item, setItem] = useState(
     props.location.state || {
       image: '',
@@ -29,6 +29,7 @@ function ItemEdit(props) {
   };
 
   const save = async () => {
+    debugger;
     if (props.location.state) {
       await updateMenuItem(item).then(
         props.history.push('/admin/menu-list')

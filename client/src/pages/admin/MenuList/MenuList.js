@@ -19,7 +19,6 @@ export default class MenuList extends Component {
     };
   }
 
-
   async componentDidMount() {
     let items = await getMenuItems();
     this.setState({...this.state, menuItems: items});
@@ -32,7 +31,7 @@ export default class MenuList extends Component {
         <div className="content">
           <GridList cellHeight={260} className="grid-list">
             {this.state.menuItems.map(tile => (
-              <Link className="grid-tile" to={{pathname: "/admin/item-edit", state: tile}}>
+              <Link key={tile.title} className="grid-tile" to={{pathname: "/admin/item-edit", state: tile}}>
                 <GridListTile key={tile.title} className="height-inherit">
                   <img src={tile.image} alt={tile.title}/>
                   <GridListTileBar
