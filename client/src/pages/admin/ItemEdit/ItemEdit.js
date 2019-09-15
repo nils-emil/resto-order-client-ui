@@ -20,21 +20,21 @@ function ItemEdit(props) {
     }
   );
 
-
   const deleteItem = () => {
-    removeMenuItem(item._id);
-    props.history.push('/admin/menu-list');
+    removeMenuItem(item._id).subscribe(() => {
+        props.history.push('/admin/menu-list');
+    });
   };
 
-  const save = async () => {
+  const save = () => {
     if (props.location.state) {
-      await updateMenuItem(item);
-
-      props.history.push('/admin/menu-list');
+      updateMenuItem(item).subscribe(e => {
+          props.history.push('/admin/menu-list');
+      });
     } else {
-      await addMenuItem(item);
-
-      props.history.push('/admin/menu-list');
+      addMenuItem(item).subscribe(e => {
+          props.history.push('/admin/menu-list');
+      });
     }
   };
 

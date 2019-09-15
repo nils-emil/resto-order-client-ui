@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import ImageAddModal from './ImageAddModal';
 
 function ImageAdd(props) {
-  const [isModalOpen, setOpen] = useState();
+  const [isModalOpen, setOpen] = useState(false);
 
   const save = (value) => {
     props.onChange({target: {value: value, id: 'image'}});
@@ -16,7 +16,6 @@ function ImageAdd(props) {
       <Card onClick={() => setOpen(true)} className="card">
         <img src={props.url || 'https://static.thenounproject.com/png/187803-200.png'} alt="" className="height-inherit"/>
       </Card>
-
       <ImageAddModal
         isModalOpen={isModalOpen}
         changeUrl={value => save(value)}

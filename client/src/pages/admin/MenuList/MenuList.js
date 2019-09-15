@@ -10,16 +10,13 @@ import {getMenuItems} from '../../../services/adminService';
 import {Link} from 'react-router-dom';
 
 function MenuList() {
-  const [menuItems, setMenuItems] = useState([]);
+    const [menuItems, setMenuItems] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const menuItems = await getMenuItems();
-      setMenuItems(menuItems);
-    }
-
-    fetchData();
-  }, []);
+    useEffect(() => {
+        getMenuItems().subscribe(e => {
+            setMenuItems(e.data);
+        });
+    }, []);
 
   return (
     <div className="menu-list">
@@ -27,7 +24,7 @@ function MenuList() {
       <div className="content">
         <GridList cellHeight={260} className="grid-list">
           {menuItems.map(tile => (
-            <Link key={tile.title} className="grid-tile" to={{pathname: "/admin/item-edit", state: tile}}>
+            <Link key={tile._id} className="grid-tile" to={{pathname: "/admin/item-edit", state: tile}}>
               <GridListTile key={tile.title} className="height-inherit">
                 <img src={tile.image} alt={tile.title}/>
                 <GridListTileBar
