@@ -23,20 +23,18 @@ function ItemEdit(props) {
 
   const deleteItem = () => {
     removeMenuItem(item._id);
-    setOpen(false);
-
     props.history.push('/admin/menu-list');
   };
 
   const save = async () => {
-    debugger;
     if (props.location.state) {
-      await updateMenuItem(item).then(
-        props.history.push('/admin/menu-list')
-      );
+      await updateMenuItem(item);
+
+      props.history.push('/admin/menu-list');
     } else {
-      await addMenuItem(item).then(
-        props.history.push('/admin/menu-list'))
+      await addMenuItem(item);
+
+      props.history.push('/admin/menu-list');
     }
   };
 
@@ -47,6 +45,7 @@ function ItemEdit(props) {
   const updateField = event => {
     let modifiedItem = {...item};
     modifiedItem[event.target.id] = event.target.value;
+
     setItem(modifiedItem);
   };
 
