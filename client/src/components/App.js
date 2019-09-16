@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header from './Header/Header'
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import '../main.scss'
 import {CssBaseline} from '@material-ui/core';
@@ -26,13 +25,10 @@ class App extends Component {
       <div className="page">
         <CssBaseline/>
         <Router>
-          <Header/>
-          <div className="main-scroll">
-            <Switch>
-              <Route path="/admin" component={Admin}/>
-              <Route path="/" component={Client}/>
-            </Switch>
-          </div>
+          <Switch>
+            <Route path="/admin" component={Admin}/>
+            <Route path="/" component={Client}/>
+          </Switch>
         </Router>
       </div>
     );

@@ -6,7 +6,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import GridListTile from '@material-ui/core/GridListTile';
 import {Link} from 'react-router-dom';
 
-function FrontPage(props) {
+function FrontPage() {
 
   const links = [
     {
