@@ -16,6 +16,8 @@ function Client() {
         openDrawer={() => toggleDrawer(true)}
       />
       <MenuDrawer
+        openDrawer={() => toggleDrawer(true)}
+        closeDrawer={() => toggleDrawer(false)}
         isOpen={isDrawerOpen}
       />
       <div className="main-scroll">

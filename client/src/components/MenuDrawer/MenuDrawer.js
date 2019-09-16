@@ -33,6 +33,7 @@ function MenuDrawer(props) {
       <SwipeableDrawer
         open={props.isOpen}
         onOpen={props.openDrawer}
+        onClose={props.closeDrawer}
       >
         {sideList()}
       </SwipeableDrawer>

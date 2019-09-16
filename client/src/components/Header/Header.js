@@ -11,8 +11,8 @@ function Header(props) {
 
   const menuButton = () => {
     return props.isClientView && (
-      <IconButton edge="start" color="inherit" aria-label="menu">
-        <MenuIcon onClick={props.openDrawer}/>
+      <IconButton edge="start" color="inherit" aria-label="menu" onClick={props.openDrawer}>
+        <MenuIcon/>
       </IconButton>
     )
   };
