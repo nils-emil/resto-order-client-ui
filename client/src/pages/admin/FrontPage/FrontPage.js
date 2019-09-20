@@ -6,18 +6,23 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import GridListTile from '@material-ui/core/GridListTile';
 import {Link} from 'react-router-dom';
 
-function Admin(props) {
+function FrontPage() {
 
   const links = [
-    {text: 'Tables that required service!',
+    {
+      text: 'Tables that required service!',
       img: 'https://image.shutterstock.com/image-vector/people-waiting-long-queue-counter-600w-1065200126.jpg',
-      linkTo: '/service-calls'},
+      linkTo: '/admin/service-calls'
+    },
     {
       text: 'Menu',
       img: 'https://www.weightwatchers.com/us/sites/default/files/styles/wwvs_default_image/public/article_masthead/allaboutzeropointfoods_yk_ww_080218_0spvfoods_190_1250x600.jpg?itok=Fo_ThSVk',
-      linkTo: "admin/menu-list"
+      linkTo: '/admin/menu-list'
     },
-    {text: 'Settings', linkTo: '/admin'},
+    {
+      text: 'Settings',
+      linkTo: '/admin'
+    },
     {
       text: 'Statistics',
       img: 'https://static.vecteezy.com/system/resources/thumbnails/000/152/182/small/free-linear-web-statistics.jpg',
@@ -41,4 +46,4 @@ function Admin(props) {
   );
 }
 
-export default Admin;
+export default FrontPage;
