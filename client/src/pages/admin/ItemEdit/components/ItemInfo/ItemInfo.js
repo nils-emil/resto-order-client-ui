@@ -4,6 +4,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 function ItemInfo(props) {
   return (
@@ -14,17 +16,16 @@ function ItemInfo(props) {
         value={props.item.title}
         onChange={e => props.onChange(e)}
       />
-
       <div className="flex space-between">
         <div>
-          <InputLabel htmlFor="category">Category</InputLabel>
-          <Input
-            id="category"
-            value={props.item.category}
-            onChange={e => props.onChange(e)}
-          />
+          <InputLabel >Category</InputLabel>
+                <Select value={props.item.category}
+                    onChange={e => props.onMultiSelectChange('category', e.target.value)}>
+                    {props.categories.map(category => {
+                        return <MenuItem key={category._id} value={category._id}>{category.name}</MenuItem>
+                    })}
+                </Select>
         </div>
-
         <div>
           <InputLabel htmlFor="price">Price</InputLabel>
           <Input

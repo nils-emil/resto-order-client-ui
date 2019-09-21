@@ -6,24 +6,55 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import {getMenuItems} from '../../../services/adminService';
+import {getMenuItems, getCategories, deleteCategory, createNewCategory} from '../../../services/adminService';
 import {Link} from 'react-router-dom';
 
 function MenuList() {
     const [menuItems, setMenuItems] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
     useEffect(() => {
         getMenuItems().subscribe(e => {
             setMenuItems(e.data);
         });
+        getCategories().subscribe(e => {
+            setCategories(e.data);
+        });
     }, []);
+
+    const deleteCategoryHandler = (id, index) => {
+        return deleteCategory(id, index).subscribe(e => {
+            let updatedCategories = [...categories];
+            updatedCategories.splice(index, 1);
+            setCategories(updatedCategories)
+            getMenuItems().subscribe(e => {
+                setMenuItems(e.data);
+            });
+        })
+    };
+
+    const createNewCategoryHandler = (name) => {
+        const category = {name: name, order: categories.length};
+        return createNewCategory(category).subscribe(e => {
+            setCategories([...categories, e.data])
+        })
+    };
+
+    const selectCategoryHandler = (categoryId) => {
+        setSelectedCategoryId(categoryId)
+    };
 
   return (
     <div className="menu-list">
-      <Drawer/>
+      <Drawer categories={categories}
+              deleteCategory={deleteCategoryHandler}
+              selectCategory={selectCategoryHandler}
+              createNewCategory={createNewCategoryHandler}
+      />
       <div className="content">
         <GridList cellHeight={260} className="grid-list">
-          {menuItems.map(tile => (
+          {menuItems.filter(e => (!selectedCategoryId && !e.category) || (e.category === selectedCategoryId)).map(tile => (
             <Link key={tile._id} className="grid-tile" to={{pathname: "/admin/item-edit", state: tile}}>
               <GridListTile key={tile.title} className="height-inherit">
                 <img src={tile.image} alt={tile.title}/>

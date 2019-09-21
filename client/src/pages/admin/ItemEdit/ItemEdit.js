@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './styles.scss'
 import {Container} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Grid from '@material-ui/core/Grid';
 import ImageAdd from './components/ImageAdd/ImageAdd';
 import ItemInfo from './components/ItemInfo/ItemInfo';
-import {addMenuItem, removeMenuItem, updateMenuItem} from '../../../services/adminService';
+import {addMenuItem, getCategories, removeMenuItem, updateMenuItem} from '../../../services/adminService';
 import DeleteModal from './components/DeleteModal/DeleteModal';
 
 function ItemEdit(props) {
   const [isModalOpen, setOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [item, setItem] = useState(
     props.location.state || {
       image: '',
@@ -19,6 +20,12 @@ function ItemEdit(props) {
       description: '',
     }
   );
+
+    useEffect(() => {
+        getCategories().subscribe(e => {
+            setCategories(e.data);
+        });
+    }, []);
 
   const deleteItem = () => {
     removeMenuItem(item._id).subscribe(() => {
@@ -43,11 +50,17 @@ function ItemEdit(props) {
   };
 
   const updateField = event => {
-    let modifiedItem = {...item};
+    const modifiedItem = {...item};
     modifiedItem[event.target.id] = event.target.value;
-
     setItem(modifiedItem);
   };
+
+    const updateMultiSelectField = (target, value) => {
+        const modifiedItem = {...item};
+        modifiedItem[target] = value;
+        setItem(modifiedItem);
+    };
+
 
   return (
     <Container className="container relative">
@@ -60,8 +73,10 @@ function ItemEdit(props) {
         </Grid>
         <Grid item xs={6}>
           <ItemInfo
+            categories={categories}
             item={item}
             onChange={event => updateField(event)}
+            onMultiSelectChange={(target, value) => updateMultiSelectField(target, value)}
             save={() => save()}
             cancel={() => cancel()}
           />
