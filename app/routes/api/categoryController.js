@@ -1,7 +1,9 @@
+
 const express = require('express');
 const router = express.Router({mergeParams: true});
 
 const Category = require('./../../models/category').Category;
+const MenuItem = require('./../../models/menu').MenuItem;
 
 router.route('/add').post(function (req, res) {
     let category = new Category(req.body);
@@ -42,6 +44,15 @@ router.route('/update/:id').post(function (req, res) {
                     res.status(400).send("unable to update the database");
                 });
         }
+    });
+});
+
+router.route('/delete/:id').delete(function (req, res) {
+    console.log(req.params.id)
+    Category.remove({_id: req.params.id}, () => {
+        MenuItem.update({category: req.params.id}, {category: null}, {multi: true},() => {
+            res.status(204).send();
+        });
     });
 });
 

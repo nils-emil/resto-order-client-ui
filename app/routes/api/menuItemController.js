@@ -44,6 +44,7 @@ router.route('/update/:id').post(function (req, res) {
             MenuItem.title = req.body.title;
             MenuItem.description = req.body.description;
             MenuItem.organization = req.body.organization;
+            MenuItem.category = req.body.category;
             MenuItem.price = req.body.price;
             MenuItem.image = req.body.image;
             MenuItem.save().then(() => {
