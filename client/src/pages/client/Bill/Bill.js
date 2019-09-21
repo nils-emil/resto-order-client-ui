@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.scss'
 
-function FoodPicker() {
+function Bill() {
 
   return (
     <span className="food-picker">
@@ -12,4 +12,4 @@ function FoodPicker() {
     </span>);
 }
 
-export default FoodPicker;
+export default Bill;

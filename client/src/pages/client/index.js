@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import BottomActions from '../../components/BottomActions/BottomActions';
 import {Route, Switch} from 'react-router-dom';
 import ClientCodeEntry from './ClientCodeEntry/ClientCodeEntry';
-import FoodPicker from './FoodPicker/FoodPicker';
+import Bill from './Bill/Bill';
 import Header from '../../components/Header/Header';
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer';
+import Menu from './Menu/Menu';
 
 function Client() {
   const [isDrawerOpen, toggleDrawer] = useState(false);
@@ -13,7 +14,6 @@ function Client() {
     <span>
       <Header
         isClientView={true}
-        openDrawer={() => toggleDrawer(true)}
       />
       <MenuDrawer
         openDrawer={() => toggleDrawer(true)}
@@ -23,9 +23,12 @@ function Client() {
       <div className="main-scroll">
         <Switch>
           <Route exact path="/" component={ClientCodeEntry}/>
-          <Route exact path="/food" component={FoodPicker}/>
+          <Route exact path="/bill" component={Bill}/>
+          <Route exact path="/menu" component={Menu}/>
         </Switch>
-        <BottomActions/>
+        <BottomActions
+          openDrawer={() => toggleDrawer(true)}
+        />
       </div>
     </span>
   )

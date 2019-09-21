@@ -5,8 +5,7 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import {Link} from 'react-router-dom';
 
-function ClientCodeEntry() {
-
+function ClientCodeEntry(props) {
   const [code, setCode] = useState("");
 
   return (
@@ -21,7 +20,7 @@ function ClientCodeEntry() {
         onChange={event => setCode(event.target.value)}
         variant="outlined"/>
 
-      <Link to={{pathname: "/food", state: code}}>
+      <Link to={{pathname: "/bill", state: code}}>
         <Fab variant="extended" aria-label="delete">
           <NavigationIcon/>
           Enter code

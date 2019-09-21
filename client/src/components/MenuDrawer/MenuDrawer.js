@@ -4,15 +4,23 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import './styles.scss'
+import {withRouter} from 'react-router-dom';
 
 function MenuDrawer(props) {
+
+  const openMenu = () => {
+    props.history.push('/menu');
+    props.closeDrawer();
+  };
+
   const sideList = () => (
     <div
       role="presentation"
     >
       <List>
         {['Main course', 'Soups', 'Hamburgers', 'Pizzas'].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={text} onClick={openMenu}>
             <ListItemText primary={text}/>
           </ListItem>
         ))}
@@ -20,7 +28,7 @@ function MenuDrawer(props) {
       <Divider/>
       <List>
         {['Soft drinks', 'Hot drinks', 'Alcholic beverages'].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={text} onClick={openMenu}>
             <ListItemText primary={text}/>
           </ListItem>
         ))}
@@ -41,4 +49,4 @@ function MenuDrawer(props) {
   );
 }
 
-export default MenuDrawer;
+export default withRouter(MenuDrawer);
