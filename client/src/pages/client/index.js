@@ -7,14 +7,20 @@ import Header from '../../components/Header/Header';
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer';
 import Menu from './Menu/Menu';
 
-function Client() {
+function Client(props) {
   const [isDrawerOpen, toggleDrawer] = useState(false);
+
+  const header = () => {
+    return props.location.pathname !== '/' && <Header isClientView={true}/>
+  };
+
+  const footer = () => {
+    return props.location.pathname !== '/' && <BottomActions openDrawer={() => toggleDrawer(true)}/>
+  };
 
   return (
     <span>
-      <Header
-        isClientView={true}
-      />
+      {header()}
       <MenuDrawer
         openDrawer={() => toggleDrawer(true)}
         closeDrawer={() => toggleDrawer(false)}
@@ -26,9 +32,7 @@ function Client() {
           <Route exact path="/bill" component={Bill}/>
           <Route exact path="/menu" component={Menu}/>
         </Switch>
-        <BottomActions
-          openDrawer={() => toggleDrawer(true)}
-        />
+        {footer()}
       </div>
     </span>
   )
