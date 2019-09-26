@@ -6,7 +6,7 @@ const categoryRoutes = require('./api/categoryController');
 
 router.use('/api/menu', menuItemRoutes);
 router.use('/api/menu/order', orderRoutes);
-router.use('/api/tab', tabRoutes);
+router.use('/api/table', tabRoutes);
 router.use('/api/category', categoryRoutes);
 
 module.exports = router;

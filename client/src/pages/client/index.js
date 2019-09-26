@@ -3,6 +3,7 @@ import BottomActions from '../../components/BottomActions/BottomActions';
 import {Route, Switch} from 'react-router-dom';
 import ClientCodeEntry from './ClientCodeEntry/ClientCodeEntry';
 import Bill from './Bill/Bill';
+import Bartab from './Bartab/Bartab';
 import Header from '../../components/Header/Header';
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer';
 import Menu from './Menu/Menu';
@@ -24,6 +25,7 @@ function Client() {
         <Switch>
           <Route exact path="/" component={ClientCodeEntry}/>
           <Route exact path="/bill" component={Bill}/>
+          <Route exact path="/tab" component={Bartab}/>
           <Route exact path="/menu" component={Menu}/>
         </Switch>
         <BottomActions
