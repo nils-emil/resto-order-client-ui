@@ -8,6 +8,8 @@ import Header from '../../components/Header/Header';
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer';
 import Menu from './Menu/Menu';
 import io from "socket.io-client";
+import SnackBar from "../../components/Snackbar/SnackBar";
+import { PopupConsumer } from "../../services/popup-context";
 
 function Client(props) {
   const [isDrawerOpen, toggleDrawer] = useState(false);
@@ -33,6 +35,7 @@ function Client(props) {
         closeDrawer={() => toggleDrawer(false)}
         isOpen={isDrawerOpen}
       />
+
       <div className="main-scroll">
         <Switch>
           <Route exact path="/" component={ClientCodeEntry}/>
@@ -40,6 +43,8 @@ function Client(props) {
           <Route exact path="/tab" component={Bartab}/>
           <Route exact path="/menu" component={Menu}/>
         </Switch>
+        <div>
+        </div>
         {footer()}
       </div>
     </span>

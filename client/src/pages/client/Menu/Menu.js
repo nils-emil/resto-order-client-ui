@@ -6,6 +6,8 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import Button from "@material-ui/core/Button";
+import { PopupConsumer } from "../../../services/popup-context";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,6 +16,14 @@ const useStyles = makeStyles(theme => ({
   cover: {
     marginRight: 10,
     height: 100
+  },
+  button: {
+    float: 'right',
+    marginTop: 10,
+    fontSize: 10
+  },
+  description: {
+    width: '100%',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -50,8 +60,23 @@ function Menu() {
             <Typography className={classes.heading}>{item.title}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
+            <Typography className={classes.description}>
               {item.description}
+              <br></br>
+              <PopupConsumer>
+                {({ addMessage }) => (
+                  <Button
+                    onClick={() => {
+                      addMessage({ text: 'Added to cart', id: Math.random() })
+                    }}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}>
+                    Add item to carts
+                  </Button>)
+                }
+              </PopupConsumer>
+
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>

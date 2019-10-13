@@ -1,22 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import CallIcon from '@material-ui/icons/Call';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import './styles.scss';
-import SnackBar from '../Snackbar/SnackBar';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { PopupConsumer } from "../../services/popup-context";
 
 function BottomActions(props) {
-  const [isSnackbarOpen, toggleSnackbar] = useState(false);
 
-  const callWaiter = () => {
+  const callWaiter = (addNotificationFn) => {
     props.socket.emit('CALL_SERVICE', {
       tableCode: props.tableCode
     });
-
-    toggleSnackbar(true);
+    addNotificationFn({ text: 'Waiter called', id: Math.random() })
   };
 
   const onBillClick = () => {
@@ -28,14 +26,16 @@ function BottomActions(props) {
       showLabels
       className="bar"
     >
-      <BottomNavigationAction label="Call waiter" socket={props.socket} onClick={callWaiter} icon={<CallIcon/>}/>
+      <PopupConsumer>
+        {({ addMessage }) => (
+          <BottomNavigationAction label="Call waiter" socket={props.socket} onClick={() => {
+            callWaiter(addMessage)
+          }} icon={<CallIcon/>}/>)}
+      </PopupConsumer>
       <BottomNavigationAction label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
       <BottomNavigationAction label="Bill" onClick={onBillClick} icon={<CreditCardIcon/>}/>
 
-      <SnackBar
-        isOpen={isSnackbarOpen}
-        handleClose={() => toggleSnackbar(false)}
-      />
+
     </BottomNavigation>
   );
 }
