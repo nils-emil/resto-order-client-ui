@@ -25,16 +25,13 @@ function ClientCodeEntry(props) {
     return (
         <div className="code-entry">
             {navigate ? <Redirect to='/bill'/> : null}
-
             <h3>Welcome to Vapiano!</h3>
             <p>Enter code and order food/service instantly!</p>
-
             <TextField
                 label="Table code"
                 margin="normal"
                 onChange={event => setCode(event.target.value)}
                 variant="outlined"/>
-
             <Fab onClick={() => submitCode()} variant="extended" aria-label="delete">
                 <NavigationIcon/>
                 Enter code

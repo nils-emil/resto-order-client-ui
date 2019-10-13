@@ -1,6 +1,6 @@
 import React from 'react';
 import io from "socket.io-client";
-import ServiceCallTableRow from "./ServiceCallTableRow";
+import ServiceCallRow from "../../../components/ServiceCall/ServiceCallRow";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -9,7 +9,7 @@ import TableBody from "@material-ui/core/TableBody";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 
-class ServiceCallTable extends React.Component {
+class ServiceCalls extends React.Component {
 
     constructor(props) {
         super(props);
@@ -18,6 +18,7 @@ class ServiceCallTable extends React.Component {
         };
 
         this.socket = io(process.env.REACT_APP_BACKEND_URL);
+        debugger
         this.socket.on('SERVICE_CALLED', function (data) {
             addMessage(data);
         });
@@ -54,7 +55,7 @@ class ServiceCallTable extends React.Component {
         if (this.state.tableCodes && this.state.tableCodes.length !== 0) {
             serviceCallRows = this.state.tableCodes.map((message, index) => {
                 return (
-                    <ServiceCallTableRow
+                    <ServiceCallRow
                         key={message._id}
                         serviceCall={message}
                         index={index}
@@ -87,4 +88,4 @@ class ServiceCallTable extends React.Component {
     }
 }
 
-export default ServiceCallTable;
+export default ServiceCalls;

@@ -1,7 +1,7 @@
 import Axios from  'axios-observable';
 
-export function getMenuItems() {
-  return Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/menu`)
+export function getMenuItems(params = null) {
+  return Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/menu`, { params: params})
 }
 
 export function getCategories() {

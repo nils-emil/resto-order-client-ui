@@ -4,7 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import Moment from "react-moment";
 import Button from "@material-ui/core/Button";
 
-export default function ServiceCallTableRow(props) {
+export default function ServiceCallRow(props) {
     return (
         <TableRow>
             <TableCell align="left" component="th" scope="row">

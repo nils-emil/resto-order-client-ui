@@ -1,35 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import './styles.scss'
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { getCategories } from "../../services/adminService";
 
 function MenuDrawer(props) {
 
-  const openMenu = () => {
-    props.history.push('/menu');
+  const [categories, setCategories] = useState([]);
+
+  const openMenu = (categoryId) => {
+    props.history.push({
+        pathname: '/menu',
+        search: `categoryId=${categoryId}`
+      }
+    );
     props.closeDrawer();
   };
 
+  useEffect(() => {
+    getCategories().subscribe(e => {
+        setCategories(e.data);
+      }
+    );
+  }, []);
+
+
   const sideList = () => (
-    <div
-      role="presentation"
-    >
+    <div role="presentation">
       <List>
-        {['Main course', 'Soups', 'Hamburgers', 'Pizzas'].map((text, index) => (
-          <ListItem button key={text} onClick={openMenu}>
-            <ListItemText primary={text}/>
-          </ListItem>
-        ))}
-      </List>
-      <Divider/>
-      <List>
-        {['Soft drinks', 'Hot drinks', 'Alcholic beverages'].map((text, index) => (
-          <ListItem button key={text} onClick={openMenu}>
-            <ListItemText primary={text}/>
+        {categories.map((text) => (
+          <ListItem button key={text._id} onClick={() => openMenu(text._id)}>
+            <ListItemText primary={text.name}/>
           </ListItem>
         ))}
       </List>

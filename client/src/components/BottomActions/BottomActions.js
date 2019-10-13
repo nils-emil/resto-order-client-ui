@@ -5,16 +5,14 @@ import CallIcon from '@material-ui/icons/Call';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import './styles.scss';
-import io from 'socket.io-client';
 import SnackBar from '../Snackbar/SnackBar';
 import {withRouter} from 'react-router-dom';
 
 function BottomActions(props) {
   const [isSnackbarOpen, toggleSnackbar] = useState(false);
-  const socket = io(process.env.REACT_APP_BACKEND_URL);
 
   const callWaiter = () => {
-    socket.emit('CALL_SERVICE', {
+    props.socket.emit('CALL_SERVICE', {
       tableCode: props.tableCode
     });
 
@@ -30,7 +28,7 @@ function BottomActions(props) {
       showLabels
       className="bar"
     >
-      <BottomNavigationAction label="Call waiter" onClick={callWaiter} icon={<CallIcon/>}/>
+      <BottomNavigationAction label="Call waiter" socket={props.socket} onClick={callWaiter} icon={<CallIcon/>}/>
       <BottomNavigationAction label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
       <BottomNavigationAction label="Bill" onClick={onBillClick} icon={<CreditCardIcon/>}/>
 
