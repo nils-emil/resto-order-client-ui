@@ -10,8 +10,10 @@ services:
       - "8080:4000"
     links:
       - mongo
+
   mongo:
     container_name: mongo
+    restart: always
     image: mongo
     volumes:
       - ./../data:/data/db
