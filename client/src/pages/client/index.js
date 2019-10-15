@@ -8,8 +8,6 @@ import Header from '../../components/Header/Header';
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer';
 import Menu from './Menu/Menu';
 import io from "socket.io-client";
-import SnackBar from "../../components/Snackbar/SnackBar";
-import { PopupConsumer } from "../../services/popup-context";
 
 function Client(props) {
   const [isDrawerOpen, toggleDrawer] = useState(false);

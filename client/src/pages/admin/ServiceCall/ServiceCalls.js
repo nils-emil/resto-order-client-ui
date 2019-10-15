@@ -18,7 +18,6 @@ class ServiceCalls extends React.Component {
         };
 
         this.socket = io(process.env.REACT_APP_BACKEND_URL);
-        debugger
         this.socket.on('SERVICE_CALLED', function (data) {
             addMessage(data);
         });

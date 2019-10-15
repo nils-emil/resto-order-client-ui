@@ -6,6 +6,7 @@ import Admin from '../pages/admin/index';
 import Client from '../pages/client/index';
 import { PopupConsumer, PopupProvider } from "../services/popup-context";
 import SnackBar from "./Snackbar/SnackBar";
+import { ShoppingCartProvider } from "../services/shoppingCartContext";
 
 require('dotenv').config();
 
@@ -19,11 +20,13 @@ class App extends Component {
           <Switch>
             <PopupProvider>
               <Route path="/admin" component={Admin}/>
-              <Route path="/" component={Client}/>
-
+              <ShoppingCartProvider>
+                <Route path="/" component={Client}/>
+              </ShoppingCartProvider>
               <PopupConsumer>
                 {({ messages, removeMessage }) => messages.map((elemenet, index) =>
                   <SnackBar
+                    key={elemenet.id}
                     offset={index}
                     text={elemenet.text}
                     _id={elemenet.id}

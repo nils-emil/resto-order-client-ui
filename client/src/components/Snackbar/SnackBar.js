@@ -12,7 +12,7 @@ function SnackBar(props) {
 
   return (
     <Snackbar
-      style={{bottom: 50 + (25 * props.offset)}}
+      style={{bottom: 50 + (65 * props.offset)}}
       open={true}
       message={<span id="message-id">{props.text}</span>}
       action={[

@@ -14,7 +14,7 @@ export class PopupProvider extends React.Component {
       ...this.state, messages: array
     });
     let messageId = message.id;
-    setTimeout(() => {this.removeMessage(messageId)}, message.timeout ? message.timeout : 5000)
+    setTimeout(() => {this.removeMessage(messageId)}, message.timeout ? message.timeout : 3000)
   };
 
   removeMessage = messageId  => {

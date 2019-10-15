@@ -7,6 +7,7 @@ import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import './styles.scss';
 import { withRouter } from 'react-router-dom';
 import { PopupConsumer } from "../../services/popup-context";
+import { ShoppingCartConsumer } from "../../services/shoppingCartContext";
 
 function BottomActions(props) {
 
@@ -22,21 +23,26 @@ function BottomActions(props) {
   };
 
   return (
-    <BottomNavigation
-      showLabels
-      className="bar"
-    >
-      <PopupConsumer>
-        {({ addMessage }) => (
-          <BottomNavigationAction label="Call waiter" socket={props.socket} onClick={() => {
-            callWaiter(addMessage)
-          }} icon={<CallIcon/>}/>)}
-      </PopupConsumer>
-      <BottomNavigationAction label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
-      <BottomNavigationAction label="Bill" onClick={onBillClick} icon={<CreditCardIcon/>}/>
+    <PopupConsumer>
+      {({ addMessage }) => (
 
+        <ShoppingCartConsumer>
+          {( {totalSum}) => (
+            <BottomNavigation
+              showLabels
+              className="bar"
+            >
+              <BottomNavigationAction label="Call waiter" socket={props.socket} onClick={() => {
+                callWaiter(addMessage)
+              }} icon={<CallIcon/>}/>
+              < BottomNavigationAction label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
+              <BottomNavigationAction label={`Bill ${totalSum.toFixed(2)} €`}  onClick={onBillClick} icon={<CreditCardIcon/>}/>
+            </BottomNavigation>
+          )}
+        </ShoppingCartConsumer>
 
-    </BottomNavigation>
+      )}
+    </PopupConsumer>
   );
 }
 
