@@ -1,14 +1,14 @@
 import Axios from  'axios-observable';
 
 export function getMenuItems() {
-  return Axios.get(process.env.REACT_APP_BACKEND_URL + '/api/menu')
+  return Axios.get('/api/menu')
 }
 
 export function getTableCodeInfo(tableCode) {
-  return Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/table/table/${tableCode}`)
+  return Axios.get(`/api/table/table/${tableCode}`)
 }
 
 
 export function getOpenTabs(tableCode) {
-  return Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/table/get-all-tabs/${tableCode}`)
+  return Axios.get(`/api/table/get-all-tabs/${tableCode}`)
 }
