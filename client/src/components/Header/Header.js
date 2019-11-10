@@ -11,15 +11,12 @@ function Header(props) {
     <AppBar className="header">
       <Toolbar>
         <Typography variant="h6">
-          Vapiano
+          ChatRestaurant
         </Typography>
-
-
         <div className="nav-buttons">
           <Link to="/admin">
             <p>Admin</p>
           </Link>
-
           <Link to="/">
             <p>Client</p>
           </Link>

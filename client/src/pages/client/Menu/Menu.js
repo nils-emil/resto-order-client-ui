@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { getMenuItems } from '../../../services/adminService';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import Button from "@material-ui/core/Button";
-import { PopupConsumer } from "../../../services/popup-context";
-import { ShoppingCartConsumer } from "../../../services/shoppingCartContext";
+import React, { useEffect, useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { getMenuItems } from '../../../services/adminService'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import * as actionCreators from '../../../store/actions/index'
+import { connect } from 'react-redux'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css';
+import callToast from '../../../services/callToast'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Menu() {
+function Menu (props) {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
@@ -64,37 +67,34 @@ function Menu() {
               <Typography className={classes.description}>
                 {item.description}
                 <br></br>
-                <ShoppingCartConsumer>
-                  {({ addItem }) => (
-                    <PopupConsumer>
-                      {({ addMessage }) =>
-                        (
-                          <Button
+                <Button
                             onClick={() => {
-                              addMessage({ text: 'Added to cart', id: Math.random() })
-                              addItem(item)
+                              props.addItemToCart(item)
+                              callToast('Added to cart')
                             }}
                             variant="contained"
                             color="primary"
                             className={classes.button}>
                             Add item to carts
                           </Button>
-                        )
-                      }
-                    </PopupConsumer>)
-                  }
-                </ShoppingCartConsumer>
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         )
       )
       }
+      <ToastContainer/>
     </div>
   );
 }
 
-export default Menu;
+const mapDispatchToProps = dispatch => {
+  return {
+    addItemToCart: (value) => dispatch(actionCreators.addItemToCart(value)),
+    removeItemFromCart: (value) => dispatch(actionCreators.removeItemFromCart(value)),
+  }
+}
+export default connect(null, mapDispatchToProps)(Menu)
 
 
 

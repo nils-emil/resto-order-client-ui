@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BottomActions from '../../components/BottomActions/BottomActions';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ClientCodeEntry from './ClientCodeEntry/ClientCodeEntry';
 import Bill from './Bill/Bill';
 import Bartab from './Bartab/Bartab';
@@ -8,6 +8,7 @@ import Header from '../../components/Header/Header';
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer';
 import Menu from './Menu/Menu';
 import io from "socket.io-client";
+import { toast } from 'react-toastify'
 
 function Client(props) {
   const [isDrawerOpen, toggleDrawer] = useState(false);
@@ -33,7 +34,6 @@ function Client(props) {
         closeDrawer={() => toggleDrawer(false)}
         isOpen={isDrawerOpen}
       />
-
       <div className="main-scroll">
         <Switch>
           <Route exact path="/" component={ClientCodeEntry}/>
@@ -41,8 +41,6 @@ function Client(props) {
           <Route exact path="/tab" component={Bartab}/>
           <Route exact path="/menu" component={Menu}/>
         </Switch>
-        <div>
-        </div>
         {footer()}
       </div>
     </span>
