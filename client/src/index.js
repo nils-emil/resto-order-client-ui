@@ -11,7 +11,10 @@ import shoppingCartReducer from './store/reducers/shoppingCart'
 import authReducer from './store/reducers/auth'
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
-axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+const token  = localStorage.getItem('token')
+if (token) {
+    axios.defaults.headers.common['Authorization'] = token;
+}
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const rootReducer = combineReducers({

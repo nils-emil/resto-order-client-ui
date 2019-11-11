@@ -1,7 +1,5 @@
 export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 export const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
-export const ADD_TOAST_MESSAGE = 'ADD_POPUP'
-export const REMOVE_TOAST_MESSAGE = 'REMOVE_POPUP'
 
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';

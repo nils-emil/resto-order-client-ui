@@ -17,7 +17,6 @@ function ClientCodeEntry(props) {
                 console.log("Invalid tableCode was entered")
             } else {
                 localStorage.setItem('tableCode', e.data.code);
-                console.log(e.data);
                 setNavigate(true)
             }
         })

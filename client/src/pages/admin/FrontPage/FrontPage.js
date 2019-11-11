@@ -16,7 +16,7 @@ function FrontPage() {
     },
     {
       text: 'Menu',
-      img: 'https://www.weightwatchers.com/us/sites/default/files/styles/wwvs_default_image/public/article_masthead/allaboutzeropointfoods_yk_ww_080218_0spvfoods_190_1250x600.jpg?itok=Fo_ThSVk',
+      img: 'https://i1.wp.com/www.delephant.com.au/wp-content/uploads/2019/03/2018-DE-Street-Food-Take-Away-Menu_page-0001-3.jpg',
       linkTo: '/admin/menu-list'
     },
     {
