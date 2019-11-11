@@ -1,9 +1,8 @@
-
 const express = require('express');
 const router = express.Router({mergeParams: true});
 
-const Category = require('./../../models/category').Category;
-const MenuItem = require('./../../models/menu').MenuItem;
+const Category = require('../../../models/category').Category
+const MenuItem = require('../../../models/menu').MenuItem
 
 router.route('/add').post(function (req, res) {
     let category = new Category(req.body);
@@ -11,16 +10,6 @@ router.route('/add').post(function (req, res) {
         .then(e => {
             res.status(200).json(e);
         })
-});
-
-router.route('/').get(function (req, res) {
-    Category.find((err, Categories) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(Categories);
-        }
-    });
 });
 
 router.route('/edit/:id').get(function (req, res) {
