@@ -8,30 +8,21 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import shoppingCartReducer from './store/reducers/shoppingCart'
-import userReducer from './store/reducers/user'
+import authReducer from './store/reducers/auth'
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const rootReducer = combineReducers({
-    user: userReducer,
+    auth: authReducer,
     cart: shoppingCartReducer,
 })
 
-const logger = store => {
-    return next => {
-        return action => {
-            console.log('[Middleware] Dispatching', action)
-            const result = next(action)
-            console.log('[Middleware] next state', store.getState())
-            return result
-        }
-    }
-}
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'))
 

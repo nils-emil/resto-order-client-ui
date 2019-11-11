@@ -1,27 +1,53 @@
-import React from 'react';
-import ServiceCalls from './ServiceCall/ServiceCalls';
-import MenuList from './MenuList/MenuList';
-import ItemEdit from './ItemEdit/ItemEdit';
-import FrontPage from './FrontPage/FrontPage';
-import {Route, Switch} from 'react-router-dom';
-import Header from '../../components/Header/Header';
+import React, { useEffect } from 'react'
+import ServiceCalls from './ServiceCall/ServiceCalls'
+import MenuList from './MenuList/MenuList'
+import ItemEdit from './ItemEdit/ItemEdit'
+import FrontPage from './FrontPage/FrontPage'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import Header from '../../components/Header/Header'
+import * as actions from '../../store/actions'
+import { connect } from 'react-redux'
 
-function Admin() {
+function Admin (props) {
+
+  useEffect(() => {
+    props.onTryAutoLogin()
+  }, [])
+
+  let routes = null
+  if (props.auth.token) {
+    routes = <Switch>
+      <Route exact path="/admin/service-calls" component={ServiceCalls}/>
+      <Route exact path="/admin/menu-list" component={MenuList}/>
+      <Route exact path="/admin/item-edit" component={ItemEdit}/>
+      <Route path="/admin" component={FrontPage}/>
+    </Switch>
+  }
+  if (!props.auth.loading && !props.auth.token) {
+    routes = <Redirect to='/login'/>
+  }
   return (
     <span>
       <Header
         isClientView={false}
       />
       <div className="main-scroll">
-        <Switch>
-          <Route exact path="/admin/service-calls" component={ServiceCalls}/>
-          <Route exact path="/admin/menu-list" component={MenuList}/>
-          <Route exact path="/admin/item-edit" component={ItemEdit}/>
-          <Route path="/admin" component={FrontPage}/>
-        </Switch>
+        {routes}
       </div>
     </span>
   )
 }
 
-export default Admin;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoLogin: () => dispatch(actions.authCheckState())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin)

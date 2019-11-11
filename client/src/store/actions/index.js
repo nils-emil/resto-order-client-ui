@@ -4,5 +4,8 @@ export {
 } from './shoppingCart';
 
 export {
-  updateUser
-} from './user';
+  auth,
+  logout,
+  setAuthRedirectPath,
+  authCheckState
+} from './auth';

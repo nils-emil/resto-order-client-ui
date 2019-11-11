@@ -4,6 +4,7 @@ import '../main.scss'
 import { CssBaseline } from '@material-ui/core'
 import Admin from '../pages/admin/index'
 import Client from '../pages/client/index'
+import Login from '../pages/admin/Login/Login'
 
 class App extends Component {
   render () {
@@ -12,6 +13,7 @@ class App extends Component {
         <CssBaseline/>
         <Router>
           <Switch>
+            <Route path="/login" component={Login}/>
             <Route path="/admin" component={Admin}/>
             <Route path="/" component={Client}/>
           </Switch>
