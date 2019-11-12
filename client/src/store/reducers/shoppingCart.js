@@ -36,12 +36,20 @@ const addToCart = (state, value) => {
   }
 }
 
+function clearCart () {
+  return {
+    items: {}, totalSum: 0
+  }
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_ITEM_TO_CART :
       return addToCart(state, action.value)
     case actionTypes.REMOVE_ITEM_FROM_CART :
       return removeFromCart(state, action.value)
+    case actionTypes.CLEAR_CART :
+      return clearCart()
     default:
       break
   }

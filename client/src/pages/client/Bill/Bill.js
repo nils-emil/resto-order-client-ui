@@ -1,18 +1,21 @@
-import React from 'react';
+import React from 'react'
 import './styles.scss'
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import Typography from "@material-ui/core/Typography";
-import ListItem from "@material-ui/core/ListItem";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Grid from "@material-ui/core/Grid";
-import * as actionCreators from "../../../store/actions/shoppingCart";
-import {connect} from "react-redux";
+import List from '@material-ui/core/List'
+import Divider from '@material-ui/core/Divider'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Avatar from '@material-ui/core/Avatar'
+import ListItemText from '@material-ui/core/ListItemText'
+import Typography from '@material-ui/core/Typography'
+import ListItem from '@material-ui/core/ListItem'
+import makeStyles from '@material-ui/core/styles/makeStyles'
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
+import Grid from '@material-ui/core/Grid'
+import * as actionCreators from '../../../store/actions/shoppingCart'
+import { connect } from 'react-redux'
+import _ from 'lodash';
+import { ToastContainer } from 'react-toastify'
+import callToast from '../../../services/callToast'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,20 +28,40 @@ const useStyles = makeStyles(theme => ({
   button: {
     float: 'right',
     fontSize: 0.5 + 'rem'
+  },
+  textAlignCenter: {
+    textAlign: 'center'
   }
 }));
 
 function Bill(props) {
+  const deliverOrder = () => {
+    props.clearCart();
+
+  }
   const classes = useStyles();
+  let checkOutAction = <Button
+    onClick={() => {
+      deliverOrder();
+      callToast('Order will be brought to you shortly.', 5000)
+    }}
+    variant="contained"
+    color="primary"
+    className={classes.button}>
+    Bring order to table
+  </Button>
+  if (_.isEmpty(props.items)) {
+    checkOutAction = <p className={classes.textAlignCenter}>No items in cart. Browse the menu to find items that suit you.</p>
+  }
   return (
     <span className="food-picker">
         <h4>Welcome to chatrestaurant</h4>
           <List className={classes.root}>
-                     {Object.entries(props.items).map(([key,element]) =>
+                     {Object.entries(props.items).map(([key, element]) =>
                        <React.Fragment>
-                         <ListItem  key={element.item._id} alignItems="flex-start">
+                         <ListItem key={element.item._id} alignItems="flex-start">
                            <ListItemAvatar>
-                             <Avatar alt="Cindy Baker" src={element.item.image}/>
+                             <Avatar alt="Cindy Baker" src={element.item.imageUrl}/>
                            </ListItemAvatar>
                            <ListItemText
                              primary={element.item.title}
@@ -53,7 +76,7 @@ function Bill(props) {
                                    <Grid item className={classes.button}>
                                      <ButtonGroup size="small" aria-label="small outlined secondary button group">
                                        <Button onClick={() => props.removeItemFromCart(element.item)}>-</Button>
-                                       <Button onClick={() => props.addItemToCart(element.item)} >+</Button>
+                                       <Button onClick={() => props.addItemToCart(element.item)}>+</Button>
                                      </ButtonGroup>
                                    </Grid>
                                  </Typography>
@@ -65,6 +88,7 @@ function Bill(props) {
                        </React.Fragment>
                      )}
          </List>
+      {checkOutAction}
     </span>);
 }
 
@@ -79,6 +103,7 @@ const mapDispatchToProps = dispatch => {
   return {
     addItemToCart: (value) => dispatch(actionCreators.addItemToCart(value)),
     removeItemFromCart: (value) => dispatch(actionCreators.removeItemFromCart(value)),
+    clearCart: () => dispatch(actionCreators.clearCart()),
   }
 };
 

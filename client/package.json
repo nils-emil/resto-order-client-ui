@@ -9,6 +9,7 @@
     "axios-observable": "^1.1.2",
     "dotenv": "^8.1.0",
     "history": "^4.9.0",
+    "lodash": "^4.17.15",
     "material-ui-image": "^3.2.1",
     "moment": "^2.24.0",
     "react": "^16.9.0",

@@ -5,6 +5,8 @@ const PORT = 4000;
 const cors = require('cors');
 const ServiceCall = require('../app/models/serviceCall').ServiceCall;
 require('./config/db').connection;
+// require('./mockData/data')
+// require('./mockData/drop')
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -43,3 +45,13 @@ io.on('connection', (socket) => {
 
     })
 });
+
+const Category = require('../app/models/category').Category
+const User = require('../app/models/user').User
+
+Category.find().then(e => {
+    console.log(e)
+})
+User.find().then(e => {
+    console.log(e)
+})

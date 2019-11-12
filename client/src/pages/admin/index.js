@@ -7,10 +7,16 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import * as actions from '../../store/actions'
 import { connect } from 'react-redux'
+import axios from 'axios'
+
 
 function Admin (props) {
 
   useEffect(() => {
+    const token  = localStorage.getItem('token')
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = token;
+    }
     props.onTryAutoLogin()
   }, [])
 

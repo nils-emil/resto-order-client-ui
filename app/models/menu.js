@@ -3,23 +3,29 @@ const Schema = mongoose.Schema;
 
 const MenuItemSchema = new Schema({
     title: {
-        type: String
+        type: String,
+        required: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
-    organization: {
-        type: String
+    organizationId: {
+        type: Schema.Types.ObjectId, ref: 'Organization',
+        required: true
     },
     price: {
-        type: Number
+        type: Number,
+        required: true
     },
-    image: {
-        type: String
+    imageUrl: {
+        type: String,
+        required: true
     },
-    category: {
-        type: String
-    },
+    categoryId: {
+        type: Schema.Types.ObjectId, ref: 'Category',
+        required: false
+    }
 });
 
 module.exports.MenuItem = mongoose.model('MenuItem', MenuItemSchema);

@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react'
 import './styles.scss'
-import {Container} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Grid from '@material-ui/core/Grid';
-import ImageAdd from './components/ImageAdd/ImageAdd';
-import ItemInfo from './components/ItemInfo/ItemInfo';
-import {addMenuItem, getCategories, removeMenuItem, updateMenuItem} from '../../../services/adminService';
-import DeleteModal from './components/DeleteModal/DeleteModal';
+import { Container } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import Grid from '@material-ui/core/Grid'
+import ImageAdd from './components/ImageAdd/ImageAdd'
+import ItemInfo from './components/ItemInfo/ItemInfo'
+import { addMenuItem, getCategories, removeMenuItem, updateMenuItem } from '../../../services/adminService'
+import DeleteModal from './components/DeleteModal/DeleteModal'
+import { connect } from 'react-redux/es/alternate-renderers'
 
 function ItemEdit(props) {
   const [isModalOpen, setOpen] = useState(false);
@@ -22,7 +23,7 @@ function ItemEdit(props) {
   );
 
     useEffect(() => {
-        getCategories().subscribe(e => {
+      getCategories(props.auth.user.data.organizationId).subscribe(e => {
             setCategories(e.data);
         });
     }, []);
@@ -67,7 +68,7 @@ function ItemEdit(props) {
       <Grid container spacing={3} className="half-height">
         <Grid item xs={6} className="full-height">
           <ImageAdd
-            url={item.image}
+            url={item.imageUrl}
             onChange={(event) => updateField(event)}
           />
         </Grid>
@@ -94,4 +95,9 @@ function ItemEdit(props) {
 
 }
 
-export default ItemEdit;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  }
+}
+export default connect(mapStateToProps, null)(ItemEdit)

@@ -19,7 +19,7 @@ function ItemInfo(props) {
       <div className="flex space-between">
         <div>
           <InputLabel >Category</InputLabel>
-                <Select value={props.item.category}
+                <Select value={props.item.categoryId}
                     onChange={e => props.onMultiSelectChange('category', e.target.value)}>
                     {props.categories.map(category => {
                         return <MenuItem key={category._id} value={category._id}>{category.name}</MenuItem>

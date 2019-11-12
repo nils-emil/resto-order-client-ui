@@ -14,3 +14,10 @@ export const removeItemFromCart = (value) => {
   }
 }
 
+export const clearCart = () => {
+  return {
+    type: actionTypes.CLEAR_CART,
+    value: null
+  }
+}
+

@@ -21,7 +21,7 @@ function MenuDrawer(props) {
   };
 
   useEffect(() => {
-    getCategories().subscribe(e => {
+    getCategories(props.organizationId).subscribe(e => {
         setCategories(e.data);
       }
     );

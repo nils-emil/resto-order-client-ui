@@ -8,17 +8,18 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {getMenuItems, getCategories, deleteCategory, createNewCategory} from '../../../services/adminService';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux/es/alternate-renderers'
 
-function MenuList() {
+function MenuList(props) {
     const [menuItems, setMenuItems] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
     useEffect(() => {
-        getMenuItems().subscribe(e => {
+        getMenuItems(props.auth.user.data.organizationId).subscribe(e => {
             setMenuItems(e.data);
         });
-        getCategories().subscribe(e => {
+        getCategories(props.auth.user.data.organizationId).subscribe(e => {
             setCategories(e.data);
         });
     }, []);
@@ -28,7 +29,7 @@ function MenuList() {
             let updatedCategories = [...categories];
             updatedCategories.splice(index, 1);
             setCategories(updatedCategories)
-            getMenuItems().subscribe(e => {
+            getMenuItems(props.auth.user.data.organizationId).subscribe(e => {
                 setMenuItems(e.data);
             });
         })
@@ -54,10 +55,10 @@ function MenuList() {
       />
       <div className="content">
         <GridList cellHeight={260} className="grid-list">
-          {menuItems.filter(e => (!selectedCategoryId && !e.category) || (e.category === selectedCategoryId)).map(tile => (
+          {menuItems.filter(e => (!selectedCategoryId && !e.categoryId) || (e.categoryId === selectedCategoryId)).map(tile => (
             <Link key={tile._id} className="grid-tile" to={{pathname: "/admin/item-edit", state: tile}}>
               <GridListTile key={tile.title} className="height-inherit">
-                <img src={tile.image} alt={tile.title}/>
+                <img src={tile.imageUrl} alt={tile.title}/>
                 <GridListTileBar
                   title={tile.title}
                   subtitle={<span>Price: {tile.price}€</span>}
@@ -76,5 +77,9 @@ function MenuList() {
     </div>
   )
 }
-
-export default MenuList;
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    }
+}
+export default connect(mapStateToProps, null)(MenuList)

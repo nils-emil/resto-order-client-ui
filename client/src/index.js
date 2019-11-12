@@ -9,12 +9,14 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import shoppingCartReducer from './store/reducers/shoppingCart'
 import authReducer from './store/reducers/auth'
+import purple from '@material-ui/core/colors/purple';
+import red from '@material-ui/core/colors/red';
+
+const primary = red[500]; // #F44336
+const accent = purple.A200; // #E040FB (alternative method)
+
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
-const token  = localStorage.getItem('token')
-if (token) {
-    axios.defaults.headers.common['Authorization'] = token;
-}
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const rootReducer = combineReducers({

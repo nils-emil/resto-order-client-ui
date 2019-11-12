@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom'
 import * as actionCreators from '../../store/actions/index'
 import { connect } from 'react-redux'
 import callToast from '../../services/callToast'
+import { ToastContainer } from 'react-toastify'
 
 function BottomActions (props) {
 
@@ -26,12 +27,13 @@ function BottomActions (props) {
   return (
     <BottomNavigation showLabels className="bar">
       <BottomNavigationAction href='#' label="Call waiter" socket={props.socket} onClick={() => {
-        callWaiter(() => callToast('Waiter called'))
+        callWaiter(() => callToast('Waiter called', 5000))
       }} icon={<CallIcon/>}/>
       <BottomNavigationAction href='#' label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
       <BottomNavigationAction href='#'label={`Bill ${props.totalSum.toFixed(2)} €`}
                               onClick={onBillClick}
                               icon={<CreditCardIcon/>}/>
+      <ToastContainer/>
     </BottomNavigation>
   )
 }

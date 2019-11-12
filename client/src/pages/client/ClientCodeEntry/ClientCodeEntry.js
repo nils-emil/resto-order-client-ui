@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react'
 import './styles.scss'
-import TextField from "@material-ui/core/TextField";
-import NavigationIcon from '@material-ui/icons/Navigation';
-import Fab from '@material-ui/core/Fab';
-import {getTableCodeInfo} from "../../../services/clientService";
-import {Redirect} from "react-router-dom";
+import TextField from '@material-ui/core/TextField'
+import NavigationIcon from '@material-ui/icons/Navigation'
+import Fab from '@material-ui/core/Fab'
+import { getTableCodeInfo } from '../../../services/clientService'
+import { Redirect } from 'react-router-dom'
+import Typography from '@material-ui/core/Typography'
 
 function ClientCodeEntry(props) {
     const [code, setCode] = useState("");
@@ -17,24 +18,30 @@ function ClientCodeEntry(props) {
                 console.log("Invalid tableCode was entered")
             } else {
                 localStorage.setItem('tableCode', e.data.code);
+              localStorage.setItem('organizationId', e.data.organizationId)
                 setNavigate(true)
             }
         })
     };
     return (
         <div className="code-entry">
-            {navigate ? <Redirect to='/bill'/> : null}
-            <h3>Welcome to Vapiano!</h3>
-            <p>Enter code and order food/service instantly!</p>
+          {navigate ? <Redirect to='/menu'/> : null}
+          <h3 className='intro-header-block'>
+            <span className='intro-header-text'>Welcome to</span> <br></br>
+            <span className='intro-header-text'>QuickOrder Resto!</span>
+          </h3>
             <TextField
                 label="Table code"
                 margin="normal"
                 onChange={event => setCode(event.target.value)}
                 variant="outlined"/>
-            <Fab onClick={() => submitCode()} variant="extended" aria-label="delete">
+          <p className='intro-text'>Enter code and order food/service instantly!</p>
+
+          <Fab className='btn-submit' onClick={() => submitCode()} variant="extended" aria-label="delete">
                 <NavigationIcon/>
                 Enter code
             </Fab>
+
         </div>
     );
 }

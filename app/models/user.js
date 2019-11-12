@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 //simple schema
 const UserSchema = new mongoose.Schema({
@@ -16,6 +17,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
     maxlength: 255
+  },
+  organizationId: {
+    type: Schema.Types.ObjectId, ref: 'Organization',
+    required: true
   },
   //give different access rights if admin or not
   isAdmin: Boolean

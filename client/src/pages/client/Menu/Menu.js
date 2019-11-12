@@ -42,7 +42,8 @@ function Menu (props) {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let categoryId = params.get('categoryId');
-    getMenuItems({ category: categoryId }).subscribe(e => {
+    console.log(props)
+    getMenuItems(props.organizationId, { categoryId: categoryId }).subscribe(e => {
       setMenuItems(e.data);
     });
   }, [window.location.search]);
@@ -58,7 +59,7 @@ function Menu (props) {
               id="panel1a-header">
               <img
                 className={classes.cover}
-                src={item.image}
+                src={item.imageUrl}
                 alt="Live from space album cover"
               />
               <Typography className={classes.heading}>{item.title}</Typography>
@@ -70,7 +71,7 @@ function Menu (props) {
                 <Button
                             onClick={() => {
                               props.addItemToCart(item)
-                              callToast('Added to cart')
+                              callToast('Added to cart', 1000)
                             }}
                             variant="contained"
                             color="primary"
@@ -83,7 +84,6 @@ function Menu (props) {
         )
       )
       }
-      <ToastContainer/>
     </div>
   );
 }

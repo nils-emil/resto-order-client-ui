@@ -6,8 +6,8 @@ const TableSchema = new Schema({
         type: String,
         required: true
     },
-    organization: {
-        type: String,
+    organizationId: {
+        type: Schema.Types.ObjectId, ref: 'Organization',
         required: true
     }
 });

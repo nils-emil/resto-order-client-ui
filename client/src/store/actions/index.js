@@ -1,6 +1,7 @@
 export {
   addItemToCart,
-  removeItemFromCart
+  removeItemFromCart,
+  clearCart
 } from './shoppingCart';
 
 export {

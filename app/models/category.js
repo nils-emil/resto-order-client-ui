@@ -9,10 +9,11 @@ const CategorySchema = new Schema({
     order: {
         type: Number,
         required: true
+    },
+    organizationId: {
+        type: Schema.Types.ObjectId, ref: 'Organization',
+        required: true
     }
-    // organizationId: {
-    //     type: Schema.Types.ObjectId, ref: 'Organization', required: true
-    // }
 });
 
 module.exports.Category = mongoose.model('Category', CategorySchema);

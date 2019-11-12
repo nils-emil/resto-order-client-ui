@@ -20,16 +20,6 @@ router.route('/add').post(function (req, res) {
     })
 })
 
-router.route('/').get(function (req, res) {
-  MenuItem.find(req.query, (err, MenuItems) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.json(MenuItems)
-    }
-  })
-})
-
 router.route('/update/:id').post(function (req, res) {
   MenuItem.findById(req.params.id, function (err, MenuItem) {
     if (!MenuItem)

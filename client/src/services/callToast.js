@@ -1,9 +1,12 @@
 import { toast } from 'react-toastify'
 
-const callToast = (value) => {
+const callToast = (value, duration) => {
   toast(value, {
-    position: 'bottom-left',
-    autoClose: 3000
+    className: 'green',
+    position: 'top-left',
+    autoClose: duration,
+    type: toast.TYPE.SUCCESS,
+    hideProgressBar: false,
   })
 }
 export default callToast
