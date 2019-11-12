@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import CallIcon from '@material-ui/icons/Call'
@@ -12,12 +12,19 @@ import callToast from '../../services/callToast'
 import { ToastContainer } from 'react-toastify'
 
 function BottomActions (props) {
+  const [serviceCallAvailable, setServiceCallAvailable] = useState(true)
 
   const callWaiter = (addNotificationFn) => {
-    props.socket.emit('CALL_SERVICE', {
-      tableCode: props.tableCode
-    })
-    addNotificationFn({ text: 'Waiter called', id: Math.random() })
+    if (serviceCallAvailable) {
+      setServiceCallAvailable(false)
+      props.socket.emit('CALL_SERVICE', {
+        tableCode: props.tableCode
+      })
+      setTimeout(() => {
+        setServiceCallAvailable(true)
+      }, 5000)
+      addNotificationFn({ text: 'Waiter called', id: Math.random() })
+    }
   }
 
   const onBillClick = () => {
@@ -26,11 +33,12 @@ function BottomActions (props) {
 
   return (
     <BottomNavigation showLabels className="bar">
-      <BottomNavigationAction href='#' label="Call waiter" socket={props.socket} onClick={() => {
+      <BottomNavigationAction className={serviceCallAvailable ? '' : 'disabled'} label="Call waiter"
+                              onClick={() => {
         callWaiter(() => callToast('Waiter called', 5000))
       }} icon={<CallIcon/>}/>
-      <BottomNavigationAction href='#' label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
-      <BottomNavigationAction href='#'label={`Bill ${props.totalSum.toFixed(2)} €`}
+      <BottomNavigationAction label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
+      <BottomNavigationAction label={`Bill ${props.totalSum.toFixed(2)} €`}
                               onClick={onBillClick}
                               icon={<CreditCardIcon/>}/>
       <ToastContainer/>
