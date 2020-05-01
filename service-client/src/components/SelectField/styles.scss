@@ -1,0 +1,17 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.select-field {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+
+  &__option {
+
+  }
+
+  &__label {
+    color: $color-white;
+    margin-bottom: .5em;
+  }
+}

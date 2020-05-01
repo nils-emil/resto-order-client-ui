@@ -1,57 +1,56 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const PORT = 4000;
-const cors = require('cors');
-const ServiceCall = require('../app/models/serviceCall').ServiceCall;
-require('./config/db').connection;
-// require('./mockData/data')
-// require('./mockData/drop')
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const PORT = 4000
+const cors = require('cors')
+const ServiceCall = require('../app/models/serviceCall').ServiceCall
+const timeUtil = require('./util/timeUtil')
+require('./config/db').connection
+require('./mockData/drop')
+require('./mockData/data')
 
-app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(require('./routes'));
+app.use(cors())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+app.use(require('./api'))
 
 const server = app.listen(PORT, function () {
-    console.log('Server is running on Port:', PORT);
-});
+  console.log('Server is running on Port:', PORT)
+})
 
-
-const socket = require('socket.io');
-io = socket(server);
+const socket = require('socket.io')
+io = socket(server)
 
 io.on('connection', (socket) => {
 
-    socket.on('CALL_SERVICE', function (data) {
-        const serviceCall = new ServiceCall(data);
-        serviceCall["serviced"] = false;
-        serviceCall["callTime"] = new Date();
-        serviceCall.save(() => {
-            io.emit('SERVICE_CALLED', serviceCall)
-        });
-    });
+  socket.on('CALL_SERVICE', function (data) {
+    const serviceCall = new ServiceCall(data)
 
-    ServiceCall.find({serviced: false}, (err, messages) => {
-        socket.emit('ALL_UNSERVICED_TABLES', messages);
-    });
+    const{date, time} = timeUtil.extractTime(new Date)
+    serviceCall.callDate = date;
+    serviceCall.callTime = time;
 
-    socket.on('MARK_TABLE_SERVICED', function (data) {
-        ServiceCall.findOne(data,
-            (err, messages) => {
-                messages["serviced"] = true;
-                messages.save();
-            });
+    serviceCall.isWaiting = true
 
+    serviceCall.save(() => {
+      io.emit('SERVICE_CALLED', serviceCall)
     })
-});
+  })
 
-const Category = require('../app/models/category').Category
-const User = require('../app/models/user').User
+  socket.on('GET_ALL_UNSERVICED_TABLES', function (data) {
+    ServiceCall.find({callDate: timeUtil.extractTime(new Date()).date}, (err, calls) => {
+      console.log(calls.sort((a, b) => timeUtil.compareTimes(a, b)))
+      console.log(calls)
+      socket.emit('ALL_UNSERVICED_TABLES', calls.sort((a, b) => timeUtil.compareTimes(a, b)).slice(0, 20))
+    })
+  })
 
-Category.find().then(e => {
-    console.log(e)
-})
-User.find().then(e => {
-    console.log(e)
+  socket.on('MARK_TABLE_SERVICED', function (data) {
+    ServiceCall.findOne(data,
+      (err, call) => {
+        call['isWaiting'] = !call['isWaiting']
+        call.save()
+      })
+
+  })
 })

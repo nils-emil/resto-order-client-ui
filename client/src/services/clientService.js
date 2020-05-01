@@ -3,7 +3,7 @@ import Axios from  'axios-observable';
 
 
 export function getTableCodeInfo(tableCode) {
-  return Axios.get(`/api/table/table/${tableCode}`)
+  return Axios.get(`/api/table/${tableCode}`)
 }
 
 

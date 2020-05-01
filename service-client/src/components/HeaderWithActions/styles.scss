@@ -1,0 +1,40 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.action-header {
+  margin: 0 0 1rem;
+  display: flex;
+
+  &__header-text {
+    font-weight: 500;
+    color: $color-background;
+
+    margin: 0 .5em 0 0;
+  }
+
+  &__header-buttons {
+    display: flex;
+    justify-content: center;
+    margin-left: .5em;
+
+    transition: 0.3s;
+
+    &--hide {
+      opacity: 0;
+    }
+  }
+
+  &__icon {
+    width: 1.2em;
+    fill: $color-background;
+    margin-right: 1.2em;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    &:hover {
+      fill: $color-secondary-light;
+    }
+  }
+}

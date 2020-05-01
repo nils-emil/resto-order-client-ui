@@ -1,0 +1,15 @@
+.item-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__button-section {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__info-section {
+
+  }
+}
