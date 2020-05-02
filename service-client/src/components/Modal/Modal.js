@@ -10,11 +10,14 @@ function Modal(props) {
     return () => {
       window.removeEventListener('keydown', listenKeyboard, true)
     }
-  }, [])
+  }, [onConfirm, onClose])
 
   const listenKeyboard = (event) => {
     if (event.key === 'Escape' || event.keyCode === 27) {
-      onClose()
+      event.stopPropagation()
+      onOverlayClick()
+    } else if (event.key === 'Enter' || event.keyCode === 13) {
+      onConfirm()
     }
   }
 

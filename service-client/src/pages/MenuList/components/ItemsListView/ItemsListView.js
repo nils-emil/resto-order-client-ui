@@ -34,9 +34,9 @@ function ItemsListView(props) {
 
   const createPopUpObserver = (callBack) => {
     return ({
-      next: () => {
+      next: (updatedCategory) => {
         showPopUpWithTimeout({ type: popUpVariants.SUCCESS, text: `Edukalt kustutatud ${selectedCategory.name}` })
-        callBack()
+        callBack(updatedCategory)
       },
       error: error => {
         showPopUpWithTimeout({ type: popUpVariants.ERROR, text: error.response.data })
@@ -46,25 +46,25 @@ function ItemsListView(props) {
 
   const modalResponseCallback = (response) => {
     if (response) {
-      deleteCategory(selectedCategory._id).subscribe(createPopUpObserver(refreshCategories))
+      deleteCategory(selectedCategory._id).subscribe(createPopUpObserver(() => refreshCategories()))
     }
   }
 
   const changeCategoryName = (newName, toggleNameEdit) => {
-    let updatedCategory = Object.assign({}, selectedCategory)
-    updatedCategory.name = newName
+    let categoryDto = Object.assign({}, selectedCategory)
+    categoryDto.name = newName
 
-    updateCategory(updatedCategory).subscribe(createPopUpObserver(() => {
+    updateCategory(categoryDto).subscribe(createPopUpObserver((updatedCategory) => {
       toggleNameEdit()
-      refreshCategories()
+      refreshCategories(updatedCategory.data)
     }))
   }
 
   const updateCategoryOrder = (amount) => {
-    let updatedCategory = Object.assign({}, selectedCategory)
-    updatedCategory.order = selectedCategory.order + amount
+    let categoryDto = Object.assign({}, selectedCategory)
+    categoryDto.order = selectedCategory.order + amount
 
-    updateCategory(updatedCategory).subscribe(() => refreshCategories(updatedCategory))
+    updateCategory(categoryDto).subscribe((updatedCategory) => refreshCategories(updatedCategory.data))
   }
 
   const MenuList = () => {

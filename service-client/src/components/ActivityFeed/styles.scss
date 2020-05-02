@@ -3,7 +3,7 @@
 
 .activity-feed {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%;
   border-radius: $default-border-radius-left;
   background-color: $color-primary;

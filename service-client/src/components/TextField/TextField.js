@@ -1,6 +1,12 @@
 import React from 'react'
 import './styles.scss'
 
+export const modifiers = {
+  FULLWIDTH: 'full-width',
+  MARGINTOP: 'margin-top',
+  BOLD: 'bold'
+}
+
 export const variants = {
   DARK: 'dark',
   LIGHT: 'light'
@@ -15,14 +21,22 @@ export const types = {
 
 function TextField(props) {
 
-  const { onChange, value, type, label, variant = variants.DARK, autoFocus } = props
+  const { onChange, value, type, label, variant = variants.DARK, modifiers = [], autoFocus } = props
 
   const handleChange = (event) => {
     onChange(event.target.value)
   }
 
+  const modifierClasses = () => {
+    let classes = ''
+    modifiers.forEach(modifier =>{
+      classes = classes + `text-field--${modifier} `
+    })
+    return classes
+  }
+
   return (
-    <div className={`text-field text-field--${variant}`}>
+    <div className={`text-field text-field--${variant} ${modifierClasses()}`}>
       <label className="text-field__label">{label}</label>
       <input
         className="text-field__input"
@@ -31,6 +45,7 @@ function TextField(props) {
         onChange={handleChange}
         placeholder={label}
         autoFocus={autoFocus}
+        spellCheck={false}
       />
     </div>
   )

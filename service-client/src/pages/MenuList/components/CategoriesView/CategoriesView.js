@@ -42,15 +42,17 @@ function CategoriesView(props) {
   return (
     <div className="categories-tab">
       <h2 className="categories-tab__header">Kategooriad</h2>
-      {categories.sort(categoryComparor).map((category) => (
-        <div
-          className="categories-tab__category-item underline"
-          key={category._id}
-          onClick={() => selectCategory(category)}
-        >
-          <p className="categories-tab__category-name">{category.name}</p>
-        </div>
-      ))}
+      <div className="categories-tab__category-container">
+        {categories.sort(categoryComparor).map((category) => (
+          <div
+            className="categories-tab__category-item underline"
+            key={category._id}
+            onClick={() => selectCategory(category)}
+          >
+            <p className="categories-tab__category-name">{category.name}</p>
+          </div>
+        ))}
+      </div>
       <div className="categories-tab__add-new">
         <TextButtonWithIcon onClick={openCategoryAddModal}/>
       </div>

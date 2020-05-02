@@ -26,6 +26,7 @@
     margin-top: 1rem;
     color: white;
     background: transparent;
+    height: 5rem;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -42,23 +43,38 @@
     }
 
     transition: .3s;
-  }
+    &:focus {
+      padding-bottom: 6px;
+      border-width: 3px;
+      border-color: $color-secondary;
 
-  &:focus {
-    padding-bottom: 6px;
-    border-width: 3px;
-    border-color: $color-secondary;
-
-    & .text-area__label {
-      position: absolute;
-      top: 0;
-      display: block;
-      transition: 0.2s;
-      font-size: 1rem;
-      color: $color-secondary;
-      font-weight: 700;
+      & .text-area__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: $color-secondary;
+        font-weight: 700;
+      }
     }
 
-  }
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
 
+    &::-webkit-scrollbar-track {
+      background: $color-background;
+      border-radius: $default-border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color-secondary;
+      border-radius: $default-border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: $color-secondary-light;
+    }
+  }
 }

@@ -61,16 +61,23 @@ function ItemEditView(props) {
 
   const modalResponseCallback = (response) => {
     if (response) {
-      removeMenuItem(item._id).subscribe(() => {
-        closeEdit()
-      })
+      const observer = {
+        next: () => {
+          showPopUpWithTimeout({ type: popUpVariants.SUCCESS, text: `Edukalt kustutatud ${item.title}` })
+          closeEdit()
+        },
+        error: error => {
+          showPopUpWithTimeout({ type: popUpVariants.ERROR, text: error.response.data })
+        }
+      }
+
+      removeMenuItem(item._id).subscribe(observer)
     }
   }
 
   return (
     <div className="item-edit-view">
       <div className="item-edit-view__header">
-        <h2 className="item-list-view__header-text">{itemToEdit?.title || 'Uue eseme lisamine'}</h2>
         {itemToEdit &&
         <HeaderWithActions
           name={itemToEdit.title}

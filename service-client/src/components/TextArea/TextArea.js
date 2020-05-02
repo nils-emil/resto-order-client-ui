@@ -17,6 +17,7 @@ function TextArea(props) {
         value={value}
         onChange={handleChange}
         placeholder={label}
+        spellCheck={false}
       />
     </div>
   )
