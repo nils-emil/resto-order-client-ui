@@ -1,0 +1,40 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.home {
+  padding: 2rem 2rem 5rem;
+  background-color: $color-background;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 20% auto 4%;
+
+  &__navigation {
+  }
+
+  &__table-plan {
+    padding: 0 2rem;
+    height: 47rem;
+  }
+
+  &__activity-feed {
+    height: 47rem;
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: $color-background;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: $color-secondary;
+      border-radius: $default-border-radius-right;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: $color-secondary-light;
+    }
+  }
+}

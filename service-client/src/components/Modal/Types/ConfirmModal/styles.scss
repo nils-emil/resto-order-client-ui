@@ -1,0 +1,10 @@
+@import '../../../../resources/colors';
+@import '../../../../resources/variables';
+
+.confirm-modal {
+  height: 15em;
+
+  &__text {
+    margin: 0;
+  }
+}

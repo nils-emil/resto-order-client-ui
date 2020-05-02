@@ -1,0 +1,51 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.pop-up {
+  background-color: $color-primary-ultralight;
+  border-radius: $default-border-radius;
+
+  width: 30em;
+  height: 4em;
+  padding: 0 1em;
+  overflow: auto;
+
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 1em;
+
+  -webkit-box-shadow: $default-shadow;
+  -moz-box-shadow: $default-shadow;
+  box-shadow: $default-shadow;
+
+  &__icon {
+    width: 2em;
+    margin-right: 1em;
+
+    &--success {
+      fill: greenyellow;
+    }
+
+    &--error {
+      fill: red;
+    }
+
+
+    &--exclamation {
+      fill: yellow;
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+  }
+
+  &__container {
+    z-index: 10000;
+    position: fixed;
+    top: 3em;
+    right: 0;
+    left: 0;
+  }
+}

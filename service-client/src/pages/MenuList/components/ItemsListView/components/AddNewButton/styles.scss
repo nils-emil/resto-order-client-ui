@@ -1,0 +1,43 @@
+@import '../../../../../../resources/colors';
+@import '../../../../../../resources/variables';
+
+.add-new-button {
+  background-color: $color-primary-ultralight;
+  border-radius: $default-border-radius;
+
+  color: $color-black;
+  text-decoration: none;
+
+  height: 2em;
+  padding: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-secondary;
+    color: $color-white;
+
+    & .add-new-button__icon {
+      fill: $color-white;
+    }
+  }
+
+  &__text {
+    grid-column: 2;
+    grid-row: 1;
+
+    font-weight: 500;
+    margin-left: 2em;
+  }
+
+  &__icon {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    height: 100%;
+    fill: $color-black;
+  }
+}

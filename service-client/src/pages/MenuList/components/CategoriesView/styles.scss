@@ -1,0 +1,58 @@
+@import '../../../../resources/colors';
+@import '../../../../resources/variables';
+
+.categories-tab {
+  height: 47rem;
+  width: 100%;
+  border-radius: $default-border-radius;
+  background-color: $color-primary;
+  box-sizing: border-box;
+  position: relative;
+  padding: 1.5em;
+
+  -webkit-box-shadow: $default-shadow;
+  -moz-box-shadow: $default-shadow;
+  box-shadow: $default-shadow;
+
+  &__header {
+    font-weight: 500;
+    color: $color-background;
+    margin: 0;
+  }
+
+  &__category-item {
+    color: $color-background;
+
+    height: 1.5em;
+    padding: .5em 0;
+    margin: .5em 0;
+    border-radius: $default-border-radius;
+
+    display: flex;
+    align-items: center;
+
+    transition: 0.3s;
+
+    &:hover {
+      color: $color-secondary-light;
+    }
+  }
+
+  &__category-name {
+    font-weight: 500;
+  }
+
+  &__add-new {
+    position: absolute;
+    bottom: 1px;
+    left: 1em;
+    right: 1em;
+
+    border-top: 1px solid $color-background;
+    display: flex;
+  }
+
+  &__add-new-button {
+    display: flex;
+  }
+}

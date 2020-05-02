@@ -1,32 +1,38 @@
 const bcrypt = require('bcrypt')
 
+console.log('Replicating DB')
+
 const Category = require('../models/category').Category
 const Organization = require('../models/organization').Organization
 const User = require('../models/user').User
 const Table = require('../models/table').Table
-const MenuItem = require('../models/menu').MenuItem
+const MenuItem = require('../models/menuItem').MenuItem
 
 const organization = new Organization({ name: 'ITÜK-TTU' })
 const organization2 = new Organization({ name: 'KULTUURIPUBI' })
 organization.save()
 organization2.save()
-const category11 = new Category({ name: 'Beer', order: 1, organizationId: organization._id })
-const category12 = new Category({ name: 'Vine', order: 2, organizationId: organization._id })
-const category13 = new Category({ name: 'Salads', order: 3, organizationId: organization._id })
-const category14 = new Category({ name: 'Snacks', order: 4, organizationId: organization._id })
-const category15 = new Category({ name: 'Pizzas', order: 5, organizationId: organization._id })
-const category16 = new Category({ name: 'Desert', order: 3, organizationId: organization._id })
+const category10 = new Category({ name: 'Kategooriata', order: 1, organizationId: organization._id })
+const category11 = new Category({ name: 'Õlud', order: 2, organizationId: organization._id })
+const category12 = new Category({ name: 'Veinid', order: 3, organizationId: organization._id })
+const category13 = new Category({ name: 'Salatid', order: 4, organizationId: organization._id })
+const category14 = new Category({ name: 'Snäkid', order: 5, organizationId: organization._id })
+const category15 = new Category({ name: 'Pitsad', order: 6, organizationId: organization._id })
+const category16 = new Category({ name: 'Magustoidud', order: 7, organizationId: organization._id })
 
-const category21 = new Category({ name: 'Beverages', order: 1, organizationId: organization2._id })
-const category22 = new Category({ name: 'Vegan pizzas', order: 2, organizationId: organization2._id })
-const category23 = new Category({ name: 'Meat pizzas', order: 3, organizationId: organization2._id })
-const category26 = new Category({ name: 'Beer', order: 2, organizationId: organization2._id })
+const category20 = new Category({ name: 'Kategooriata', order: 1, organizationId: organization2._id })
+const category21 = new Category({ name: 'Beverages', order: 2, organizationId: organization2._id })
+const category22 = new Category({ name: 'Vegan pizzas', order: 3, organizationId: organization2._id })
+const category23 = new Category({ name: 'Meat pizzas', order: 4, organizationId: organization2._id })
+const category26 = new Category({ name: 'Beer', order: 5, organizationId: organization2._id })
 
+category10.save()
 category11.save()
 category12.save()
 category13.save()
 category14.save()
 category15.save()
+category20.save()
 category21.save()
 category22.save()
 category23.save()
@@ -91,6 +97,17 @@ const menuItem4 = new MenuItem({
 })
 menuItem4.save()
 
+const menuItem41 = new MenuItem({
+  title: 'Tervislikum šokolaadikook kaks',
+  description: 'Selle imelise magustoidu põhi valmib mandlitest, mis sisaldavad suures koguses kehale väga vajalikke Oomega 9 rasvhappeid ja looduslikest magustajatest datlitest. Tume šokolaad koogi kattena on suhkruvaesem valik, kui tema piimašokolaadist sõbrad ning seega ka taljesõbralikum alternatiiv. Magususe eest hoolitsevad vahekihis olevad vaarikad ja banaan kaks.',
+  organizationId: organization._id,
+  price: 1.2,
+  categoryId: category16._id,
+  imageUrl: 'https://i.ytimg.com/vi/vsSz7t5lqzw/maxresdefault.jpg'
+})
+menuItem41.save()
+
+
 const menuItem5 = new MenuItem({
   title: 'Punane vein',
   description: 'See punane vein on valmistatud 100% Primitivo kohapeal kasvanud viinamarjadest. Erinevalt teistest Primitivo veinidest nagu näiteks Gioia del Colle Primitivo, mis on segu erineva päritoluga viinamarjadest.',
@@ -112,14 +129,54 @@ const menuItem6 = new MenuItem({
 menuItem6.save()
 
 const menuItem7 = new MenuItem({
-  title: 'PUNANE JA MUST - Raspberry Porter',
-  description: 'Tulipunane ahvatlus ja tumedad ihad, kriimuke karget mõistust seda kõike kontrollimas.',
-  organizationId: organization2._id,
+  title: 'PUNANE JA MUST - Raspberry Porter6',
+  description: 'Tulipunane ahvatlus ja tumedad ihad, kriimuke karget mõistust seda kõike kontrollimas6.',
+  organizationId: organization._id,
   price: 5.2,
   categoryId: category26._id,
   imageUrl: 'https://lehepruulikoda.ee/img/punane-ja-must.jpg'
 })
 menuItem7.save()
+
+const menuItem70 = new MenuItem({
+  title: 'PUNANE JA MUST - Raspberry Porter4',
+  description: 'Tulipunane ahvatlus ja tumedad ihad, kriimuke karget mõistust seda kõike kontrollimas4.',
+  organizationId: organization._id,
+  price: 5.2,
+  categoryId: category26._id,
+  imageUrl: 'https://lehepruulikoda.ee/img/punane-ja-must.jpg'
+})
+menuItem70.save()
+
+const menuItem71 = new MenuItem({
+  title: 'PUNANE JA MUST - Raspberry Porter3',
+  description: 'Tulipunane ahvatlus ja tumedad ihad, kriimuke karget mõistust seda kõike kontrollimas3.',
+  organizationId: organization._id,
+  price: 5.2,
+  categoryId: category26._id,
+  imageUrl: 'https://lehepruulikoda.ee/img/punane-ja-must.jpg'
+})
+menuItem71.save()
+
+const menuItem72 = new MenuItem({
+  title: 'PUNANE JA MUST - Raspberry Porter1',
+  description: 'Tulipunane ahvatlus ja tumedad ihad, kriimuke karget mõistust seda kõike kontrollimas1.',
+  organizationId: organization._id,
+  price: 5.2,
+  categoryId: category26._id,
+  imageUrl: 'https://lehepruulikoda.ee/img/punane-ja-must.jpg'
+})
+menuItem72.save()
+
+const menuItem73 = new MenuItem({
+  title: 'PUNANE JA MUST - Raspberry Porter2',
+  description: 'Tulipunane ahvatlus ja tumedad ihad, kriimuke karget mõistust seda kõike kontrollimas2.',
+  organizationId: organization._id,
+  price: 5.2,
+  categoryId: category26._id,
+  imageUrl: 'https://lehepruulikoda.ee/img/punane-ja-must.jpg'
+})
+menuItem73.save()
 
 const menuItem8 = new MenuItem({
   title: 'TRADITSIOONILINE LIMONAAD 500 ML',
