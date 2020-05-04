@@ -69,7 +69,7 @@ function Menu (props) {
                 <Button
                             onClick={() => {
                               props.addItemToCart(item)
-                              callToast('Added to cart', 1000)
+                              callToast('Toode lisatud ostukorvi', 2500)
                             }}
                             variant="contained"
                             color="primary"

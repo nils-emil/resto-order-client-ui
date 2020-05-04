@@ -13,8 +13,9 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Grid from '@material-ui/core/Grid'
 import * as actionCreators from '../../../store/actions/shoppingCart'
 import { connect } from 'react-redux'
-import _ from 'lodash';
+import _ from 'lodash'
 import callToast from '../../../services/callToast'
+import { postOrder } from '../../../services/clientService'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,26 +36,32 @@ const useStyles = makeStyles(theme => ({
 
 function Bill(props) {
   const deliverOrder = () => {
-    props.clearCart();
-
+    postOrder(localStorage.getItem('tableCode'), props.items)
+      .subscribe(e => {
+        props.clearCart()
+        props.socket.emit('ORDER_PLACED', {
+          organizationId: localStorage.getItem('organizationId')
+        })
+      }
+    )
   }
   const classes = useStyles();
   let checkOutAction = <Button
     onClick={() => {
       deliverOrder();
-      callToast('Order will be brought to you shortly.', 5000)
+      callToast('Tellimus jõuad Teieni peatselt', 5000)
     }}
     variant="contained"
     color="primary"
-    className={classes.button}>
-    Bring order to table
+    classNbame={classes.button}>
+    Telli tooted lauda
   </Button>
   if (_.isEmpty(props.items)) {
-    checkOutAction = <p className={classes.textAlignCenter}>No items in cart. Browse the menu to find items that suit you.</p>
+    checkOutAction = <p className={classes.textAlignCenter}>Ostukorvis puuduvad tooted. Palun sirvige menüüd, et leida just Teile sobivad tooted.</p>
   }
   return (
     <span className="food-picker">
-        <h4>Welcome to chatrestaurant</h4>
+        <h4>Tellimus</h4>
           <List className={classes.root}>
                      {Object.entries(props.items).map(([key, element]) =>
                        <React.Fragment>
@@ -71,7 +78,7 @@ function Bill(props) {
                                    variant="body2"
                                    className={classes.inline}
                                    color="textPrimary"
-                                 >Count: {element.amount}
+                                 >Kogus: {element.amount}
                                    <Grid item className={classes.button}>
                                      <ButtonGroup size="small" aria-label="small outlined secondary button group">
                                        <Button onClick={() => props.removeItemFromCart(element.item)}>-</Button>

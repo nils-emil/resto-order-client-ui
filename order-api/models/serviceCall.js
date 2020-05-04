@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const ServiceCallSchema = new Schema({
-  message: {
+  tableCode: {
+    type: String
+  },
+  callType: {
     type: String
   },
   isWaiting: {

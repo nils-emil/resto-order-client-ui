@@ -5,7 +5,7 @@ export function getMenuItems(organizationId, params = null) {
 }
 
 export function getCategories(organizationId) {
-  return Axios.get(`/api/category/${organizationId}`)
+  return Axios.get(`/api/client/category/${organizationId}`)
 }
 
 export function deleteCategory(id) {

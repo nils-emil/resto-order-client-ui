@@ -9,7 +9,7 @@ function ErrorPage() {
       <p>I think you are lost.</p>
 
       <Link to="/">
-        <Button color="primary" variant="contained" size={'large'}>Go back</Button>
+        <Button color="primary" variant="extended" size={'large'}>Go back</Button>
       </Link>
     </div>);
 }

@@ -31,7 +31,7 @@ function Client(props) {
       closeDrawer={() => toggleDrawer(false)}
       isOpen={isDrawerOpen}
     />
-    routes = <><Route exact path="/bill" component={Bill}/>
+    routes = <><Route exact path="/bill" render={(props) => (<Bill socket={socket} {...props}/>)}/>
       <Route exact path="/tab" component={Bartab}/>
       <Route exact path="/menu" component={() => <Menu  organizationId={organizationId} />}/></>
   } else {

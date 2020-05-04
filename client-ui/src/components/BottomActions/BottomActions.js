@@ -8,17 +8,29 @@ import './styles.scss'
 import { withRouter } from 'react-router-dom'
 import * as actionCreators from '../../store/actions/index'
 import { connect } from 'react-redux'
-import callToast from '../../services/callToast'
 import { ToastContainer } from 'react-toastify'
+import CallServiceChoice from "../CallServiceChoice/CallServiceChoice";
 
 function BottomActions (props) {
   const [serviceCallAvailable, setServiceCallAvailable] = useState(true)
+  const [callServiceDialogOpen, setCallServiceDialogOpen] = React.useState(false);
 
-  const callWaiter = (addNotificationFn) => {
+  const handleClickOpen = () => {
+    if (serviceCallAvailable) {
+      setCallServiceDialogOpen(true);
+    }
+  };
+
+  const handleClose = () => {
+    setCallServiceDialogOpen(false);
+  };
+
+  const callWaiter = (addNotificationFn, type) => {
     if (serviceCallAvailable) {
       setServiceCallAvailable(false)
       props.socket.emit('CALL_SERVICE', {
-        tableCode: props.tableCode
+        tableCode: localStorage.getItem("tableCode"),
+        callType: type
       })
       setTimeout(() => {
         setServiceCallAvailable(true)
@@ -33,12 +45,13 @@ function BottomActions (props) {
 
   return (
     <BottomNavigation showLabels className="bar">
-      <BottomNavigationAction className={serviceCallAvailable ? '' : 'disabled'} label="Call waiter"
-                              onClick={() => {
-        callWaiter(() => callToast('Waiter called', 5000))
-      }} icon={<CallIcon/>}/>
-      <BottomNavigationAction label="Menu" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
-      <BottomNavigationAction label={`Bill ${props.totalSum.toFixed(2)} €`}
+      <CallServiceChoice callWaiter={callWaiter}
+                         handleClickOpen={handleClickOpen}
+                         handleClose={handleClose} open={callServiceDialogOpen}/>
+      <BottomNavigationAction className={serviceCallAvailable ? '' : 'disabled'} label="Kutsu teenindaja"
+                              onClick={handleClickOpen} icon={<CallIcon/>}/>
+      <BottomNavigationAction label="Menüü" onClick={props.openDrawer} icon={<RestaurantMenuIcon/>}/>
+      <BottomNavigationAction label={`Arve ${props.totalSum.toFixed(2)} €`}
                               onClick={onBillClick}
                               icon={<CreditCardIcon/>}/>
       <ToastContainer/>
