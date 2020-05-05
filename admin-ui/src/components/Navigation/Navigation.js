@@ -26,7 +26,10 @@ function Navigation(props) {
       page: pages.MENU,
       icon: Map,
       linkTo: '/admin/menu-list'
-    },
+    }
+  ]
+
+  const otherLinks = [
     {
       page: pages.SETTINGS,
       icon: Cog,

@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
   socket.on('MARK_TABLE_SERVICED', function (data) {
     ServiceCall.findOne(data,
       (err, call) => {
-        call['isWaiting'] = false;
+        call['isWaiting'] = !call['isWaiting']
         call.save()
       })
 

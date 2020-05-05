@@ -7,10 +7,10 @@ import { connect } from 'react-redux'
 function ConfirmModal(props) {
 
   const { hideModal } = props
-  const { modalResponseCallback } = props.options
+  const { modalResponseCallback, confirmButtonText = 'Kustuta', modalText } = props.options
 
   const dialogStyle = {
-    height: '14em'
+    height: '15em'
   }
 
   const onConfirm = () => {
@@ -28,9 +28,10 @@ function ConfirmModal(props) {
       header={'Kinnita oma tegevus'}
       onClose={onClose}
       onConfirm={onConfirm}
+      confirmButtonText={confirmButtonText}
       dialogStyle={dialogStyle}
     >
-      <p className='confirm-modal__text'>Kas soovid eset kustutada?</p>
+      <p className='confirm-modal__text'>{modalText}</p>
     </Modal>
   )
 }

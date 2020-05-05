@@ -1,24 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles.scss'
+import { fetchAll } from '../../services/tableService'
+import { connect } from 'react-redux/es/alternate-renderers'
+import { showPopUpWithTimeout } from '../../store/actions/popup'
 
 function TablePlan(props) {
+  const { organizationId } = props.auth.user.data
 
-  const tables = [
-    {
-      number: 1,
-      width: '20%',
-      height: '10%',
-      marginTop: '2rem',
-      marginLeft: '2rem'
-    },
-    {
-      number: 2,
-      width: '20%',
-      height: '10%',
-      marginTop: '10rem',
-      marginLeft: '2rem'
-    }
-  ]
+  const [tables, setTables] = useState([])
+
+  useEffect(() => {
+    fetchAll(organizationId).subscribe((response) => {
+      const responseTables = response.data
+      setTables(responseTables)
+    })
+  }, [])
 
   const tableStates = [
     {
@@ -28,12 +24,19 @@ function TablePlan(props) {
     {
       tableNumber: 2,
       state: 'empty'
+    },
+    {
+      tableNumber: 3,
+      state: 'empty'
     }
   ]
 
   const getTableState = (tableNumber) => {
-    const table = tableStates.filter(state => state.tableNumber === tableNumber)[0]
-    return table.state
+    tableStates.forEach(table => {
+      if (table.tableNumber === parseInt(tableNumber)) {
+        return table.state
+      }
+    })
   }
 
   return (
@@ -44,11 +47,11 @@ function TablePlan(props) {
             <div
               className={`table-plan__table table-plan__table--${getTableState(table.number)}`}
               style={{
-                height: table.height,
-                width: table.width,
+                height: table.height + 'px',
+                width: table.width + 'px',
                 position: 'absolute',
-                marginTop: table.marginTop,
-                marginLeft: table.marginLeft
+                transform: `translate(${table.xPosition}px, ${table.yPosition}px)`
+
               }}
               key={table.number}>{table.number}</div>
           )
@@ -58,4 +61,14 @@ function TablePlan(props) {
   )
 }
 
-export default TablePlan
+
+const mapDispatchToProps = dispatch => ({
+  showPopUpWithTimeout: (popUpType, popUpText) => dispatch(showPopUpWithTimeout(popUpType, popUpText))
+})
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TablePlan)

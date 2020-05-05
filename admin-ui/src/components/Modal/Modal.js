@@ -3,18 +3,21 @@ import './styles.scss'
 import TextButton from '../TextButton/TextButton'
 
 function Modal(props) {
-  const { onClose, onConfirm, children, header, dialogStyle } = props
+  const { onClose, onConfirm, children, header, dialogStyle, confirmButtonText = 'Salvesta' } = props
 
   useEffect(() => {
     window.addEventListener('keydown', listenKeyboard, true)
     return () => {
       window.removeEventListener('keydown', listenKeyboard, true)
     }
-  }, [])
+  }, [onConfirm, onClose])
 
   const listenKeyboard = (event) => {
     if (event.key === 'Escape' || event.keyCode === 27) {
-      onClose()
+      event.stopPropagation()
+      onOverlayClick()
+    } else if (event.key === 'Enter' || event.keyCode === 13) {
+      onConfirm()
     }
   }
 
@@ -35,7 +38,7 @@ function Modal(props) {
         </div>
         <div className="modal__footer">
           <TextButton onClick={onClose} isTransparent>Tühista</TextButton>
-          <TextButton onClick={onConfirm}>Salvesta</TextButton>
+          <TextButton onClick={onConfirm}>{confirmButtonText}</TextButton>
         </div>
       </div>
     </div>

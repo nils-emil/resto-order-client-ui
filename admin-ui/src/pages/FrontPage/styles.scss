@@ -19,22 +19,5 @@
 
   &__activity-feed {
     height: 47rem;
-
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: $color-background;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: $color-secondary;
-      border-radius: $default-border-radius-right;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: $color-secondary-light;
-    }
   }
 }
