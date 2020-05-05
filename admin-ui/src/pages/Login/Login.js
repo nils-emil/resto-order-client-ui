@@ -24,24 +24,30 @@ function Login(props) {
         <LoginSvg className="login__svg"/>
       </div>
       <div className="login__form">
-        <h1>Logi sisse</h1>
-        <TextField
-          label="Emaili aadress"
-          onChange={setEmail}
-          modifiers={[modifiers.MARGINTOP]}
-          autoFocus/>
-        <TextField
-          label="Parool"
-          onChange={setPassword}
-          modifiers={[modifiers.MARGINTOP]}
-          type={types.PASSWORD}
-        />
-        <TextButton
-          onClick={() => props.login({ email, password })}
-          modifiers={[buttonModifiers.MARGINTOP]}
-        >
-          Logi sisse
-        </TextButton>
+        <h1 className="login__header">Tere tulemast!</h1>
+        <div className="login__field-container">
+          <TextField
+            label="Emaili aadress"
+            onChange={setEmail}
+            modifiers={[modifiers.MARGINTOP]}
+            autoFocus/>
+        </div>
+        <div className="login__field-container">
+          <TextField
+            label="Parool"
+            onChange={setPassword}
+            modifiers={[modifiers.MARGINTOP]}
+            type={types.PASSWORD}
+          />
+        </div>
+        <div className="login__field-container">
+          <TextButton
+            onClick={() => props.login({ email, password })}
+            modifiers={[buttonModifiers.MARGINTOP]}
+          >
+            Logi sisse
+          </TextButton>
+        </div>
       </div>
 
     </div>
