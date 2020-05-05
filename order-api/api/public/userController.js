@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
     const passwordMatches = await bcrypt.compare(req.body.password, user.password)
     if (passwordMatches) {
       const token = user.generateAuthToken()
-      return res.status(200).send({ token: token })
+      return res.status(200).send({ user: user, token: token })
     }
     return res.status(403).send({ error: 'Username or password incorrect' })
   }

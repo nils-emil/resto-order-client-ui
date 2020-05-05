@@ -37,7 +37,7 @@ module.exports = class CategoryService {
     })
 
     if (categoryToUpdate.order !== categoryDto.order) {
-      let categoryToChangePlace = undefined
+      let categoryToChangePlace
       await Category.findOne({
         organizationId: categoryDto.organizationId,
         order: categoryDto.order
@@ -45,19 +45,16 @@ module.exports = class CategoryService {
         categoryToChangePlace = category
       })
 
-      if (categoryToChangePlace !== undefined) {
+      if (categoryToChangePlace !== null) {
         categoryToChangePlace.order = categoryToUpdate.order
         categoryToChangePlace.save()
-      } else {
-        return
+        categoryToUpdate.order = categoryDto.order
       }
-
-      categoryToUpdate.order = categoryDto.order
     } else {
-      categoryToUpdate.name = categoryDto.name
       categoryToUpdate.name = categoryDto.name
     }
 
-    categoryToUpdate.save()
+    await categoryToUpdate.save()
+    return categoryToUpdate
   }
 }

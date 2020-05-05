@@ -54,7 +54,7 @@ export const auth = (credentials) => {
     Axios.post('/api/user/login', authData)
       .subscribe(response => {
           localStorage.setItem('token', response.data.token)
-          dispatch(authSuccess(response.data.token))
+          dispatch(authSuccess(response.data.token, response.data.user))
         },
         err => {
           dispatch(authFail(err.response.data.error))
@@ -75,8 +75,8 @@ export const authCheckState = () => {
     if (!token) {
       dispatch(logout())
     } else {
-      Axios.get('/api/user/current').subscribe(user => {
-        dispatch(authSuccess(token, user))
+      Axios.get('/api/user/current').subscribe(response => {
+        dispatch(authSuccess(token, response.data))
       })
     }
   }

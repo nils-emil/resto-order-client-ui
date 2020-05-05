@@ -6,6 +6,7 @@ const menuItemPrivateRoutes = require('./protected/menuItemController');
 const menuItemPublicRoutes = require('./public/menuItemController');
 const tabPublicRoutes = require('./public/tableController');
 const categoryPrivateRoutes = require('./protected/categoryController');
+const tablePrivateRoutes = require('./protected/tableController');
 const categoryPublicRoutes = require('./public/categoryController');
 const userPublicRoute = require('./public/userController');
 const userPrivateRoute = require('./protected/userController');
@@ -25,5 +26,6 @@ router.use('/api/menu', menuItemPrivateRoutes);
 router.use('/api/user', userPrivateRoute);
 router.use('/api/organization', organizationPrivateRoute);
 router.use('/api/category', categoryPrivateRoutes);
+router.use('/api/admin/table', tablePrivateRoutes);
 
 module.exports = router;

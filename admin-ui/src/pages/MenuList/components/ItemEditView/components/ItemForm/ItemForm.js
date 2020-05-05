@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.scss'
 import TextButton from '../../../../../../components/TextButton/TextButton'
-import TextField, { types, variants } from '../../../../../../components/TextField/TextField'
+import TextField, { modifiers, types, variants } from '../../../../../../components/TextField/TextField'
 import SelectField from '../../../../../../components/SelectField/SelectField'
 import TextArea from '../../../../../../components/TextArea/TextArea'
 
@@ -14,6 +14,7 @@ function ItemForm(props) {
         <TextField
           value={item.title}
           variant={variants.LIGHT}
+          modifiers={[modifiers.FULLWIDTH, modifiers.MARGINTOP]}
           onChange={value => onChange('title', value)}
           label={'Nimi'}
         />
@@ -27,6 +28,7 @@ function ItemForm(props) {
           value={item.price}
           type={types.PRICE}
           variant={variants.LIGHT}
+          modifiers={[modifiers.FULLWIDTH, modifiers.MARGINTOP]}
           onChange={value => onChange('price', value)}
           label={'Hind'}
         />

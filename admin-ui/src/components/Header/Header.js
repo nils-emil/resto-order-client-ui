@@ -8,8 +8,8 @@ function Header(props) {
 
   return (
     <div className="header">
-      <Link to="/admin" className="header__name">
-        <p>Vapiano</p>
+      <Link to="/" className="header__name">
+        <p>Sinu restoran</p>
       </Link>
       <Link to="/login" className="header__logout">
         <p onClick={props.logout}>Logi välja</p>

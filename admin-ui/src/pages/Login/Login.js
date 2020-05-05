@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import './styles.scss'
 import { connect } from 'react-redux'
+import { LoginSvg } from '../../resources/svg_index'
 import { Redirect } from 'react-router-dom'
-import TextButton from '../../components/TextButton/TextButton'
+import TextButton, { buttonModifiers } from '../../components/TextButton/TextButton'
 import { auth } from '../../store/actions/auth'
+import TextField, { modifiers, types } from '../../components/TextField/TextField'
 
 
 function Login(props) {
@@ -12,33 +14,40 @@ function Login(props) {
 
   let redirect = null
   if (!props.auth.loading && props.auth.token) {
-    redirect = <Redirect to='/admin'/>
+    redirect = <Redirect to='/'/>
   }
 
   return (
-    <div>
+    <div className="login">
       {redirect}
-      <div className="Paper">
-        <h1>Logi sisse</h1>
-        <input
-          type="text"
-          onChange={e => setEmail(e.target.value)}
-          id="email"
-          label="Email Address"
-          name="email"
-          autoFocus/>
-        <input
-          type="password"
-          onChange={e => setPassword(e.target.value)}
-          name="password"
-          label="Password"
-          id="password"
-        />
-        <TextButton
-          onClick={() => props.login({ email, password })}
-        >
-          Logi sisse
-        </TextButton>
+      <div className="login__svg-container">
+        <LoginSvg className="login__svg"/>
+      </div>
+      <div className="login__form">
+        <h1 className="login__header">Tere tulemast!</h1>
+        <div className="login__field-container">
+          <TextField
+            label="Emaili aadress"
+            onChange={setEmail}
+            modifiers={[modifiers.MARGINTOP]}
+            autoFocus/>
+        </div>
+        <div className="login__field-container">
+          <TextField
+            label="Parool"
+            onChange={setPassword}
+            modifiers={[modifiers.MARGINTOP]}
+            type={types.PASSWORD}
+          />
+        </div>
+        <div className="login__field-container">
+          <TextButton
+            onClick={() => props.login({ email, password })}
+            modifiers={[buttonModifiers.MARGINTOP]}
+          >
+            Logi sisse
+          </TextButton>
+        </div>
       </div>
 
     </div>

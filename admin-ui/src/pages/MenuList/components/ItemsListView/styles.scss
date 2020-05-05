@@ -8,7 +8,8 @@
   background-color: $color-primary;
   padding: 1.5em 2em;
   box-sizing: border-box;
-  overflow: auto;
+  display: grid;
+  grid-template-rows: 3rem auto;
 
   -webkit-box-shadow: $default-shadow;
   -moz-box-shadow: $default-shadow;
@@ -16,7 +17,6 @@
 
   &__menu-list {
     overflow: auto;
-    height: 41rem;
     padding-right: .5em;
 
     &::-webkit-scrollbar {

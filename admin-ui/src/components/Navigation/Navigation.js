@@ -20,22 +20,25 @@ function Navigation(props) {
     {
       page: pages.HOME,
       icon: Home,
-      linkTo: '/admin'
+      linkTo: '/'
     },
     {
       page: pages.MENU,
       icon: Map,
-      linkTo: '/admin/menu-list'
-    },
+      linkTo: '/menu-list'
+    }
+  ]
+
+  const otherLinks = [
     {
       page: pages.SETTINGS,
       icon: Cog,
-      linkTo: '/admin/settings'
+      linkTo: '/settings'
     },
     {
       page: pages.STATISTICS,
       icon: Portfolio,
-      linkTo: '/admin/statistics'
+      linkTo: '/statistics'
     }
   ]
 

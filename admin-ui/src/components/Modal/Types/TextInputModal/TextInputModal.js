@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { hideModal } from '../../../../store/actions/modal'
 import Modal from '../../Modal'
 import './styles.scss'
 import { connect } from 'react-redux'
-import TextField, { variants } from '../../../TextField/TextField'
+import TextField, { modifiers, variants } from '../../../TextField/TextField'
 
 function TextInputModal(props) {
 
@@ -12,6 +12,9 @@ function TextInputModal(props) {
 
   const emptyState = { text: '' }
   const [modalState, setModalState] = useState(initialState || emptyState)
+
+  useEffect(() => {
+  }, [modalState])
 
   const onConfirm = () => {
     modalResponseCallback(modalState)
@@ -41,6 +44,7 @@ function TextInputModal(props) {
           variant={variants.DARK}
           label={textFieldName}
           autoFocus
+          modifiers={[modifiers.FULLWIDTH, modifiers.MARGINTOP, modifiers.FULLWIDTH]}
         />
       </h1>
     </Modal>

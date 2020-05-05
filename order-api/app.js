@@ -28,8 +28,7 @@ io.on('connection', (socket) => {
     const{date, time} = timeUtil.extractTime(new Date)
     serviceCall.callDate = date;
     serviceCall.callTime = time;
-    serviceCall.callTime = data.callType;
-    serviceCall.callTime = data.callType;
+    serviceCall.callType = data.callType;
     serviceCall.isWaiting = true
     serviceCall.save(() => {
       io.emit('SERVICE_CALLED', serviceCall)
@@ -49,7 +48,7 @@ io.on('connection', (socket) => {
   socket.on('MARK_TABLE_SERVICED', function (data) {
     ServiceCall.findOne(data,
       (err, call) => {
-        call['isWaiting'] = false;
+        call['isWaiting'] = !call['isWaiting']
         call.save()
       })
 

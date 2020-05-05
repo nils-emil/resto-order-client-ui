@@ -21,8 +21,8 @@ function Admin(props) {
 
   if (props.auth.token) {
     routes = <Switch>
-      <Route exact path="/admin/menu-list" component={MenuList}/>
-      <Route path="/admin" component={FrontPage}/>
+      <Route exact path="/menu-list" component={MenuList}/>
+      <Route path="/" component={FrontPage}/>
     </Switch>
   }
 

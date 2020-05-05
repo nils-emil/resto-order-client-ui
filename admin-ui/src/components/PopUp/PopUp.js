@@ -1,6 +1,9 @@
 import React from 'react'
 import './styles.scss'
 import { CheckMarkOutline, CloseOutline, ExclamationOutline } from '../../resources/icons_index'
+import { loadModal } from '../../store/actions/modal'
+import { hidePopUp, showPopUpWithTimeout } from '../../store/actions/popup'
+import { connect } from 'react-redux'
 
 export const popUpVariants = {
   SUCCESS: 'SUCCESS',
@@ -10,7 +13,7 @@ export const popUpVariants = {
 
 function PopUp(props) {
 
-  const { type, text } = props
+  const { type, text, hidePopUp } = props
 
   const Icon = () => {
     switch (type) {
@@ -24,12 +27,15 @@ function PopUp(props) {
   }
 
   return (
-    <div className="pop-up">
+    <div className="pop-up" onClick={hidePopUp}>
       <Icon/>
       <p className="pop-up__text">{text}</p>
     </div>
   )
 }
 
+const mapDispatchToProps = dispatch => ({
+  hidePopUp: (popUpType, popUpText) => dispatch(hidePopUp(popUpType, popUpText))
+})
 
-export default PopUp
+export default connect(null, mapDispatchToProps)(PopUp)

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './styles.scss'
 import io from 'socket.io-client'
+import FeedWithHeader from '../FeedWithHeader/FeedWithHeader'
 import { Add } from '../../resources/icons_index'
 
 const socket = io(process.env.REACT_APP_BACKEND_URL)
@@ -49,20 +50,8 @@ function ActivityFeed(props) {
 
   return (
     <div className="activity-feed">
-      <h1 className="activity-feed__header">Viimased teated</h1>
-      {serviceCalls.length === 0 && <p className="activity-feed__no_content_message">Täna pole uusi teateid</p>}
-      {serviceCalls.map(call => {
-        return (
-          <div
-            onClick={() => markAsServiced(call)}
-            className={`activity-item ${call.isWaiting ? 'activity-item--alert' : ''}`}
-            key={call._id}
-          >
-            <p className="activity-item__message">{call.message}</p>
-            <p className="activity-item__time-stamp">{call.callTime}</p>
-          </div>
-        )
-      })}
+     <FeedWithHeader header={'Tellimused'} serviceCalls={serviceCalls} markAsServiced={markAsServiced}/>
+     <FeedWithHeader header={'Kutsungid'} serviceCalls={serviceCalls} markAsServiced={markAsServiced}/>
       <Add style={{ width: '2rem', fill: 'red' }}
            onClick={() => socket.emit('CALL_SERVICE', { message: 'Nils tahab süüa' })}/>
     </div>

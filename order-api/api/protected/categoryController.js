@@ -26,10 +26,10 @@ router.route('/add').post(async function (req, res) {
   return res.json(savedCategory)
 })
 
-router.route('/update/:id').post(function (req, res) {
+router.route('/update/:id').post(async function (req, res) {
   const categoryDto = req.body
 
-  const savedCategory = categoryService.update(categoryDto)
+  const savedCategory = await categoryService.update(categoryDto)
 
   return res.json(savedCategory)
 })
