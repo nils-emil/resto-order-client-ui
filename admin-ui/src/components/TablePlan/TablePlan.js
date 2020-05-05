@@ -5,7 +5,7 @@ import { connect } from 'react-redux/es/alternate-renderers'
 import { showPopUpWithTimeout } from '../../store/actions/popup'
 
 function TablePlan(props) {
-  const { organizationId } = props.auth.user.organizationId
+  const { organizationId } = props.auth.user
 
   const [tables, setTables] = useState([])
 
@@ -14,7 +14,7 @@ function TablePlan(props) {
       const responseTables = response.data
       setTables(responseTables)
     })
-  }, [])
+  }, [organizationId])
 
   const tableStates = [
     {
@@ -32,12 +32,16 @@ function TablePlan(props) {
   ]
 
   const getTableState = (tableNumber) => {
-    tableStates.forEach(table => {
+    for (let table of tableStates) {
       if (table.tableNumber === parseInt(tableNumber)) {
         return table.state
       }
-    })
+    }
   }
+
+  tables.map(table => {
+    console.log('function call ' + getTableState(table.number))
+  })
 
   return (
     <div className="table-plan">
