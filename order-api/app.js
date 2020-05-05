@@ -28,8 +28,7 @@ io.on('connection', (socket) => {
     const{date, time} = timeUtil.extractTime(new Date)
     serviceCall.callDate = date;
     serviceCall.callTime = time;
-    serviceCall.callTime = data.callType;
-    serviceCall.callTime = data.callType;
+    serviceCall.callType = data.callType;
     serviceCall.isWaiting = true
     serviceCall.save(() => {
       io.emit('SERVICE_CALLED', serviceCall)
