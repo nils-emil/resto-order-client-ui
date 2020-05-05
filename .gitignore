@@ -86,8 +86,9 @@ yarn-error.log*
 
 
 # IDEA
-client/.idea
+client-ui/.idea
 admin-ui/.idea
+order-api/.idea
 app/.idea
 /.idea
 
