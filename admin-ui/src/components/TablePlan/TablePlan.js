@@ -39,10 +39,6 @@ function TablePlan(props) {
     }
   }
 
-  tables.map(table => {
-    console.log('function call ' + getTableState(table.number))
-  })
-
   return (
     <div className="table-plan">
       <div className="table-plan__internal-container">
