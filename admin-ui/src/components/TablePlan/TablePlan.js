@@ -5,7 +5,7 @@ import { connect } from 'react-redux/es/alternate-renderers'
 import { showPopUpWithTimeout } from '../../store/actions/popup'
 
 function TablePlan(props) {
-  const { organizationId } = props.auth.user.data
+  const { organizationId } = props.auth.user.organizationId
 
   const [tables, setTables] = useState([])
 

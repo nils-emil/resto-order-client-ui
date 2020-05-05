@@ -8,7 +8,7 @@ import ItemEditView from './components/ItemEditView/ItemEditView'
 import { getCategories } from '../../services/categoryService'
 
 function MenuList(props) {
-  const { organizationId } = props.auth.user.data
+  const { organizationId } = props.auth.user.organizationId
 
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState({ _id: 0 })
