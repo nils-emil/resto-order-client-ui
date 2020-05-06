@@ -37,8 +37,12 @@
     justify-content: center;
     align-items: center;
 
-    &--waiting {
+    &--is-waiting-for-order {
       background-color: $color-secondary-light;
+    }
+
+    &--is-waiting-for-service {
+      background-color: green;
     }
   }
 }

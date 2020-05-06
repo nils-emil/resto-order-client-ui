@@ -6,6 +6,7 @@ import { showPopUpWithTimeout } from '../../store/actions/popup'
 
 function TablePlan(props) {
   const { organizationId } = props.auth.user
+  const { serviceCalls = [], orders = [] } = props
 
   const [tables, setTables] = useState([])
 
@@ -16,24 +17,54 @@ function TablePlan(props) {
     })
   }, [organizationId])
 
-  const tableStates = [
-    {
-      tableNumber: 1,
-      state: 'waiting'
-    },
-    {
-      tableNumber: 2,
-      state: 'empty'
-    },
-    {
-      tableNumber: 3,
-      state: 'empty'
+  const getTableStates = () => {
+    let states = []
+    const tablesNeedingOrdering = orders.map(order => {
+      if (order.isWaiting) {
+        return order.tableCode
+      }
+    })
+    const tablesNeedingServicing = serviceCalls.map(call => {
+      if (call.isWaiting) {
+        return call.tableCode
+      }
+    })
+
+    for (let table of tables) {
+      if (tablesNeedingOrdering.includes(table.code)) {
+        states.push(
+          {
+            tableNumber: table.code,
+            state: 'is-waiting-for-service'
+          }
+        )
+        continue
+      }
+
+      if (tablesNeedingServicing.includes(table.code)) {
+        states.push(
+          {
+            tableNumber: table.code,
+            state: 'is-waiting-for-order'
+          }
+        )
+        continue
+      }
+
+      states.push(
+        {
+          tableNumber: table.code,
+          state: 'empty'
+        }
+      )
     }
-  ]
+    return states
+  }
 
   const getTableState = (tableNumber) => {
+    const tableStates = getTableStates()
     for (let table of tableStates) {
-      if (table.tableNumber === parseInt(tableNumber)) {
+      if (table.tableNumber === tableNumber) {
         return table.state
       }
     }
@@ -45,7 +76,7 @@ function TablePlan(props) {
         {tables.map(table => {
           return (
             <div
-              className={`table-plan__table table-plan__table--${getTableState(table.number)}`}
+              className={`table-plan__table table-plan__table--${getTableState(table.code)}`}
               style={{
                 height: table.height + 'px',
                 width: table.width + 'px',
