@@ -5,6 +5,16 @@ import Feed from '../FeedWithHeader/Feed'
 import { connect } from 'react-redux/es/alternate-renderers'
 import { fetchAll } from '../../services/orderService'
 import FeedSelector from '../FeedSelector/FeedSelector'
+import {
+  EMIT_FETCH_ALL_ORDERS,
+  EMIT_FETCH_SERVICE_CALLS,
+  EMIT_ORDER_SERVICED,
+  EMIT_SERVICE_CALL_SERVICED,
+  RECEIVE_ALL_ORDERS,
+  RECEIVE_ALL_SERVICE_CALLS,
+  RECEIVE_REFRESH_ORDERS,
+  RECEIVE_SERVICE_CALLED
+} from './socketConstants'
 
 const socket = io(process.env.REACT_APP_BACKEND_URL)
 
@@ -17,43 +27,50 @@ function ActivityFeed(props) {
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
-    socket.on('ALL_UNSERVICED_TABLES', (data) => {
+    socket.on(RECEIVE_ALL_SERVICE_CALLS, (data) => {
       setServiceCalls(data.map(call => transformServiceCall(call)))
     })
 
-    socket.emit('GET_ALL_UNSERVICED_TABLES')
+    socket.emit(EMIT_FETCH_SERVICE_CALLS)
 
     return () => {
-      socket.off('ALL_UNSERVICED_TABLES')
+      socket.off(RECEIVE_ALL_SERVICE_CALLS)
     }
   }, [])
 
 
   useEffect(() => {
-    socket.on('SERVICE_CALLED', function (data) {
+    socket.on(RECEIVE_SERVICE_CALLED, function (data) {
       setServiceCalls([transformServiceCall(data), ...serviceCalls])
     })
 
     return () => {
-      socket.off('SERVICE_CALLED')
+      socket.off(RECEIVE_SERVICE_CALLED)
     }
   })
 
   useEffect(() => {
-    fetchAll().subscribe(response => {
-      setOrders(response.data.map(order => transformOrder(order)))
+    socket.on(RECEIVE_ALL_ORDERS, (data) => {
+      setOrders(data.map(order => transformOrder(order)))
     })
+
+    socket.emit(EMIT_FETCH_ALL_ORDERS, { organizationId })
+
+    return () => {
+      socket.off(RECEIVE_ALL_ORDERS)
+    }
   }, [])
 
+
   useEffect(() => {
-    socket.on(`REFRESH-ORDERS-${organizationId}`, function () {
+    socket.on(RECEIVE_REFRESH_ORDERS + organizationId, function () {
       fetchAll().subscribe(response => {
         setOrders(response.data.map(order => transformOrder(order)))
       })
     })
 
     return () => {
-      socket.off(`REFRESH-ORDERS-${organizationId}`)
+      socket.off(RECEIVE_REFRESH_ORDERS + organizationId)
     }
   })
 
@@ -85,7 +102,7 @@ function ActivityFeed(props) {
     )
 
     setServiceCalls(callsCopy)
-    socket.emit('MARK_TABLE_SERVICED', {
+    socket.emit(EMIT_SERVICE_CALL_SERVICED, {
       _id: call._id
     })
   }
@@ -100,7 +117,7 @@ function ActivityFeed(props) {
     )
 
     setOrders(ordersCopy)
-    socket.emit('MARK_ORDER_SERVICED', {
+    socket.emit(EMIT_ORDER_SERVICED, {
       _id: order._id
     })
   }

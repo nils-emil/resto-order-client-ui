@@ -9,30 +9,32 @@
   margin-bottom: 1em;
 
   height: 100%;
+  width: 100%;
+
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-background;
+    border-radius: $default-border-radius;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-secondary;
+    border-radius: $default-border-radius;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-secondary-light;
+    border-radius: $default-border-radius;
+  }
 
   &__item-container {
     overflow: auto;
     padding-right: .5em;
-
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: $color-background;
-      border-radius: $default-border-radius;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: $color-secondary;
-      border-radius: $default-border-radius;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: $color-secondary-light;
-      border-radius: $default-border-radius;
-    }
   }
 
   &__header {
