@@ -2,7 +2,7 @@
 @import '../../resources/variables';
 
 .feed {
-  border-radius: $default-border-radius;
+  border-radius: $default-border-radius-bottom;
   background-color: $color-primary;
   padding: 1rem;
   box-sizing: border-box;
@@ -10,9 +10,6 @@
 
   height: 100%;
   overflow: auto;
-
-  display: grid;
-  grid-template-rows: 3rem auto;
 
   &__item-container {
     overflow: auto;

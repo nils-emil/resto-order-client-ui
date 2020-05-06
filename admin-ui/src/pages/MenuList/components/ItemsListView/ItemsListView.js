@@ -64,7 +64,7 @@ function ItemsListView(props) {
     let categoryDto = Object.assign({}, selectedCategory)
     categoryDto.order = selectedCategory.order + amount
 
-    updateCategory(categoryDto).subscribe((response) => refreshCategories(response.data))
+    updateCategory(categoryDto).subscribe(() => refreshCategories(categoryDto))
   }
 
   const MenuList = () => {

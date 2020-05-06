@@ -3,9 +3,11 @@ import { ReactComponent as ArrowDown } from './icons/arrow-down.svg'
 import { ReactComponent as ArrowUp } from './icons/arrow-up.svg'
 import { ReactComponent as CheckMarkOutline } from './icons/checkmark-outline.svg'
 import { ReactComponent as CloseOutline } from './icons/close-outline.svg'
+import { ReactComponent as CreditCard } from './icons/credit-card.svg'
 import { ReactComponent as Cog } from './icons/cog.svg'
 import { ReactComponent as EditPencil } from './icons/edit-pencil.svg'
 import { ReactComponent as ExclamationOutline } from './icons/exclamation-outline.svg'
+import { ReactComponent as ExclamationSolid } from './icons/exclamation-solid.svg'
 import { ReactComponent as Hamburger } from './icons/menu.svg'
 import { ReactComponent as Home } from './icons/home.svg'
 import { ReactComponent as Map } from './icons/map.svg'
@@ -20,9 +22,11 @@ export {
   ArrowUp,
   CheckMarkOutline,
   CloseOutline,
+  CreditCard,
   Cog,
   EditPencil,
   ExclamationOutline,
+  ExclamationSolid,
   Hamburger,
   Home,
   Map,

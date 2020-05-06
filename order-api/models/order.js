@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
@@ -27,6 +26,15 @@ const OrderSchema = new Schema({
     },
     cancelled: {
         type: Boolean
+    },
+    isWaiting: {
+      type: Boolean
+    },
+    createdTime: {
+      type: String
+    },
+    createdDate: {
+      type: String
     }
 })
 module.exports.MenuItemAmount = mongoose.model('MenuItemAmount', MenuItemAmountSchema);

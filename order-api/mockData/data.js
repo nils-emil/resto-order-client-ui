@@ -50,28 +50,28 @@ const table1 = new Table({
   code: '111111',
   organizationId: organization._id,
   number: 1,
-  width: 200,
-  height: 100,
-  xPosition: 7,
-  yPosition: 9
+  width: 100,
+  height: 300,
+  xPosition: 50,
+  yPosition: 50
 })
 const table2 = new Table({
   code: '222AAA',
   organizationId: organization._id,
   number: 2,
-  width: 200,
-  height: 100,
-  xPosition: 502,
-  yPosition: -11.67
+  width: 100,
+  height: 300,
+  xPosition: 300,
+  yPosition: 50
 })
 const table3 = new Table({
   code: '586TGJ',
   organizationId: organization._id,
   number: 3,
-  width: 200,
-  height: 100,
-  xPosition: 502,
-  yPosition: 100.67
+  width: 100,
+  height: 300,
+  xPosition: 550,
+  yPosition: 50
 })
 //const table4 = new Table({ code: '333QQQ', organizationId: organization._id })
 /*const table5 = new Table({ code: 'QQQAAA', organizationId: organization2._id })

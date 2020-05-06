@@ -1,0 +1,62 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.feed-selector {
+  border-radius: $default-border-radius-top;
+  background-color: $color-primary;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  &__button {
+    cursor: pointer;
+
+    border-radius: $default-border-radius-top;
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    transition: 0.3s;
+
+    &:hover {
+      border-radius: $default-border-radius;
+      background-color: $color-secondary;
+
+      & .feed-selector__exclamation_icon {
+        transition: 0.3s;
+        fill: $color-white;
+      }
+    }
+
+    &--active {
+      background-color: $color-primary-light;
+      cursor: default;
+
+      &:hover {
+        background-color: $color-primary-light;
+      }
+
+      & .feed-selector__exclamation_icon {
+        fill: $color-white;
+      }
+    }
+  }
+
+  &__icon {
+    fill: $color-background;
+    width: 1.5em;
+
+    position: absolute;
+    left: calc(50% - .75em);
+    top: calc(50% - .75em);
+  }
+
+  &__exclamation_icon {
+    position: absolute;
+    fill: #e63946;
+    width: 1em;
+    right: calc(50% - 1.5em);
+    top: calc(50% - 1.2em);
+  }
+}

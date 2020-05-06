@@ -1,8 +1,7 @@
 import React from 'react'
 import './styles.scss'
 import { CheckMarkOutline, CloseOutline, ExclamationOutline } from '../../resources/icons_index'
-import { loadModal } from '../../store/actions/modal'
-import { hidePopUp, showPopUpWithTimeout } from '../../store/actions/popup'
+import { hidePopUp } from '../../store/actions/popup'
 import { connect } from 'react-redux'
 
 export const popUpVariants = {

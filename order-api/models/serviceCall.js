@@ -11,10 +11,10 @@ const ServiceCallSchema = new Schema({
   isWaiting: {
     type: Boolean
   },
-  callTime: {
+  createdTime: {
     type: String
   },
-  callDate: {
+  createdDate: {
     type: String
   }
 })

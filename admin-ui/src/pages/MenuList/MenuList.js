@@ -23,7 +23,7 @@ function MenuList(props) {
     getCategories(organizationId).subscribe(e => {
       setCategories(e.data)
       if (categoryToSelect) {
-        setSelectedCategory(e.data.find(category => category.order === categoryToSelect.order))
+        selectCategory(e.data.find(category => category.order === categoryToSelect.order))
       } else {
         setSelectedCategory({ ...e.data[0], orderDecreaseAllowed: false,  orderIncreaseAllowed: true})
       }
@@ -41,10 +41,11 @@ function MenuList(props) {
   }
 
   const selectCategory = (category) => {
-    if (categories.length > 2 && categories[categories.length - 1]._id !== category._id) {
+    if (category._id && categories.length > 2 && categories[categories.length - 2]._id !== category._id) {
       category.orderIncreaseAllowed = true
     }
-    if (categories.length > 2 && categories[1]._id !== category._id) {
+
+    if (category._id && categories.length > 2 && categories[0]._id !== category._id && category._id) {
       category.orderDecreaseAllowed = true;
     }
     setSelectedCategory(category)

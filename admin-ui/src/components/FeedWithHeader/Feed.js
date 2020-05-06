@@ -1,19 +1,18 @@
 import React from 'react'
 import './styles.scss'
 
-function FeedWithHeader(props) {
+function Feed(props) {
 
-  const {header, serviceCalls, markAsServiced} = props
+  const { serviceCalls, onClick} = props
 
   return (
     <div className="feed">
-      <h1 className="feed__header">{header}</h1>
       <div className="feed__item-container">
       {serviceCalls.length === 0 && <p className="feed__no_content_message">Täna pole uusi teateid</p>}
       {serviceCalls.map(call => {
         return (
           <div
-            onClick={() => markAsServiced(call)}
+            onClick={() => onClick(call)}
             className={`feed-item ${call.isWaiting ? 'feed-item--alert' : ''}`}
             key={call._id}
           >
@@ -27,4 +26,4 @@ function FeedWithHeader(props) {
   )
 }
 
-export default FeedWithHeader
+export default Feed
