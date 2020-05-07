@@ -6,7 +6,15 @@ module.exports = class CategoryService {
   async fetchAll(organizationId) {
     return Category.find({ organizationId: organizationId })
       .then(categories => {
-        return categories
+
+        let unCategorized = {
+          '_id': null,
+          'name': 'Kategooriata',
+          'organizationId': organizationId,
+          'order': categories.length + 1
+        }
+
+        return [...categories, unCategorized]
       })
   }
 
@@ -20,7 +28,7 @@ module.exports = class CategoryService {
   // TODO: Fix this shitty code
   async remove(id) {
     await Category.findOne({ _id: id }).then(category => {
-      Category.updateMany({ order: { $gt: category.order, }}, {$inc: {order: -1} }).then(() => {
+      Category.updateMany({ order: { $gt: category.order } }, { $inc: { order: -1 } }).then(() => {
       })
     })
 

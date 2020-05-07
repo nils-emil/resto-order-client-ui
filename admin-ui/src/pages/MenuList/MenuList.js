@@ -11,22 +11,18 @@ function MenuList(props) {
   const { organizationId } = props.auth.user
 
   const [categories, setCategories] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState({ _id: 0 })
+  const [selectedCategory, setSelectedCategory] = useState({ _id: 0, name: '' })
   const [isEditing, setEditingMode] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
 
   useEffect(() => {
-    refreshCategories()
+    refreshCategories(1)
   }, [])
 
-  const refreshCategories = (categoryToSelect) => {
+  const refreshCategories = (selectedOrder) => {
     getCategories(organizationId).subscribe(e => {
       setCategories(e.data)
-      if (categoryToSelect) {
-        selectCategory(e.data.find(category => category.order === categoryToSelect.order))
-      } else {
-        setSelectedCategory({ ...e.data[0], orderDecreaseAllowed: false,  orderIncreaseAllowed: true})
-      }
+      selectCategory(selectedOrder, e.data)
     })
   }
 
@@ -40,15 +36,17 @@ function MenuList(props) {
     }
   }
 
-  const selectCategory = (category) => {
-    if (category._id && categories.length > 2 && categories[categories.length - 2]._id !== category._id) {
-      category.orderIncreaseAllowed = true
+  const selectCategory = (selectedCategoryOrder, fromCategories = categories) => {
+    const selectedCategory = fromCategories[selectedCategoryOrder - 1]
+    if (fromCategories.length > 2 && selectedCategoryOrder < fromCategories.length - 1) {
+      selectedCategory.orderIncreaseAllowed = true
     }
 
-    if (category._id && categories.length > 2 && categories[0]._id !== category._id && category._id) {
-      category.orderDecreaseAllowed = true;
+    if (fromCategories.length > 2 && selectedCategoryOrder > 1 && selectedCategoryOrder < fromCategories.length) {
+      selectedCategory.orderDecreaseAllowed = true
     }
-    setSelectedCategory(category)
+
+    setSelectedCategory(selectedCategory)
     setEditingMode(false)
     setEditingItem(null)
   }

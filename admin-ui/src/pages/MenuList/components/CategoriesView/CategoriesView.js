@@ -13,7 +13,7 @@ function CategoriesView(props) {
   const createCategoryHandler = (data) => {
     const category = {
       name: data.text,
-      order: categories.length + 1,
+      order: categories.length,
       organizationId: organizationId
     }
 
@@ -46,11 +46,11 @@ function CategoriesView(props) {
     <div className="categories-tab">
       <h2 className="categories-tab__header">Kategooriad</h2>
       <div className="categories-tab__category-container">
-        {categories.sort(categoryComparor).map((category) => (
+        {categories.sort(categoryComparor).map((category, index) => (
           <div
             className="categories-tab__category-item underline"
             key={category._id}
-            onClick={() => selectCategory(category)}
+            onClick={() => selectCategory(index + 1)}
           >
             <p className="categories-tab__category-name">{category.name}</p>
           </div>

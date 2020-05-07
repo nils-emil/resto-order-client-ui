@@ -46,7 +46,7 @@ function ItemsListView(props) {
 
   const modalResponseCallback = (response) => {
     if (response) {
-      deleteCategory(selectedCategory._id).subscribe(createPopUpObserver(() => refreshCategories()))
+      deleteCategory(selectedCategory._id).subscribe(createPopUpObserver(() => refreshCategories(0)))
     }
   }
 
@@ -64,7 +64,9 @@ function ItemsListView(props) {
     let categoryDto = Object.assign({}, selectedCategory)
     categoryDto.order = selectedCategory.order + amount
 
-    updateCategory(categoryDto).subscribe(() => refreshCategories(categoryDto))
+    updateCategory(categoryDto).subscribe(() => {
+      refreshCategories(selectedCategory.order + amount)
+    })
   }
 
   const MenuList = () => {

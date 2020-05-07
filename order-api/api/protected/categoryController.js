@@ -8,13 +8,8 @@ router.route('/:organizationId').get(async function (req, res) {
   const organizationId = req.params.organizationId
 
   const categories = await categoryService.fetchAll(organizationId)
-  let uncategorized = {
-    '_id': null,
-    'name': 'Kategooriata',
-    'organizationId': req.params.organizationId,
-    'order': -1
-  }
-  res.json([...categories, uncategorized])
+
+  res.json(categories)
 })
 
 
