@@ -25,9 +25,8 @@
     margin: auto;
     z-index: 10000;
     overflow: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: 3rem auto 5rem;
   }
 
   &__header {

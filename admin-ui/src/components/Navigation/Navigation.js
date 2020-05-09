@@ -36,7 +36,7 @@ function Navigation(props) {
   ]
 
   return links.filter(link => link.page !== currentPage).map(link => (
-    <Link to={link.linkTo} onClick={() => link.onClick ? link.onClick() : null} key={link.page}>
+    <Link to={link.linkTo} onClick={() => link.onClick ? link.onClick() : null} key={link.linkTo}>
       <IconButton Icon={link.icon}/>
     </Link>
   ))

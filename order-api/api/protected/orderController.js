@@ -16,6 +16,7 @@ router.route('/all').get(function (req, res) {
 router.route('/:tableCode').get(function (req, res) {
     let id = req.params.tableCode;
     Order.find({ tableCode: id }).populate('orderContent.menuItemId')
+      .sort({ createdTime: -1 })
       .then(allOrdersFromTable => {
               res.json(allOrdersFromTable);
       })
