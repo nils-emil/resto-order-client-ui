@@ -59,15 +59,6 @@
 
   transition: 0.3s;
 
-  &:hover {
-    background-color: $color-secondary;
-    cursor: pointer;
-
-    & .activity-item__message, .activity-item__time-stamp, &.activity-item--alert::after {
-      color: $color-white;
-    }
-  }
-
   &--alert::after {
     content: "!";
     font-size: 1.5rem;
@@ -77,6 +68,16 @@
     margin: auto;
     font-weight: 500;
   }
+
+  &:hover {
+    background-color: $color-secondary;
+    cursor: pointer;
+
+    & .feed-item__message, .feed-item__time-stamp, &.feed-item--alert::after {
+      color: $color-white;
+    }
+  }
+
 
   &__message {
     font-size: 1em;

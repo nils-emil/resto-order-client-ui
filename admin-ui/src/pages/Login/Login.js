@@ -14,7 +14,7 @@ function Login(props) {
 
   let redirect = null
   if (!props.auth.loading && props.auth.token) {
-    redirect = <Redirect to='/'/>
+    redirect = <Redirect to='/admin'/>
   }
 
   return (

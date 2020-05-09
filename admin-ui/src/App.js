@@ -13,7 +13,7 @@ function App(props) {
     <Router>
       <Switch>
         <Route path="/login" component={Login}/>
-        <Route path="/" component={Page}/>
+        <Route path="/admin" component={Page}/>
       </Switch>
       <ModalContainer/>
       <PopUpContainer/>

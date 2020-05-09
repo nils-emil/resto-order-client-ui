@@ -1,14 +1,15 @@
 import React from 'react'
 
 import './styles.scss'
-import { Cog, Home, Map, Portfolio } from '../../resources/icons_index'
+import { LockClosed, Home, Map } from '../../resources/icons_index'
 import { Link } from 'react-router-dom'
 import IconButton from '../IconButton/IconButton'
+import { logout } from '../../store/actions/auth'
+import { connect } from 'react-redux'
 
 export const pages = {
   HOME: 'HOME',
   MENU: 'MENU',
-  SETTINGS: 'SETTINGS',
   STATISTICS: 'STATISTICS'
 }
 
@@ -20,33 +21,32 @@ function Navigation(props) {
     {
       page: pages.HOME,
       icon: Home,
-      linkTo: '/'
+      linkTo: '/admin'
     },
     {
       page: pages.MENU,
       icon: Map,
-      linkTo: '/menu-list'
-    }
-  ]
-
-  const otherLinks = [
-    {
-      page: pages.SETTINGS,
-      icon: Cog,
-      linkTo: '/settings'
+      linkTo: '/admin/menu-list'
     },
     {
-      page: pages.STATISTICS,
-      icon: Portfolio,
-      linkTo: '/statistics'
-    }
+      icon: LockClosed,
+      linkTo: '/login',
+      onClick: props.logout
+    },
   ]
 
   return links.filter(link => link.page !== currentPage).map(link => (
-    <Link to={link.linkTo} key={link.page}>
+    <Link to={link.linkTo} onClick={() => link.onClick ? link.onClick() : null} key={link.page}>
       <IconButton Icon={link.icon}/>
     </Link>
   ))
 }
 
-export default Navigation
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Navigation)

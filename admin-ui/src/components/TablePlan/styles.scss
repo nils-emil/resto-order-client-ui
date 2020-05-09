@@ -26,7 +26,7 @@
   }
 
   &__table {
-    background-color: $color-secondary;
+    background-color: #b0b0b0;
     border-radius: $default-border-radius;
 
     color: $color-white;
@@ -38,11 +38,11 @@
     align-items: center;
 
     &--is-waiting-for-order {
-      background-color: $color-secondary-light;
+      background-color: #f1b8d0;  
     }
 
     &--is-waiting-for-service {
-      background-color: green;
+      background-color: $color-primary;
     }
   }
 }

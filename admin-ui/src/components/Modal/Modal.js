@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './styles.scss'
-import TextButton from '../TextButton/TextButton'
+import TextButton, { buttonModifiers } from '../TextButton/TextButton'
 
 function Modal(props) {
   const { onClose, onConfirm, children, header, dialogStyle, confirmButtonText = 'Salvesta' } = props
@@ -37,8 +37,8 @@ function Modal(props) {
           {children}
         </div>
         <div className="modal__footer">
-          <TextButton onClick={onClose} isTransparent>Tühista</TextButton>
-          <TextButton onClick={onConfirm}>{confirmButtonText}</TextButton>
+          <TextButton onClick={onClose} modifiers={[buttonModifiers.TRANSPARENT, buttonModifiers.SMALL, buttonModifiers.INLINE]}>Tühista</TextButton>
+          <TextButton onClick={onConfirm} modifiers={[buttonModifiers.SMALL, buttonModifiers.INLINE]}>{confirmButtonText}</TextButton>
         </div>
       </div>
     </div>

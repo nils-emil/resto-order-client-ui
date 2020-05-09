@@ -6,7 +6,7 @@
 
   z-index: 10;
   font-size: 1.5rem;
-  height: 5rem;
+  height: 4rem;
   padding: 0 3rem;
 
   display: flex;
@@ -19,12 +19,6 @@
 
   &__name {
     color: $color-background;
-    text-decoration: none;
-  }
-
-  &__logout {
-    color: $color-background;
-    font-size: 1.1rem;
     text-decoration: none;
   }
 }

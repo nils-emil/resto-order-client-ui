@@ -19,6 +19,7 @@ const orderSocket = (socket, io) => {
         organizationId: data.organizationId,
         createdDate: timeUtil.extractTime(new Date()).date
       })
+      .populate('orderContent.menuItemId')
       .sort({ createdTime: -1 })
       .exec((err, orders) => {
         socket.emit(EMIT_ALL_ORDERS, orders)

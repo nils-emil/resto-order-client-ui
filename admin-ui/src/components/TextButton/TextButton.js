@@ -4,11 +4,15 @@ import './styles.scss'
 export const buttonModifiers = {
   MARGINTOP: 'margin-top',
   MARGINLEFT: 'margin-left',
+  TRANSPARENT: 'transparent',
+  TRANSPARENT_LIGHT: 'transparent-light',
+  SMALL: 'small',
+  INLINE: 'in-line'
 }
 
 function TextButton(props) {
 
-  const { onClick, isTransparent, Icon, children, modifiers = [] } = props
+  const { onClick, Icon, children, modifiers = [] } = props
 
   const modifierClasses = () => {
     let classes = ''
@@ -20,7 +24,7 @@ function TextButton(props) {
 
 
   return (
-    <div className={`text-button ${isTransparent ? 'text-button--transparent' : ''} ${modifierClasses()}`} onClick={onClick}>
+    <div className={`text-button ${modifierClasses()}`} onClick={onClick}>
       {Icon && <Icon class="text-button__icon"/>}
       <p className="text-button__text">{children}</p>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import './styles.scss'
-import TextButton from '../../../../../../components/TextButton/TextButton'
+import TextButton, { buttonModifiers } from '../../../../../../components/TextButton/TextButton'
 import TextField, { modifiers, types, variants } from '../../../../../../components/TextField/TextField'
 import SelectField from '../../../../../../components/SelectField/SelectField'
 import TextArea from '../../../../../../components/TextArea/TextArea'
@@ -40,11 +40,11 @@ function ItemForm(props) {
       </div>
 
       <div className="item-info__button-section">
-        <TextButton onClick={cancel} isTransparent>
+        <TextButton onClick={cancel} modifiers={[buttonModifiers.TRANSPARENT_LIGHT, buttonModifiers.INLINE]}>
           Tühista
         </TextButton>
 
-        <TextButton onClick={save}>
+        <TextButton onClick={save} modifiers={[buttonModifiers.INLINE]}>
           Salvesta
         </TextButton>
       </div>

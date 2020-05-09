@@ -4,7 +4,8 @@ import './styles.scss'
 export const modifiers = {
   FULLWIDTH: 'full-width',
   MARGINTOP: 'margin-top',
-  BOLD: 'bold'
+  BOLD: 'bold',
+  INLINE: 'in-line'
 }
 
 export const variants = {

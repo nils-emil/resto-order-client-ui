@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import './styles.scss'
 import Feed from '../Feed/Feed'
 import FeedSelector from '../FeedSelector/FeedSelector'
+import { loadModal } from '../../store/actions/modal'
+import { connect } from 'react-redux'
+import { ORDER_MODAL, CONFIRM_MODAL } from '../Modal/Types'
 
 
 function ActivityFeed(props) {
@@ -9,6 +12,29 @@ function ActivityFeed(props) {
   const { serviceCalls, orders, toggleServiceCallWaiting, toggleOrderWaiting } = props
 
   const [isServiceCallSelected, selectServiceCalls] = useState(true)
+
+  const openOrderModal = (order) => {
+    props.loadModal(ORDER_MODAL, {
+      order: order,
+      modalResponseCallback: function (response) {
+        if (response) {
+          toggleOrderWaiting(order)
+        }
+      }
+    })
+  }
+
+  const openConfirmModal = (order) => {
+    props.loadModal(CONFIRM_MODAL, {
+      modalText: 'Kas soovid kutsungi staatust muuta?',
+      confirmButtonText: 'Muuda',
+      modalResponseCallback: function (response) {
+        if (response) {
+          toggleServiceCallWaiting(order)
+        }
+      }
+    })
+  }
 
   return (
     <div className="activity-feed">
@@ -25,10 +51,14 @@ function ActivityFeed(props) {
         />
       </div>
       <Feed serviceCalls={isServiceCallSelected ? serviceCalls : orders}
-            onClick={isServiceCallSelected ? toggleServiceCallWaiting : toggleOrderWaiting}
+            onClick={isServiceCallSelected ? openConfirmModal : openOrderModal}
       />
     </div>
   )
 }
 
-export default ActivityFeed
+const mapDispatchToProps = dispatch => ({
+  loadModal: (modelType, modalResponseCallback) => dispatch(loadModal(modelType, modalResponseCallback))
+})
+
+export default connect(null, mapDispatchToProps)(ActivityFeed)

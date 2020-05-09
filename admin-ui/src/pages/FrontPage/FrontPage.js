@@ -20,7 +20,6 @@ import { connect } from 'react-redux/es/alternate-renderers'
 
 const socket = io(process.env.REACT_APP_BACKEND_URL)
 
-
 function FrontPage(props) {
 
   const { organizationId } = props.auth.user

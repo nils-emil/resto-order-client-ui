@@ -59,4 +59,29 @@
       box-shadow: $default-shadow;
     }
   }
+
+  &--transparent-light {
+    background-color: transparent;
+    color: $color-white;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-secondary;
+      -webkit-box-shadow: $default-shadow;
+      -moz-box-shadow: $default-shadow;
+      box-shadow: $default-shadow;
+    }
+  }
+
+  &--small {
+    font-size: .8em;
+  }
+
+  &--in-line {
+    margin-left: 1em
+  }
 }

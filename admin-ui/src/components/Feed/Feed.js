@@ -17,7 +17,7 @@ function Feed(props) {
             key={call._id}
           >
             <p className="feed-item__message">{call.message}</p>
-            <p className="feed-item__time-stamp">{call.callTime}</p>
+            <p className="feed-item__time-stamp">{call.createdTime}</p>
           </div>
         )
       })}

@@ -16,12 +16,6 @@
     display: flex;
     justify-content: center;
     margin-left: .5em;
-
-    transition: 0.3s;
-
-    &--hide {
-      opacity: 0;
-    }
   }
 
   &__icon {

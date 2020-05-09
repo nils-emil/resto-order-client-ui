@@ -32,11 +32,10 @@ function ItemsListView(props) {
     props.loadModal(CONFIRM_MODAL, { modalResponseCallback, modalText: 'Kas soovid kategooriat kustutada?' })
   }
 
-  const createPopUpObserver = (callBack) => {
+  const createPopUpObserver = () => {
     return ({
-      next: (updatedCategory) => {
+      next: () => {
         showPopUpWithTimeout({ type: popUpVariants.SUCCESS, text: `Edukalt kustutatud ${selectedCategory.name}` })
-        callBack(updatedCategory)
       },
       error: error => {
         showPopUpWithTimeout({ type: popUpVariants.ERROR, text: error.response.data })
@@ -46,7 +45,11 @@ function ItemsListView(props) {
 
   const modalResponseCallback = (response) => {
     if (response) {
-      deleteCategory(selectedCategory._id).subscribe(createPopUpObserver(() => refreshCategories(0)))
+      deleteCategory(selectedCategory._id).subscribe(() => {
+          createPopUpObserver()
+          refreshCategories(0)
+        }
+      )
     }
   }
 
@@ -54,10 +57,11 @@ function ItemsListView(props) {
     let categoryDto = Object.assign({}, selectedCategory)
     categoryDto.name = newName
 
-    updateCategory(categoryDto).subscribe(createPopUpObserver((updatedCategory) => {
+    updateCategory(categoryDto).subscribe(() => {
+      createPopUpObserver()
+      refreshCategories(selectedCategory.order)
       toggleNameEdit()
-      refreshCategories(updatedCategory.data)
-    }))
+    })
   }
 
   const updateCategoryOrder = (amount) => {
