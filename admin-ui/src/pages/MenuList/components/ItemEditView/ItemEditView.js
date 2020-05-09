@@ -83,8 +83,8 @@ function ItemEditView(props) {
           name={itemToEdit.title}
           id={itemToEdit._id}
           onDelete={openDeleteModal}
-        />
-        }
+        />}
+        {!itemToEdit && <h2 className="item-edit-view__header">Lisa uus</h2>}
       </div>
       <div className="item-edit-view__edit-section">
         <div className="item-edit-view__image-section">

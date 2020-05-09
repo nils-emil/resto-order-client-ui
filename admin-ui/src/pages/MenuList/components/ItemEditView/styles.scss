@@ -15,8 +15,10 @@
   box-shadow: $default-shadow;
 
   &__header {
-    margin: 0 0 1rem;
-    display: flex;
+    font-weight: 500;
+    color: $color-background;
+
+    margin: 0 .5em 0 0;
   }
 
   &__edit-section {

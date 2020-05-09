@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles.scss'
-import { ArrowDown, ArrowUp, EditPencil, Trash } from '../../resources/icons_index'
+import { ArrowDown, ArrowUp, CheckMark, Close, EditPencil, Trash } from '../../resources/icons_index'
 import TextField, { modifiers, variants } from '../TextField/TextField'
 
 function HeaderWithActions(props) {
@@ -15,7 +15,6 @@ function HeaderWithActions(props) {
     updateCategoryOrder
   } = props
 
-  const [isButtonsVisible, setButtonsVisible] = useState(true)
   const [isEditingEnabled, setEditingMode] = useState(false)
   const [editedName, setEditedName] = useState('')
 
@@ -48,18 +47,17 @@ function HeaderWithActions(props) {
   }
 
   return (
-    <div className="action-header"
-         onMouseEnter={() => setButtonsVisible(true)}
-         onMouseLeave={() => setButtonsVisible(false)}
-    >
-      {isEditingEnabled && <TextField variant={variants.LIGHT} modifiers={[modifiers.BOLD]} value={editedName} onChange={onChange}/>}
+    <div className="action-header">
+      {isEditingEnabled &&
+      <TextField variant={variants.LIGHT} modifiers={[modifiers.BOLD, modifiers.INLINE]} value={editedName} onChange={onChange}/>}
       {!isEditingEnabled && <h2 className="action-header__header-text">{name}</h2>}
-      <div
-        className={`action-header__header-buttons ${isButtonsVisible || !isListView ? '' : 'action-header__header-buttons--hide'}`}>
-        {orderIncreaseAllowed && <ArrowDown className="action-header__icon" onClick={() => updateCategoryOrder(1)}/>}
-        {orderDecreaseAllowed && <ArrowUp className="action-header__icon" onClick={() => updateCategoryOrder(-1)}/>}
-        {isListView && <EditPencil className="action-header__icon" onClick={toggleNameEdit}/>}
-        <Trash className="action-header__icon" onClick={onDelete}/>
+      <div className={`action-header__header-buttons ${!isListView ? '' : 'action-header__header-buttons--hide'}`}>
+        {!isEditingEnabled && orderIncreaseAllowed && <ArrowDown className="action-header__icon" onClick={() => updateCategoryOrder(1)}/>}
+        {!isEditingEnabled && orderDecreaseAllowed && <ArrowUp className="action-header__icon" onClick={() => updateCategoryOrder(-1)}/>}
+        {!isEditingEnabled && isListView && <EditPencil className="action-header__icon" onClick={toggleNameEdit}/>}
+        {isEditingEnabled && <Close className="action-header__icon" onClick={toggleNameEdit}/>}
+        {isEditingEnabled && <CheckMark className="action-header__icon" onClick={() => onTitleChange(editedName, toggleNameEdit)}/>}
+        {!isEditingEnabled && <Trash className="action-header__icon" onClick={onDelete}/>}
       </div>
     </div>
   )
