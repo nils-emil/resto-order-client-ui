@@ -54,7 +54,6 @@ function BottomActions (props) {
       <BottomNavigationAction label={`Arve ${props.totalSum.toFixed(2)} €`}
                               onClick={onBillClick}
                               icon={<CreditCardIcon/>}/>
-      <ToastContainer/>
     </BottomNavigation>
   )
 }

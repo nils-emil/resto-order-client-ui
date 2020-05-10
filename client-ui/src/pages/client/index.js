@@ -3,10 +3,10 @@ import BottomActions from '../../components/BottomActions/BottomActions'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import ClientCodeEntry from './ClientCodeEntry/ClientCodeEntry'
 import Bill from './Bill/Bill'
-import Bartab from './Bartab/Bartab'
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer'
 import Menu from './Menu/Menu'
 import io from 'socket.io-client'
+import { ToastContainer } from 'react-toastify'
 
 function Client(props) {
   const [isDrawerOpen, toggleDrawer] = useState(false);
@@ -32,13 +32,13 @@ function Client(props) {
       isOpen={isDrawerOpen}
     />
     routes = <><Route exact path="/bill" render={(props) => (<Bill socket={socket} {...props}/>)}/>
-      <Route exact path="/tab" component={Bartab}/>
       <Route exact path="/menu" component={() => <Menu  organizationId={organizationId} />}/></>
   } else {
     routes = <Redirect to='/'/>
   }
   return (
     <span>
+      <ToastContainer/>
       {menuDrawer}
       <div className="main-scroll">
         <Switch>

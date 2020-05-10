@@ -25,9 +25,18 @@ const useStyles = makeStyles(theme => ({
   inline: {
     display: 'inline',
   },
+  inlineBlock: {
+    display: 'inline-block'
+  },
+  block: {
+    display: 'block'
+  },
   button: {
     float: 'right',
     fontSize: 0.5 + 'rem'
+  },
+  header: {
+    margin: 0
   },
   textAlignCenter: {
     textAlign: 'center'
@@ -53,7 +62,7 @@ function Bill(props) {
     }}
     variant="contained"
     color="primary"
-    classNbame={classes.button}>
+    className={classes.button}>
     Telli tooted lauda
   </Button>
   if (_.isEmpty(props.items)) {
@@ -61,7 +70,7 @@ function Bill(props) {
   }
   return (
     <span className="food-picker">
-        <h4>Tellimus</h4>
+        <h4 className={classes.header}>Tellimus</h4>
           <List className={classes.root}>
                      {Object.entries(props.items).map(([key, element]) =>
                        <React.Fragment>
@@ -77,8 +86,11 @@ function Bill(props) {
                                    component="span"
                                    variant="body2"
                                    className={classes.inline}
-                                   color="textPrimary"
-                                 >Kogus: {element.amount}
+                                   color="textPrimary">
+                                   <span className={classes.inlineBlock}>
+                                     <span className={classes.block}> Kogus: {element.amount} </span>
+                                     <span className={classes.block}> Hind: { (element.amount * element.item.price).toFixed(2)}</span>
+                                   </span>
                                    <Grid item className={classes.button}>
                                      <ButtonGroup size="small" aria-label="small outlined secondary button group">
                                        <Button onClick={() => props.removeItemFromCart(element.item)}>-</Button>
