@@ -4,13 +4,10 @@
 .order-modal {
   &__content {
     display: grid;
-    grid-template-columns: 10rem auto;
-    height: 18rem;
+    height: 14rem;
   }
 
   &__order-list {
-    padding-left: 2em;
-    border-left: 2px solid $color-primary-light;
     overflow: auto;
   }
 
@@ -33,5 +30,18 @@
   &__row {
     display: flex;
     margin-bottom: 1rem;
+  }
+
+  @media screen and (min-width: $screen-size-mobile) {
+    &__content {
+      grid-template-columns: 10rem auto;
+      height: 18rem;
+    }
+
+    &__order-list {
+      padding-left: 2em;
+      border-left: 2px solid $color-primary-light;
+      overflow: auto;
+    }
   }
 }

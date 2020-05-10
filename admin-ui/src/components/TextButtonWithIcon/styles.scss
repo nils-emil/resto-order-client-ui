@@ -4,7 +4,7 @@
 .text-button-with-icon {
   cursor: pointer;
   display: flex;
-  padding: 1em 3.5em 1em 1em;
+  padding: 1em 0 1em 1em;
 
   &__text {
     color: $color-background;

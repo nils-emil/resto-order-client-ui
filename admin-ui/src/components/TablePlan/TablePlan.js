@@ -14,17 +14,12 @@ function TablePlan(props) {
 
   useEffect(() => {
     fetchAll(organizationId).subscribe((response) => {
-      const responseTables = response.data
-      setTables(responseTables)
+      transformTables(response.data)
     })
-  }, [organizationId])
-
-  useEffect(() => {
-    transformTables()
   }, [orders, serviceCalls])
 
-  const transformTables = () => {
-    const tablesWithLastCalls = [...tables]
+  const transformTables = (tablesToTransform) => {
+    const tablesWithLastCalls = [...tablesToTransform]
     for (let table of tablesWithLastCalls) {
       table.lastCall = serviceCalls.find(call => call.isWaiting && call.tableCode === table.code)
       table.lastOrder = orders.find(order => order.isWaiting && order.tableCode === table.code)

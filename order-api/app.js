@@ -10,8 +10,9 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 const db = require('./config/db').connection
-// require('./mockData/dropdb')
-// require('./mockData/data')
+//require('./mockData/dropdb')
+//require('./mockData/data')
+//require('./mockData/test-data')
 
 const server = app.listen(PORT, function () {
   console.log('Server is running on Port:', PORT)

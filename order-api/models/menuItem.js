@@ -8,7 +8,7 @@ const MenuItemSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     organizationId: {
         type: Schema.Types.ObjectId, ref: 'Organization',

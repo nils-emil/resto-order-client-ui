@@ -8,7 +8,6 @@
   margin: 0;
 
   display: grid;
-  grid-template-columns: 70% 30%;
 
   &__form {
     padding: 10rem 4rem;
@@ -44,4 +43,8 @@
     font-weight: 500;
   }
 
+
+  @media screen and (min-width: $screen-size-mobile) {
+    grid-template-columns: 70% 30%;
+  }
 }

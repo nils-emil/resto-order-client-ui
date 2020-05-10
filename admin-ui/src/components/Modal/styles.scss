@@ -20,8 +20,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    width: 30em;
-    height: 20em;
+    width: 90vw;
+    height: 30vh;
     margin: auto;
     z-index: 1000;
     overflow: auto;
@@ -33,7 +33,7 @@
     text-align: left;
     margin: 0;
     padding: 1em;
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   &__content {
@@ -66,6 +66,17 @@
       to {
         transform: rotate(360deg);
       }
+    }
+  }
+
+  @media screen and (min-width: $screen-size-mobile) {
+    &__dialog {
+      width: 30em;
+      height: 20em;
+    }
+
+    &__header {
+      font-size: 1.3em;
     }
   }
 }

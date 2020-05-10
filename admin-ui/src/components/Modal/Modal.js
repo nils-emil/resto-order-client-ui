@@ -3,6 +3,8 @@ import './styles.scss'
 import TextButton, { buttonModifiers } from '../TextButton/TextButton'
 import { YinYang } from '../../resources/icons_index'
 
+const isMobile = window.matchMedia('only screen and (max-width: 760px)').matches
+
 function Modal(props) {
   const { onClose, onConfirm, children, header, dialogStyle, confirmButtonText = 'Salvesta', isLoading = false } = props
 

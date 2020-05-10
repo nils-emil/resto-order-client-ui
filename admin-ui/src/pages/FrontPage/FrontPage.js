@@ -19,6 +19,7 @@ import io from 'socket.io-client'
 import { connect } from 'react-redux/es/alternate-renderers'
 
 const socket = io(process.env.REACT_APP_BACKEND_URL)
+const isMobile = window.matchMedia('only screen and (max-width: 760px)').matches
 
 function FrontPage(props) {
 
@@ -26,6 +27,7 @@ function FrontPage(props) {
 
   const [serviceCalls, setServiceCalls] = useState([])
   const [orders, setOrders] = useState([])
+
 
   useEffect(() => {
     socket.on(RECEIVE_ALL_SERVICE_CALLS, (data) => {
@@ -123,17 +125,21 @@ function FrontPage(props) {
           toggleServiceCallWaiting={toggleServiceCallWaiting}
         />
       </div>
-      <div className="home__table-plan">
-        <TablePlan
-          toggleOrderWaiting={toggleOrderWaiting}
-          orders={orders}
-          toggleServiceCallWaiting={toggleServiceCallWaiting}
-          serviceCalls={serviceCalls}
-        />
-      </div>
-      <div className="home__navigation">
-        <Navigation currentPage={pages.HOME}/>
-      </div>
+      {!isMobile &&
+      <>
+        <div className="home__table-plan">
+          <TablePlan
+            toggleOrderWaiting={toggleOrderWaiting}
+            orders={orders}
+            toggleServiceCallWaiting={toggleServiceCallWaiting}
+            serviceCalls={serviceCalls}
+          />
+        </div>
+        <div className="home__navigation">
+          <Navigation currentPage={pages.HOME}/>
+        </div>
+      </>
+      }
     </div>
   )
 }

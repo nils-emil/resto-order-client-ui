@@ -19,11 +19,11 @@
   box-shadow: $default-shadow;
 
 
-  &--margin-left{
+  &--margin-left {
     margin-left: 1em;
   }
 
-  &--margin-top{
+  &--margin-top {
     margin-top: 1em;
   }
 
@@ -79,6 +79,11 @@
 
   &--small {
     font-size: .8em;
+    padding: .5em 1em;
+
+    @media screen and (min-width: $screen-size-mobile) {
+      padding: 1em 2em;
+    }
   }
 
   &--in-line {

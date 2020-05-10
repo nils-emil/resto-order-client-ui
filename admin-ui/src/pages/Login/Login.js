@@ -7,6 +7,7 @@ import TextButton, { buttonModifiers } from '../../components/TextButton/TextBut
 import { auth } from '../../store/actions/auth'
 import TextField, { modifiers, types } from '../../components/TextField/TextField'
 
+const isMobile = window.matchMedia('only screen and (max-width: 760px)').matches
 
 function Login(props) {
   const [email, setEmail] = useState('')
@@ -21,9 +22,11 @@ function Login(props) {
   return (
     <div className="login">
       {redirect}
+      {!isMobile &&
       <div className="login__svg-container">
         <LoginSvg className="login__svg"/>
       </div>
+      }
       <div className="login__form">
         <h1 className="login__header">Tere tulemast!</h1>
         <div className="login__field-container">
