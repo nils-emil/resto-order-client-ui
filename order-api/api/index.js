@@ -6,6 +6,7 @@ const menuItemPrivateRoutes = require('./protected/menuItemController');
 const menuItemPublicRoutes = require('./public/menuItemController');
 const tabPublicRoutes = require('./public/tableController');
 const categoryPrivateRoutes = require('./protected/categoryController');
+const imagePrivateRoute = require('./protected/imageController');
 const tablePrivateRoutes = require('./protected/tableController');
 const categoryPublicRoutes = require('./public/categoryController');
 const userPublicRoute = require('./public/userController');
@@ -20,6 +21,7 @@ router.use('/api/menu/order', orderPublicRoutes);
 
 // TODO move under auth after testing
 router.use('/api/menu/order', orderPrivateRoutes);
+router.use('/api/admin/image', imagePrivateRoute);
 
 router.use(auth);
 router.use('/api/menu', menuItemPrivateRoutes);

@@ -18,6 +18,7 @@ import { ReactComponent as Phone } from './icons/phone.svg'
 import { ReactComponent as Photo } from './icons/photo.svg'
 import { ReactComponent as Portfolio } from './icons/portfolio.svg'
 import { ReactComponent as Trash } from './icons/trash.svg'
+import { ReactComponent as YinYang } from './icons/yin-yang.svg'
 
 export {
   Add,
@@ -39,5 +40,6 @@ export {
   Phone,
   Photo,
   Portfolio,
-  Trash
+  Trash,
+  YinYang
 }

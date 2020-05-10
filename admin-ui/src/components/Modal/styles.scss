@@ -9,7 +9,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 1000;
+  z-index: 100;
   background-color: rgba(0, 0, 0, .65);
 
   &__dialog {
@@ -23,7 +23,7 @@
     width: 30em;
     height: 20em;
     margin: auto;
-    z-index: 10000;
+    z-index: 1000;
     overflow: auto;
     display: grid;
     grid-template-rows: 3rem auto 5rem;
@@ -44,5 +44,28 @@
     display: flex;
     justify-content: flex-end;
     padding: 1em;
+  }
+
+  &__loading-spinner {
+    width: 5rem;
+    fill: $color-secondary;
+    z-index: 10000;
+    position: absolute;
+    top: calc(50% - 2.5rem);
+    right: calc(50% - 2.5rem);
+
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
   }
 }
