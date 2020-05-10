@@ -38,11 +38,13 @@
     align-items: center;
 
     &--is-waiting-for-order {
-      background-color: #f1b8d0;  
+      background-color: #f1b8d0;
+      cursor: pointer;
     }
 
     &--is-waiting-for-service {
       background-color: $color-primary;
+      cursor: pointer;
     }
   }
 }

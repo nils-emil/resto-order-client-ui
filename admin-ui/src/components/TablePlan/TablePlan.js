@@ -3,10 +3,12 @@ import './styles.scss'
 import { fetchAll } from '../../services/tableService'
 import { connect } from 'react-redux/es/alternate-renderers'
 import { showPopUpWithTimeout } from '../../store/actions/popup'
+import { CONFIRM_MODAL, ORDER_MODAL } from '../Modal/Types'
+import { loadModal } from '../../store/actions/modal'
 
 function TablePlan(props) {
   const { organizationId } = props.auth.user
-  const { serviceCalls = [], orders = [] } = props
+  const { serviceCalls = [], orders = [], toggleServiceCallWaiting, toggleOrderWaiting } = props
 
   const [tables, setTables] = useState([])
 
@@ -17,57 +19,48 @@ function TablePlan(props) {
     })
   }, [organizationId])
 
-  const getTableStates = () => {
-    let states = []
-    const tablesNeedingOrdering = orders.map(order => {
-      if (order.isWaiting) {
-        return order.tableCode
-      }
-    })
-    const tablesNeedingServicing = serviceCalls.map(call => {
-      if (call.isWaiting) {
-        return call.tableCode
-      }
-    })
+  useEffect(() => {
+    transformTables()
+  }, [orders, serviceCalls])
 
-    for (let table of tables) {
-      if (tablesNeedingOrdering.includes(table.code)) {
-        states.push(
-          {
-            tableNumber: table.code,
-            state: 'is-waiting-for-service'
-          }
-        )
-        continue
-      }
-
-      if (tablesNeedingServicing.includes(table.code)) {
-        states.push(
-          {
-            tableNumber: table.code,
-            state: 'is-waiting-for-order'
-          }
-        )
-        continue
-      }
-
-      states.push(
-        {
-          tableNumber: table.code,
-          state: 'empty'
-        }
-      )
+  const transformTables = () => {
+    const tablesWithLastCalls = [...tables]
+    for (let table of tablesWithLastCalls) {
+      table.lastCall = serviceCalls.find(call => call.isWaiting && call.tableCode === table.code)
+      table.lastOrder = orders.find(order => order.isWaiting && order.tableCode === table.code)
     }
-    return states
+    setTables(tablesWithLastCalls)
   }
 
-  const getTableState = (tableNumber) => {
-    const tableStates = getTableStates()
-    for (let table of tableStates) {
-      if (table.tableNumber === tableNumber) {
-        return table.state
+  const getTableState = (table) => {
+      if (table.lastOrder !== undefined) {
+        return 'is-waiting-for-order'
+      } else if (table.lastCall !== undefined) {
+        return 'is-waiting-for-service'
       }
-    }
+  }
+
+  const openOrderModal = (order) => {
+    props.loadModal(ORDER_MODAL, {
+      order: order,
+      modalResponseCallback: function (response) {
+        if (response.isConfirm) {
+          toggleOrderWaiting(response.order)
+        }
+      }
+    })
+  }
+
+  const openConfirmModal = (serviceCall) => {
+    props.loadModal(CONFIRM_MODAL, {
+      modalText: 'Kas soovid viimase kutsungi staatust muuta?',
+      confirmButtonText: 'Muuda',
+      modalResponseCallback: function (response) {
+        if (response) {
+          toggleServiceCallWaiting(serviceCall)
+        }
+      }
+    })
   }
 
   return (
@@ -76,13 +69,13 @@ function TablePlan(props) {
         {tables.map(table => {
           return (
             <div
-              className={`table-plan__table table-plan__table--${getTableState(table.code)}`}
+              onClick={() => table.lastOrder ? openOrderModal(table.lastOrder) : openConfirmModal(table.lastCall)}
+              className={`table-plan__table table-plan__table--${getTableState(table)}`}
               style={{
                 height: table.height + 'px',
                 width: table.width + 'px',
                 position: 'absolute',
                 transform: `translate(${table.xPosition}px, ${table.yPosition}px)`
-
               }}
               key={table.number}>{table.number}</div>
           )
@@ -94,7 +87,8 @@ function TablePlan(props) {
 
 
 const mapDispatchToProps = dispatch => ({
-  showPopUpWithTimeout: (popUpType, popUpText) => dispatch(showPopUpWithTimeout(popUpType, popUpText))
+  showPopUpWithTimeout: (popUpType, popUpText) => dispatch(showPopUpWithTimeout(popUpType, popUpText)),
+  loadModal: (modelType, modalResponseCallback) => dispatch(loadModal(modelType, modalResponseCallback))
 })
 
 const mapStateToProps = state => {

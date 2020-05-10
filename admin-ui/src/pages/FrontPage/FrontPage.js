@@ -125,7 +125,9 @@ function FrontPage(props) {
       </div>
       <div className="home__table-plan">
         <TablePlan
+          toggleOrderWaiting={toggleOrderWaiting}
           orders={orders}
+          toggleServiceCallWaiting={toggleServiceCallWaiting}
           serviceCalls={serviceCalls}
         />
       </div>
