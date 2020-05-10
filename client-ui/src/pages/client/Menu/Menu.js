@@ -11,6 +11,7 @@ import * as actionCreators from '../../../store/actions/index'
 import { connect } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.min.css';
 import callToast from '../../../services/callToast'
+import './styles.scss'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,14 +29,20 @@ const useStyles = makeStyles(theme => ({
   description: {
     width: '100%',
   },
+  categoryHeading: {
+    textAlign: 'center'
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
+    padding: '.5rem',
+    width: 'calc(100% - 7rem)',
   },
 }));
 
 function Menu (props) {
   const [menuItems, setMenuItems] = useState([]);
+  const [heading, setHeading] = useState([]);
 
   useEffect(() => {
     let search = window.location.search;
@@ -43,23 +50,22 @@ function Menu (props) {
     let categoryId = params.get('categoryId');
     getMenuItems(props.organizationId, { categoryId: categoryId }).subscribe(e => {
       setMenuItems(e.data);
+      setHeading( params.get('categoryTitle'))
     });
   }, [window.location.search]);
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      <h3 className={classes.categoryHeading}>{ heading || 'Kogu menüü' }</h3>
       {menuItems.map(item => (
           <ExpansionPanel key={item._id}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon/>}
               aria-controls="panel1a-content"
               id="panel1a-header">
-              <img
-                className={classes.cover}
-                src={item.imageUrl}
-                alt="Live from space album cover"
-              />
+              <div className={'cover'}
+                   style={{'backgroundImage':  'url(' + item.imageUrl + ')'}}/>
               <Typography className={classes.heading}>{item.title}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -74,7 +80,7 @@ function Menu (props) {
                             variant="contained"
                             color="primary"
                             className={classes.button}>
-                            Add item to carts
+                            Lisa toode ostukorvi
                           </Button>
               </Typography>
             </ExpansionPanelDetails>

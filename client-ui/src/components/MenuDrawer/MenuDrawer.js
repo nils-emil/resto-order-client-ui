@@ -11,10 +11,10 @@ function MenuDrawer (props) {
 
   const [categories, setCategories] = useState([])
 
-  const openMenu = (categoryId) => {
+  const openMenu = (categoryId, categoryTitle) => {
     props.history.push({
         pathname: '/menu',
-        search: `categoryId=${categoryId}`
+        search: `categoryId=${categoryId}&categoryTitle=${categoryTitle}`
       }
     )
     props.closeDrawer()
@@ -32,7 +32,7 @@ function MenuDrawer (props) {
       <List>
         {categories.map((text) => (
           <ListItem button key={text._id}
-                    onClick={() => openMenu(text._id)}>
+                    onClick={() => openMenu(text._id, text.name)}>
             <ListItemText primary={text.name}/>
           </ListItem>
         ))}

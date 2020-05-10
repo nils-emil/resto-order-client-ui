@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import Fab from '@material-ui/core/Fab'
 import { getTableCodeInfo } from '../../../services/clientService'
 import { Redirect } from 'react-router-dom'
+import callErrorToast from '../../../services/callErrorToast'
 
 function ClientCodeEntry (props) {
   const [code, setCode] = useState('')
@@ -13,6 +14,7 @@ function ClientCodeEntry (props) {
     getTableCodeInfo(code).subscribe(e => {
       if (!e.data) {
         // TODO error handling
+        callErrorToast("Antud lauda ei suudetud leida, palun kontrollige sisestatud koodi", 5000)
         console.log('Invalid tableCode was entered')
       } else {
         localStorage.setItem('tableCode', e.data.code)
@@ -21,22 +23,21 @@ function ClientCodeEntry (props) {
       }
     })
   }
-  let opacity = 1;
-  if (code.length < 6) {
-    opacity = 0;
-  }
+
   return (
-    <div className="code-entry">
+    <div className={"code-entry " +  ((!code || code.length !== 6) && (code && code.length != 0) ? "error" : "" )}>
       {navigate ? <Redirect to='/menu'/> : null}
       <img className={'enter-text-logo'} src="family_meal__monochromatic.svg" alt="React Logo"/>
       <TextField
         label="Kood"
         helperText={'Sisesta lauale esitatud kood'}
-        inputProps={{ inputMode: 'numeric' }}
+        inputProps={{ inputMode: 'numeric', maxLength: 6}}
         margin="normal"
         onChange={event => setCode(event.target.value)}
         variant="outlined"/>
-      <Fab style={{opacity: opacity}} className='btn-submit' onClick={() => submitCode()} variant="extended">
+      <Fab className='btn-submit'
+           onClick={() => submitCode()} variant="extended"
+           disabled={!code || code.length !== 6}>
         Sirvi menüüd
       </Fab>
     </div>
