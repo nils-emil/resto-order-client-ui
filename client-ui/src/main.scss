@@ -11,6 +11,7 @@ body {
 
 .main-scroll {
   overflow: auto;
+  overflow-x: hidden;
   height: calc(100vh - 64px);
   padding-bottom: 64px;
 }
