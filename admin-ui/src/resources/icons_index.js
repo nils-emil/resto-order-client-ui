@@ -3,6 +3,7 @@ import { ReactComponent as ArrowDown } from './icons/arrow-down.svg'
 import { ReactComponent as ArrowUp } from './icons/arrow-up.svg'
 import { ReactComponent as CheckMark } from './icons/checkmark.svg'
 import { ReactComponent as CheckMarkOutline } from './icons/checkmark-outline.svg'
+import { ReactComponent as ChevronDown } from './icons/cheveron-down.svg'
 import { ReactComponent as Close } from './icons/close.svg'
 import { ReactComponent as CloseOutline } from './icons/close-outline.svg'
 import { ReactComponent as CreditCard } from './icons/credit-card.svg'
@@ -26,6 +27,7 @@ export {
   ArrowUp,
   CheckMark,
   CheckMarkOutline,
+  ChevronDown,
   Close,
   CloseOutline,
   CreditCard,
