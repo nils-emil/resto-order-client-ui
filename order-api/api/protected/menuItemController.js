@@ -27,7 +27,7 @@ router.route('/update/:id').post(function (req, res) {
       menuItem.description = req.body.description
       menuItem.categoryId = req.body.categoryId
       menuItem.price = req.body.price
-      menuItem.image = req.body.image
+      menuItem.imageUrl = req.body.imageUrl
       menuItem.save().then(() => {
         res.json('Update complete')
       })
