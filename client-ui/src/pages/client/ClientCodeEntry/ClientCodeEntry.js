@@ -5,6 +5,9 @@ import Fab from '@material-ui/core/Fab'
 import { getTableCodeInfo } from '../../../services/clientService'
 import { Redirect } from 'react-router-dom'
 import callErrorToast from '../../../services/callErrorToast'
+import history from './../../../history';
+import * as actionCreators from '../../../store/actions/shoppingCart'
+import { connect } from 'react-redux'
 
 function ClientCodeEntry (props) {
   const [code, setCode] = useState('')
@@ -15,10 +18,13 @@ function ClientCodeEntry (props) {
       if (!e.data) {
         // TODO error handling
         callErrorToast("Antud lauda ei suudetud leida, palun kontrollige sisestatud koodi", 5000)
+        props.clearCart();
         console.log('Invalid tableCode was entered')
       } else {
         localStorage.setItem('tableCode', e.data.code)
         localStorage.setItem('organizationId', e.data.organizationId)
+        props.clearCart();
+        history.push('/');
         setNavigate(true)
       }
     })
@@ -43,5 +49,10 @@ function ClientCodeEntry (props) {
     </div>
   )
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    clearCart: () => dispatch(actionCreators.clearCart()),
+  }
+};
 
-export default ClientCodeEntry
+export default connect(null, mapDispatchToProps)(ClientCodeEntry);
