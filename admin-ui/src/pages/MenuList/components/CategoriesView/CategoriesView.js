@@ -18,7 +18,7 @@ function CategoriesView(props) {
     }
 
     return createCategory(category).subscribe(e => {
-      refreshCategories(category)
+      refreshCategories(category.order)
     })
   }
 

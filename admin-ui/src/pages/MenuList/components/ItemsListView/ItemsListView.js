@@ -47,7 +47,7 @@ function ItemsListView(props) {
     if (response) {
       deleteCategory(selectedCategory._id).subscribe(() => {
           createPopUpObserver()
-          refreshCategories(0)
+          refreshCategories(1)
         }
       )
     }
