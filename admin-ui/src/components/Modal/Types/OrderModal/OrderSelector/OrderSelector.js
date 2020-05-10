@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.scss'
+import { ExclamationOutline } from '../../../../../resources/icons_index'
 
 function OrderSelector(props) {
 
@@ -11,6 +12,7 @@ function OrderSelector(props) {
         return (
           <div className="order-selector__order-wrapper" onClick={() => onClick(order)} key={order._id}>
             <p>{order.createdTime}</p>
+            {order.isWaiting && <ExclamationOutline className='order-selector__alert-indicator'/>}
           </div>
         )
       })}

@@ -17,8 +17,8 @@ function ActivityFeed(props) {
     props.loadModal(ORDER_MODAL, {
       order: order,
       modalResponseCallback: function (response) {
-        if (response) {
-          toggleOrderWaiting(order)
+        if (response.isConfirm) {
+          toggleOrderWaiting(response.order)
         }
       }
     })

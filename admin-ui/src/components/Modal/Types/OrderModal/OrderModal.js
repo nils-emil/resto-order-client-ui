@@ -26,12 +26,12 @@ function OrderModal(props) {
   }
 
   const onConfirm = () => {
-    modalResponseCallback(true)
+    modalResponseCallback({order: selectedOrder, isConfirm: true})
     hideModal()
   }
 
   const onClose = () => {
-    modalResponseCallback(false)
+    modalResponseCallback({isConfirm: false})
     hideModal()
   }
 
