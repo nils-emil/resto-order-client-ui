@@ -11,6 +11,7 @@ import TextField, { modifiers, types } from '../../components/TextField/TextFiel
 function Login(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isErrorState, setErrorState] = useState(false)
 
   let redirect = null
   if (!props.auth.loading && props.auth.token) {
@@ -26,23 +27,24 @@ function Login(props) {
       <div className="login__form">
         <h1 className="login__header">Tere tulemast!</h1>
         <div className="login__field-container">
+          {isErrorState && <p className="login__error-message">Vale email või parool</p>}
           <TextField
             label="Emaili aadress"
             onChange={setEmail}
-            modifiers={[modifiers.MARGINTOP]}
+            modifiers={[modifiers.MARGINTOP, isErrorState ? modifiers.ERROR : '']}
             autoFocus/>
         </div>
         <div className="login__field-container">
           <TextField
             label="Parool"
             onChange={setPassword}
-            modifiers={[modifiers.MARGINTOP]}
+            modifiers={[modifiers.MARGINTOP, isErrorState ? modifiers.ERROR : '']}
             type={types.PASSWORD}
           />
         </div>
         <div className="login__field-container">
           <TextButton
-            onClick={() => props.login({ email, password })}
+            onClick={() => props.login({ email, password }, () => setErrorState(true))}
             modifiers={[buttonModifiers.MARGINTOP]}
           >
             Logi sisse
@@ -62,7 +64,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (value) => dispatch(auth(value))
+    login: (value, cb) => dispatch(auth(value, cb))
   }
 }
 

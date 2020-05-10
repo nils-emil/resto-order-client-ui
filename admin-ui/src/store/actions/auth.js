@@ -44,7 +44,7 @@ export const checkAuthTimeout = (expirationTime) => {
   }
 }
 
-export const auth = (credentials) => {
+export const auth = (credentials, cb) => {
   return dispatch => {
     dispatch(authStart())
     const authData = {
@@ -58,6 +58,7 @@ export const auth = (credentials) => {
         },
         err => {
           dispatch(authFail(err.response.data.error))
+          cb()
         })
   }
 }

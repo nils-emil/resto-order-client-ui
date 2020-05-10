@@ -5,7 +5,8 @@ export const modifiers = {
   FULLWIDTH: 'full-width',
   MARGINTOP: 'margin-top',
   BOLD: 'bold',
-  INLINE: 'in-line'
+  INLINE: 'in-line',
+  ERROR: 'error'
 }
 
 export const variants = {

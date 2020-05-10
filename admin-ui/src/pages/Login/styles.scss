@@ -26,7 +26,7 @@
   }
 
   &__field-container {
-    margin-top: 1.5em;
+    margin-top: 1em;
   }
 
   &__svg-container {
@@ -36,6 +36,12 @@
 
   &__svg {
     width: 50%;
+  }
+
+  &__error-message {
+    color: $color-error-red;
+    margin: 0 0 .5em;
+    font-weight: 500;
   }
 
 }
