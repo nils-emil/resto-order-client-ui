@@ -3,18 +3,21 @@ const MenuItem = require('../models/menuItem').MenuItem
 
 module.exports = class CategoryService {
 
-  async fetchAll(organizationId) {
+  async fetchAll(organizationId, includeWithoutCategory) {
     return Category.find({ organizationId: organizationId })
       .then(categories => {
 
-        let unCategorized = {
-          '_id': null,
-          'name': 'Kategooriata',
-          'organizationId': organizationId,
-          'order': categories.length + 1
-        }
+        if (includeWithoutCategory) {
+          let unCategorized = {
+            '_id': null,
+            'name': 'Kategooriata',
+            'organizationId': organizationId,
+            'order': categories.length + 1
+          }
 
-        return [...categories, unCategorized]
+          return [...categories, unCategorized]
+        }
+        return categories
       })
   }
 
