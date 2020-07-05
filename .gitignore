@@ -97,3 +97,7 @@ app/.idea
 app/data
 /data
 
+/client-ui/build
+/order-api/rootkey.csv
+/client-ui/package-lock.json
+/package-lock.json
