@@ -4,7 +4,6 @@
 .text-button-with-icon {
   cursor: pointer;
   display: flex;
-  padding: 1em 0 1em 1em;
 
   &__text {
     color: $color-background;
@@ -29,5 +28,9 @@
         transition: 0.3s;
       }
     }
+  }
+
+  @media screen and (min-width: $screen-size-tablet) {
+    padding: 1em 0 1em 1em;
   }
 }

@@ -10,7 +10,6 @@
   padding: 0 1.5rem;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
   -webkit-box-shadow: $default-shadow;
@@ -27,8 +26,21 @@
     fill: $color-background;
   }
 
+  &__navigation-item {
+    color: $color-background;
+    text-decoration: none;
+    padding: 0 1rem;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+
   @media screen and (min-width: $screen-size-mobile) {
     padding: 0 3rem;
-
   }
 }

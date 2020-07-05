@@ -20,11 +20,13 @@
     font-weight: 500;
     color: $color-background;
     margin: 0;
+    font-size: 1.1em;
   }
 
   &__category-container {
     overflow-y: auto;
     margin-bottom: 1em;
+
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -74,5 +76,21 @@
 
   &__add-new-button {
     display: flex;
+  }
+
+  @media screen and (min-width: $screen-size-mobile) {
+    padding: 1em 1em 0;
+
+    &__header {
+      font-size: 1.1em;
+    }
+  }
+
+  @media screen and (min-width: $screen-size-tablet) {
+    padding: 1.5em 1.5em 0;
+
+    &__header {
+      font-size: 1.5em;
+    }
   }
 }

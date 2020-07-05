@@ -44,7 +44,7 @@ function CategoriesView(props) {
 
   return (
     <div className="categories-tab">
-      <h2 className="categories-tab__header">Kategooriad</h2>
+      <h1 className="categories-tab__header">Kategooriad</h1>
       <div className="categories-tab__category-container">
         {categories.sort(categoryComparor).map((category, index) => (
           <div

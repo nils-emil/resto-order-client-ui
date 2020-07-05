@@ -15,8 +15,6 @@ export const pages = {
 
 function Navigation(props) {
 
-  const { currentPage } = props
-
   const links = [
     {
       page: pages.HOME,
@@ -35,7 +33,7 @@ function Navigation(props) {
     },
   ]
 
-  return links.filter(link => link.page !== currentPage).map(link => (
+  return links.map(link => (
     <Link to={link.linkTo} onClick={() => link.onClick ? link.onClick() : null} key={link.linkTo}>
       <IconButton Icon={link.icon}/>
     </Link>

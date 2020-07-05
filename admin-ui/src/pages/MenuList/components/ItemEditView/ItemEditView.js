@@ -56,7 +56,7 @@ function ItemEditView(props) {
   }
 
   const openDeleteModal = () => {
-    props.loadModal(CONFIRM_MODAL, { modalResponseCallback, modalText: 'Kas soovid toodet kustutada?' })
+    props.loadModal(CONFIRM_MODAL, { modalResponseCallback, modalText: 'Kas soovid toote kustutada?' })
   }
 
   const modalResponseCallback = (response) => {

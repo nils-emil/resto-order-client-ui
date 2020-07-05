@@ -8,12 +8,11 @@ function MenuItem(props) {
 
 
   const convertedPrice = () => {
-    console.log(price)
     const priceParts = price.toString().split('.')
     const priceFullPart = priceParts[0]
     let priceCentPart = priceParts[1] || '00'
 
-    while (priceCentPart.length !== 2) {
+    while (priceCentPart.length < 2) {
       priceCentPart += '0'
     }
 

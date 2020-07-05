@@ -27,6 +27,7 @@
     color: white;
     background: transparent;
     height: 5rem;
+    resize: vertical;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -38,11 +39,6 @@
       -moz-appearance: textfield;
     }
 
-    &::placeholder {
-      color: transparent;
-    }
-
-    transition: .3s;
     &:focus {
       padding-bottom: 6px;
       border-width: 3px;

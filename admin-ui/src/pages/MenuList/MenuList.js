@@ -3,7 +3,6 @@ import './styles.scss'
 import { connect } from 'react-redux/es/alternate-renderers'
 import CategoriesView from './components/CategoriesView/CategoriesView'
 import ItemsListView from './components/ItemsListView/ItemsListView'
-import Navigation, { pages } from '../../components/Navigation/Navigation'
 import ItemEditView from './components/ItemEditView/ItemEditView'
 import { getCategories } from '../../services/categoryService'
 
@@ -87,10 +86,6 @@ function MenuList(props) {
 
       <div className="menu__items">
         <CenterPanel/>
-      </div>
-
-      <div className="menu__navigation">
-        <Navigation currentPage={pages.MENU}/>
       </div>
     </div>
   )

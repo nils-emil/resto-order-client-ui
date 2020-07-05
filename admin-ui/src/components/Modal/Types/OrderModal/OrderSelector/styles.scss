@@ -37,6 +37,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: $default-border-radius-top;
 
     & p {
       margin: 0;
@@ -48,6 +49,10 @@
 
     &:hover {
       border-bottom: 2px solid $color-secondary;
+    }
+
+    &--active {
+      background-color: $color-secondary-light;
     }
   }
 

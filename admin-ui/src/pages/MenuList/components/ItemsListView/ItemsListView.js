@@ -29,7 +29,7 @@ function ItemsListView(props) {
   }
 
   const openDeleteModal = () => {
-    props.loadModal(CONFIRM_MODAL, { modalResponseCallback, modalText: 'Kas soovid kategooriat kustutada?' })
+    props.loadModal(CONFIRM_MODAL, { modalResponseCallback, modalText: 'Kas soovid kategooria kustutada?' })
   }
 
   const createPopUpObserver = () => {

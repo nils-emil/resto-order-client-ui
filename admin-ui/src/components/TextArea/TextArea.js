@@ -16,7 +16,6 @@ function TextArea(props) {
         className="text-area__input"
         value={value}
         onChange={handleChange}
-        placeholder={label}
         spellCheck={false}
       />
     </div>

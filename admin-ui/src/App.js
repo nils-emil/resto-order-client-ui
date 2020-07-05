@@ -7,7 +7,7 @@ import Login from './pages/Login/Login'
 import ModalContainer from './services/modalService'
 import PopUpContainer from './services/popupService'
 
-function App(props) {
+function App() {
 
   return (
     <Router>

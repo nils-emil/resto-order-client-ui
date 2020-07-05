@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import './styles.scss'
 import TablePlan from '../../components/TablePlan/TablePlan'
 import ActivityFeed from '../../components/ActivityFeed/ActivityFeed'
-import Navigation, { pages } from '../../components/Navigation/Navigation'
 import {
   EMIT_FETCH_ALL_ORDERS,
   EMIT_FETCH_SERVICE_CALLS,
@@ -134,9 +133,6 @@ function FrontPage(props) {
             toggleServiceCallWaiting={toggleServiceCallWaiting}
             serviceCalls={serviceCalls}
           />
-        </div>
-        <div className="home__navigation">
-          <Navigation currentPage={pages.HOME}/>
         </div>
       </>
       }

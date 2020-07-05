@@ -50,10 +50,10 @@ function ImageUploadModal(props) {
 
   return (
     <Modal
-      header={'Lae pilt'}
+      header={'Laadi pilt'}
       onClose={onClose}
       onConfirm={onConfirm}
-      confirmButtonText={'Nõustu'}
+      confirmButtonText={'Salvesta'}
       dialogStyle={{}}
       isLoading={isLoading}
     >
@@ -61,9 +61,9 @@ function ImageUploadModal(props) {
         <label className="image-modal__upload-button">
           <input className="image-modal__upload-field" type="file" accept="image/png, image/jpeg" id='single'
                  onChange={onChange}/>
-          Lae fail
+          Laadi pilt
         </label>
-        {imageName && <p className="image-modal__file-name-display">Faili nimi : {imageName}</p>}
+        {imageName && <p className="image-modal__file-name-display">Pildi nimi : {imageName}</p>}
       </div>
     </Modal>
   )
