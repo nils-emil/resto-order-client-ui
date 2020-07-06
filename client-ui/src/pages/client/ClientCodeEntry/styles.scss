@@ -1,0 +1,41 @@
+.code-entry {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn-submit {
+  margin-top: 2rem;
+}
+
+.intro-text {
+  padding: 1rem;
+  text-align: center;
+}
+
+.error .MuiOutlinedInput-notchedOutline {
+  border-color: #6C63FF !important
+}
+
+.intro-header-block {
+  width: 100%;
+  text-align: center;
+}
+.intro-header-text {
+  color: azure;
+  font-weight: 300;
+  white-space: nowrap;
+  display: inline-block;
+  padding: 0.75rem;
+  background-image: linear-gradient(to right bottom, #006400, #002b00);
+  box-shadow: 2px 5px 5px 5px rgba(0,0,0,0.25);
+}
+
+.enter-text-logo {
+  height: 20vh;
+}

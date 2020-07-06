@@ -1,0 +1,29 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.home {
+  padding: 1rem;
+  background-color: $color-background;
+  height: 100%;
+
+  display: grid;
+
+  &__table-plan {
+    padding: 0 2rem;
+    height: 47rem;
+  }
+
+  &__activity-feed {
+    height: 85vh;
+
+  }
+
+  @media screen and (min-width: $screen-size-mobile) {
+    grid-template-columns: 15rem auto 4%;
+    padding: 2rem 2rem 5rem;
+
+    &__activity-feed {
+      height: 47rem;
+    }
+  }
+}

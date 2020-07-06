@@ -1,0 +1,82 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, .65);
+
+  &__dialog {
+    background-color: $color-background;
+    border-radius: $default-border-radius;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 90vw;
+    height: 30vh;
+    margin: auto;
+    z-index: 1000;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: 3rem auto 5rem;
+  }
+
+  &__header {
+    text-align: left;
+    margin: 0;
+    padding: 1em;
+    font-size: 1.1em;
+  }
+
+  &__content {
+    padding: 1.5em;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+  }
+
+  &__loading-spinner {
+    width: 5rem;
+    fill: $color-secondary;
+    z-index: 10000;
+    position: absolute;
+    top: calc(50% - 2.5rem);
+    right: calc(50% - 2.5rem);
+
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-size-mobile) {
+    &__dialog {
+      width: 30em;
+      height: 20em;
+    }
+
+    &__header {
+      font-size: 1.3em;
+    }
+  }
+}

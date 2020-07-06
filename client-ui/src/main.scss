@@ -1,0 +1,37 @@
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+}
+
+.main-scroll {
+  overflow: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 64px);
+  padding-bottom: 64px;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.green {
+  background-color: #002b00 !important;
+}
+.MuiButton-containedPrimary {
+  color: white !important;
+  background-color: #005400 !important;
+}
+

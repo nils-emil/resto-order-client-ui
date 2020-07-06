@@ -1,0 +1,31 @@
+@import '../../../../resources/colors';
+@import '../../../../resources/variables';
+
+.image-modal {
+  &__upload-button {
+    cursor: pointer;
+    background-color: $color-primary-light;
+    padding: .5em 1em;
+    font-weight: 500;
+    letter-spacing: .1em;
+    border-radius: $default-border-radius;
+    display: flex;
+    color: $color-background;
+    height: 1.5em;
+    width: fit-content;
+
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $color-secondary;
+    }
+  }
+
+  &__upload-field {
+    display: none;
+  }
+
+  &__file-name-display {
+    margin-bottom: 0;
+  }
+}

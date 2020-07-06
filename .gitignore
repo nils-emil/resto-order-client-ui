@@ -4,7 +4,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+aws-resto.pem
 # Runtime data
 pids
 *.pid
@@ -72,6 +72,7 @@ typings/
 
 # production
 /build
+admin-ui/build
 
 # misc
 .DS_Store
@@ -86,8 +87,9 @@ yarn-error.log*
 
 
 # IDEA
-client/.idea
-service-client/.idea
+client-ui/.idea
+admin-ui/.idea
+order-api/.idea
 app/.idea
 /.idea
 
@@ -95,3 +97,7 @@ app/.idea
 app/data
 /data
 
+/client-ui/build
+/order-api/rootkey.csv
+/client-ui/package-lock.json
+/package-lock.json

@@ -1,0 +1,19 @@
+@import '../../resources/colors';
+
+.menu {
+  padding: 2rem 2rem 5rem;
+  background-color: $color-background;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 15% auto 4%;
+
+  &__items {
+    padding: 0 2rem;
+  }
+
+
+  &__categories {
+  }
+
+}

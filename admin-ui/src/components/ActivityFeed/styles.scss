@@ -1,0 +1,14 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.activity-feed {
+  height: 100%;
+  width: 100%;
+
+  display: grid;
+  grid-template-rows: 4rem auto;
+
+  -webkit-box-shadow: $default-shadow;
+  -moz-box-shadow: $default-shadow;
+  box-shadow: $default-shadow;
+}

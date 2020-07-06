@@ -1,0 +1,92 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.text-button {
+  cursor: pointer;
+  background-color: $color-primary-light;
+  padding: 1em 2em;
+  font-weight: 500;
+  letter-spacing: .1em;
+  border-radius: $default-border-radius;
+  display: flex;
+  color: $color-background;
+  width: 9em;
+  height: 1.5em;
+
+
+  -webkit-box-shadow: $default-shadow;
+  -moz-box-shadow: $default-shadow;
+  box-shadow: $default-shadow;
+
+
+  &--margin-left {
+    margin-left: 1em;
+  }
+
+  &--margin-top {
+    margin-top: 1em;
+  }
+
+  &__text {
+    margin: auto;
+  }
+
+  &__icon {
+    color: $color-background;
+    width: 1em;
+    margin-left: 1em;
+  }
+
+  transition: 0.3s;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+
+  &--transparent {
+    background-color: transparent;
+    color: black;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-secondary;
+      -webkit-box-shadow: $default-shadow;
+      -moz-box-shadow: $default-shadow;
+      box-shadow: $default-shadow;
+    }
+  }
+
+  &--transparent-light {
+    background-color: transparent;
+    color: $color-white;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-secondary;
+      -webkit-box-shadow: $default-shadow;
+      -moz-box-shadow: $default-shadow;
+      box-shadow: $default-shadow;
+    }
+  }
+
+  &--small {
+    font-size: .8em;
+    padding: .5em 1em;
+
+    @media screen and (min-width: $screen-size-mobile) {
+      padding: 1em 2em;
+    }
+  }
+
+  &--in-line {
+    margin-left: 1em
+  }
+}

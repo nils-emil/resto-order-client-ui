@@ -1,0 +1,50 @@
+@import '../../resources/colors';
+@import '../../resources/variables';
+
+.login {
+
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+
+  display: grid;
+
+  &__form {
+    padding: 10rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    background-color: $color-primary-ultralight;
+    -webkit-box-shadow: -3px 0px 5px 0px rgba(221, 254, 255, 1);
+    -moz-box-shadow: -3px 0px 5px 0px rgba(221, 254, 255, 1);
+    box-shadow: -3px 0px 5px 0px rgba(221, 254, 255, 1);
+  }
+
+  &__header {
+    margin: 0 0 2rem;
+  }
+
+  &__field-container {
+    margin-bottom: .5em;
+  }
+
+  &__svg-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__svg {
+    width: 50%;
+  }
+
+  &__error-message {
+    color: $color-error-red;
+    margin: 0 0 .5em;
+    font-weight: 500;
+  }
+
+
+  @media screen and (min-width: $screen-size-mobile) {
+    grid-template-columns: 70% 30%;
+  }
+}
