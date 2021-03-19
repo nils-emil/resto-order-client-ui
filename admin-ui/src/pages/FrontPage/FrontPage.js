@@ -52,19 +52,6 @@ function FrontPage(props) {
   })
 
   useEffect(() => {
-    socket.on(RECEIVE_ALL_ORDERS, (data) => {
-      setOrders(data.map(order => transformOrder(order)))
-    })
-
-    socket.emit(EMIT_FETCH_ALL_ORDERS, { organizationId })
-
-    return () => {
-      socket.off(RECEIVE_ALL_ORDERS)
-    }
-  }, [])
-
-
-  useEffect(() => {
     socket.on(RECEIVE_REFRESH_ORDERS + organizationId, function () {
       fetchAll().subscribe(response => {
         setOrders(response.data.map(order => transformOrder(order)))

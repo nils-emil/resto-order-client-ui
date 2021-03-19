@@ -1,14 +1,16 @@
 const orderSocketWrapper = require('./orderSocket')
-const serviceCallSocketWrapper = require('./serviceCallSocket')
 
 const sockets = (server) => {
   const socket = require('socket.io')
   const io = socket(server)
 
+
   io.on('connection', (socket) => {
+    global.socket = socket
+    global.io = io
     const orderSocket = orderSocketWrapper.orderSocket(socket, io)
-    const serviceCallSocket = serviceCallSocketWrapper.serviceCallSocket(socket, io)
   })
+  return io;
 }
 
 module.exports = {
