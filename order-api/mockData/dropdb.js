@@ -5,12 +5,10 @@ const Table = require('../models/table').Table
 const MenuItem = require('../models/menuItem').MenuItem
 const Order = require('../models/order').Order
 const MenuItemAmount = require('../models/order').MenuItemAmount
-const ServiceCall = require('../models/serviceCall').ServiceCall
 
 Organization.collection.drop()
 Category.collection.drop()
 User.collection.drop()
-ServiceCall.collection.drop()
 Table.collection.drop()
 MenuItem.collection.drop()
 Order.collection.drop()

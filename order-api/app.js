@@ -11,6 +11,7 @@ app.use(bodyParser.json())
 
 const db = require('./config/db').connection
 // require('./mockData/dropdb')
+
 // require('./mockData/data')
 // require('./mockData/test-data')
 
@@ -22,3 +23,16 @@ const socketWrapper = require('./socket/index')
 const sockets = socketWrapper.sockets(server)
 
 const api = app.use(require('./api'))
+
+console.log(sockets)
+
+
+
+const User = require('./models/user').User
+const jwt = require('jsonwebtoken')
+global.extractOrganizationFromRequest = async (request) => {
+  const token = request.headers.authorization;
+  const decoded = jwt.verify(token, 'myPrivateKey');
+  const user = await User.findById(decoded._id).select('-password')
+  return user.organizationId;
+}

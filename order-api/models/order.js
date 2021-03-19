@@ -31,11 +31,11 @@ const OrderSchema = new Schema({
       type: Boolean
     },
     createdTime: {
-      type: String
+      type: Date
     },
-    createdDate: {
-      type: String
-    }
+    callType: {
+        type: String
+    },
 })
 module.exports.MenuItemAmount = mongoose.model('MenuItemAmount', MenuItemAmountSchema);
 module.exports.Order = mongoose.model('Order', OrderSchema)

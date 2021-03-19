@@ -8,8 +8,8 @@ import './styles.scss'
 import { withRouter } from 'react-router-dom'
 import * as actionCreators from '../../store/actions/index'
 import { connect } from 'react-redux'
-import { ToastContainer } from 'react-toastify'
 import CallServiceChoice from "../CallServiceChoice/CallServiceChoice";
+import { postServiceCall } from '../../services/clientService'
 
 function BottomActions (props) {
   const [serviceCallAvailable, setServiceCallAvailable] = useState(true)
@@ -28,10 +28,9 @@ function BottomActions (props) {
   const callWaiter = (addNotificationFn, type) => {
     if (serviceCallAvailable) {
       setServiceCallAvailable(false)
-      props.socket.emit('CALL_SERVICE', {
-        tableCode: localStorage.getItem("tableCode"),
-        callType: type
-      })
+      let org = localStorage.getItem('organizationId');
+      postServiceCall(localStorage.getItem("tableCode"), type, org)
+          .subscribe(e => {})
       setTimeout(() => {
         setServiceCallAvailable(true)
       }, 5000)

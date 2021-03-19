@@ -1,6 +1,6 @@
 const S3Credentials = {
-  accessKeyId: 'key',
-  secretAccessKey: 'password'
+  accessKeyId: 'AKIAIKCCSBXZEIP446LA',
+  secretAccessKey: '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'
 }
 
 module.exports = S3Credentials;

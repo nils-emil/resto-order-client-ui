@@ -1,15 +1,21 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const MenuItem = require('../../models/menuItem').MenuItem
 const router = express.Router({ mergeParams: true })
-
+const { User } = require('../../models/user')
 router.route('/edit/:id').get(function (req, res) {
   MenuItem.findById(req.params.id, function (err, MenuItem) {
     res.json(MenuItem)
   })
 })
 
-router.route('/add').post(function (req, res) {
+router.route('/add').post(async function (req, res) {
   const menuItem = new MenuItem(req.body)
+  const usertoken = req.headers.authorization;
+  const decoded = jwt.verify(usertoken, 'myPrivateKey');
+  const user = await User.findById(decoded._id).select('-password')
+  menuItem.organizationId = user.organizationId;
+
   menuItem.save().then(e => {
     res.status(200).json(e)
   }).catch(e => {
