@@ -101,3 +101,5 @@ app/data
 /order-api/rootkey.csv
 /client-ui/package-lock.json
 /package-lock.json
+
+/order-api/config/credentials.js
