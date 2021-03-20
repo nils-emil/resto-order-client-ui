@@ -7,7 +7,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import * as actionCreators from '../../../store/actions/index'
+import * as actionCreators from '../../../store/actions'
 import { connect } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.min.css';
 import callToast from '../../../services/callToast'

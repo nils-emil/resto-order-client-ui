@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import '../main.scss'
 import { createMuiTheme, CssBaseline, MuiThemeProvider } from '@material-ui/core'
-import Client from '../pages/client/index'
+import Client from '../pages/client'
 import { green, red } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({

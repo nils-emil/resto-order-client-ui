@@ -6,7 +6,7 @@ import CreditCardIcon from '@material-ui/icons/CreditCard'
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu'
 import './styles.scss'
 import { withRouter } from 'react-router-dom'
-import * as actionCreators from '../../store/actions/index'
+import * as actionCreators from '../../store/actions'
 import { connect } from 'react-redux'
 import CallServiceChoice from "../CallServiceChoice/CallServiceChoice";
 import { postServiceCall } from '../../services/clientService'
