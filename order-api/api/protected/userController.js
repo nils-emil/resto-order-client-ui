@@ -13,7 +13,7 @@ router.get('/current', auth, async (req, res) => {
 
 router.get('/all', auth, async (req, res) => {
   const usertoken = req.headers.authorization;
-  const decoded = jwt.verify(usertoken, 'myPrivateKey');
+  const decoded = jwt.verify(usertoken, process.env.JWT_KEY);
   const user = await User.findById(decoded._id).select('-password')
   let organizationId = user.organizationId;
   const users = await userService.fetchAll(organizationId)
@@ -23,7 +23,7 @@ router.get('/all', auth, async (req, res) => {
 router.route('/add').post(async function (req, res) {
   const user = new User(req.body)
   const usertoken = req.headers.authorization;
-  const decoded = jwt.verify(usertoken, 'myPrivateKey');
+  const decoded = jwt.verify(usertoken, process.env.JWT_KEY);
   const creator = await User.findById(decoded._id).select('-password')
   let preExistingUser = await userService.findById(user._id);
   if (preExistingUser) {

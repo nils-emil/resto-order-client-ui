@@ -12,7 +12,7 @@ router.route('/edit/:id').get(function (req, res) {
 router.route('/add').post(async function (req, res) {
   const menuItem = new MenuItem(req.body)
   const usertoken = req.headers.authorization;
-  const decoded = jwt.verify(usertoken, 'myPrivateKey');
+  const decoded = jwt.verify(usertoken, process.env.JWT_KEY);
   const user = await User.findById(decoded._id).select('-password')
   menuItem.organizationId = user.organizationId;
 

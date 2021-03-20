@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 console.log('Replicating DB')
 
@@ -40,7 +40,7 @@ async function addUsers() {
   let user = new User({username: "Nils-Emil Lille", password: password, email: 'nilsemil.lille@gmail.com', organizationId: organization._id })
   await user.save()
 
-  let user2 = new User({ password: password, email: 'nilill@ttu.ee', organizationId: organization2._id })
+  let user2 = new User({username: "Nils-Emil Lille", password: password, email: 'nilill@ttu.ee', organizationId: organization2._id })
   await user2.save()
 }
 

@@ -17,7 +17,7 @@ router.route('/:organizationId').get(async function (req, res) {
 router.route('/add').post(async function (req, res) {
 
   const usertoken = req.headers.authorization;
-  const decoded = jwt.verify(usertoken, 'myPrivateKey');
+  const decoded = jwt.verify(usertoken, process.env.JWT_KEY);
   const user = await User.findById(decoded._id).select('-password')
   const categoryDto = req.body
   categoryDto.organizationId = user.organizationId;
