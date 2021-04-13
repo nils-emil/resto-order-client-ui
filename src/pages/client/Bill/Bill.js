@@ -48,9 +48,6 @@ function Bill(props) {
     postOrder(localStorage.getItem('tableCode'), props.items)
       .subscribe(e => {
         props.clearCart()
-        props.socket.emit('ORDER_PLACED', {
-          organizationId: localStorage.getItem('organizationId')
-        })
       }
     )
   }

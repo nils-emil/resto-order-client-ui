@@ -13,6 +13,6 @@ export function postOrder(tableCode, order) {
   return Axios.post(`/api/menu/order/add/${tableCode}`, order)
 }
 
-export function postServiceCall(tableCode, type, organizationId) {
-  return Axios.post(`/api/menu/order/add/${tableCode}/call-service/${type}/${organizationId}`, null)
+export function postServiceCall(tableCode, type) {
+  return Axios.post(`/api/menu/order/add/${tableCode}/call-service/${type}/`, null)
 }

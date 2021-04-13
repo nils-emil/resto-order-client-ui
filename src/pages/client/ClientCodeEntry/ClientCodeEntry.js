@@ -5,7 +5,6 @@ import Fab from '@material-ui/core/Fab'
 import { getTableCodeInfo } from '../../../services/clientService'
 import { Redirect } from 'react-router-dom'
 import callErrorToast from '../../../services/callErrorToast'
-import history from '../../../history';
 import * as actionCreators from '../../../store/actions/shoppingCart'
 import { connect } from 'react-redux'
 
@@ -22,9 +21,7 @@ function ClientCodeEntry (props) {
         console.log('Invalid tableCode was entered')
       } else {
         localStorage.setItem('tableCode', e.data.code)
-        localStorage.setItem('organizationId', e.data.organizationId)
         props.clearCart();
-        history.push('/');
         setNavigate(true)
       }
     })

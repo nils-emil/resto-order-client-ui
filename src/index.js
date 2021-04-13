@@ -9,7 +9,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import shoppingCartReducer from './store/reducers/shoppingCart'
 
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+axios.defaults.baseURL =  window["env"]["REACT_APP_BACKEND_URL"];
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const rootReducer = combineReducers({

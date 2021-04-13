@@ -1,11 +1,11 @@
 import Axios from  'axios-observable';
 
-export function getMenuItems(organizationId, params = null) {
-  return Axios.get(`/api/menu/${organizationId}`, { params: params})
+export function getMenuItems(params = null) {
+  return Axios.get(`/api/menu/`, { params: params})
 }
 
-export function getCategories(organizationId) {
-  return Axios.get(`/api/client/category/${organizationId}`)
+export function getCategories() {
+  return Axios.get(`/api/client/category/`)
 }
 
 export function deleteCategory(id) {

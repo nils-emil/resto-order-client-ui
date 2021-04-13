@@ -21,11 +21,11 @@ function MenuDrawer (props) {
   }
 
   useEffect(() => {
-    getCategories(props.organizationId).subscribe(e => {
+    getCategories().subscribe(e => {
         setCategories(e.data)
       }
     )
-  }, [props.organizationId])
+  }, [])
 
   const sideList = () => (
     <div role="presentation">

@@ -28,8 +28,7 @@ function BottomActions (props) {
   const callWaiter = (addNotificationFn, type) => {
     if (serviceCallAvailable) {
       setServiceCallAvailable(false)
-      let org = localStorage.getItem('organizationId');
-      postServiceCall(localStorage.getItem("tableCode"), type, org)
+      postServiceCall(localStorage.getItem("tableCode"), type)
           .subscribe(e => {})
       setTimeout(() => {
         setServiceCallAvailable(true)

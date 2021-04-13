@@ -48,7 +48,7 @@ function Menu (props) {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let categoryId = params.get('categoryId');
-    getMenuItems(props.organizationId, { categoryId: categoryId }).subscribe(e => {
+    getMenuItems({ categoryId: categoryId }).subscribe(e => {
       setMenuItems(e.data);
       setHeading( params.get('categoryTitle'))
     });
