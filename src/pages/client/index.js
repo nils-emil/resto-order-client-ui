@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import BottomActions from '../../components/BottomActions/BottomActions'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 import ClientCodeEntry from './ClientCodeEntry/ClientCodeEntry'
 import Bill from './Bill/Bill'
 import MenuDrawer from '../../components/MenuDrawer/MenuDrawer'
 import Menu from './Menu/Menu'
-import { ToastContainer } from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 
 function Client(props) {
   const [isDrawerOpen, toggleDrawer] = useState(false);
 
   useEffect(() => {
-  }, []);
+  }, [window["env"]["tableCode"]]);
 
   const footer = () => {
     return props.location.pathname !== '/' && <BottomActions openDrawer={() => toggleDrawer(true)}/>
@@ -19,14 +19,19 @@ function Client(props) {
 
   let routes = null
   let menuDrawer = null
+
+  let windowElementElement = window["env"]["tableCode"];
+  if (windowElementElement) {
     menuDrawer = <MenuDrawer
-      openDrawer={() => toggleDrawer(true)}
-      closeDrawer={() => toggleDrawer(false)}
-      isOpen={isDrawerOpen}
+        openDrawer={() => toggleDrawer(true)}
+        closeDrawer={() => toggleDrawer(false)}
+        isOpen={isDrawerOpen}
     />
     routes = <><Route exact path="/bill" render={(props) => (<Bill {...props} />)}/>
-      <Route exact path="/menu" component={() => <Menu />}/></>
-    // routes = <Redirect to='/'/>
+      <Route exact path="/menu" component={() => <Menu/>}/></>
+  } else {
+    routes = <Redirect to='/'/>
+  }
   return (
     <span>
       <ToastContainer/>

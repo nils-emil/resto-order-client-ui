@@ -24,4 +24,3 @@ services:
 
 docker-compose up -d
 EOF
-ssh ubuntu@13.48.27.146

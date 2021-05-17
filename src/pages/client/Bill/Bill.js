@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 
 function Bill(props) {
   const deliverOrder = () => {
-    postOrder(localStorage.getItem('tableCode'), props.items)
+    postOrder(window["env"]["tableCode"], props.items)
       .subscribe(e => {
         props.clearCart()
       }

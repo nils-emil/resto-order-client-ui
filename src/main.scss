@@ -11,9 +11,11 @@ body {
 
 .main-scroll {
   overflow: auto;
+  width: 100vw;
+  position: fixed;
   overflow-x: hidden;
   height: calc(100vh - 64px);
-  padding-bottom: 64px;
+  padding-bottom: 110px;
 }
 
 .relative {
@@ -27,11 +29,8 @@ body {
 .clickable {
   cursor: pointer;
 }
-.green {
-  background-color: #002b00 !important;
-}
+
 .MuiButton-containedPrimary {
   color: white !important;
-  background-color: #005400 !important;
 }
 
